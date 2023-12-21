@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="timeline_user_edit_save">Salvar</string>
+    <string name="notifications_title">Notificaciones</string>
+    <string name="timeline_user_edit_title">Editar el perfil</string>
+    <string name="timeline_user_edit_biography">Biografía</string>
+    <string name="settings_title">Ajustes</string>
+    <string name="timeline_button_dc">Direct Contact</string>
+    <string name="timeline_button_ask">Preguntar</string>
+    <string name="timeline_user_edit_username">Nombre de usuario</string>
+    <string name="timeline_user_title">Perfil del usuario</string>
+    <string name="timeline_button_asked">Preguntado</string>
+    <string name="timeline_button_following">Siguiendo</string>
+    <string name="timeline_button_edit">Editar</string>
+    <string name="timeline_search_title">Resultados de la busqueda</string>
+    <string name="settings_add_account">Añadir una cuenta</string>
+    <string name="timeline_button_settings">Ajustes</string>
+    <string name="timeline_button_follow">Seguir</string>
+    <string name="timeline_compose_account">Cuenta</string>
+</resources>

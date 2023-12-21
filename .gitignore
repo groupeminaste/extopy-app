@@ -1,0 +1,14 @@
+*.iml
+.gradle
+.idea
+.DS_Store
+build
+*.apk
+*.aab
+captures
+.externalNativeBuild
+.cxx
+local.properties
+xcuserdata
+contents.xcworkspacedata
+swiftpm/

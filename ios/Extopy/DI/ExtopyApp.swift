@@ -10,7 +10,7 @@ struct ExtopyApp: App {
         KoinApplication.start()
         
         #if !DEBUG
-        initializeSentry(context: nil)
+        SentryKt.initializeSentry(context: nil)
         #endif
     }
     

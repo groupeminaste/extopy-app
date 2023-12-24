@@ -1,0 +1,55 @@
+/* 
+  Localizable.strings
+  iosApp
+
+  Created by Nathan Fallet on 09/11/2022.
+  Copyright © 2022 orgName. All rights reserved.
+*/
+
+"timeline_title" = "Timeline";
+"timeline_user_title" = "User profile";
+"timeline_post_title" = "Post details";
+"timeline_search_title" = "Search results";
+"timeline_compose_title" = "Compose a post";
+"timeline_compose_reply_title" = "Reply to a post";
+"timeline_compose_repost_title" = "Repost a post";
+"timeline_compose_account" = "Account";
+"timeline_compose_account_none" = "Select…";
+"timeline_compose_content" = "Post content";
+"timeline_compose_send" = "Send";
+"timeline_user_edit_title" = "Edit profile";
+"timeline_user_edit_main" = "Username and display name";
+"timeline_user_edit_username" = "Username";
+"timeline_user_edit_displayName" = "Display name";
+"timeline_user_edit_biography" = "Biography";
+"timeline_user_edit_save" = "Save";
+"timeline_info_posts" = "%@\nposts";
+"timeline_info_followers" = "%@\nfollowers";
+"timeline_info_following" = "%@\nfollowing";
+"timeline_button_follow" = "Follow";
+"timeline_button_following" = "Following";
+"timeline_button_ask" = "Ask to follow";
+"timeline_button_asked" = "Asked";
+"timeline_button_dc" = "Direct Contact";
+"timeline_button_edit" = "Edit";
+"timeline_button_settings" = "Settings";
+"direct_message_title" = "Direct Message";
+"direct_message_conversation_field" = "Type a message…";
+"settings_title" = "Settings";
+"settings_accounts" = "Accounts";
+"settings_add_account" = "Add an account";
+"settings_add_account_name" = "Account name";
+"settings_add_account_platform" = "Platform";
+"settings_add_account_platform_none" = "Select…";
+"settings_add_account_needs_login" = "Login required!";
+"settings_about" = "About";
+"settings_about_developer" = "Developed by Groupe MINASTE";
+"notifications_title" = "Notifications";
+"notifications_title_solar" = "%@ (@%@) on Extopy";
+"notifications_title_solar_other" = "%@ (@%@) on %@";
+"notifications_title_extopy" = "%@ (@%@)";
+"notifications_followers_new" = "%@ started to follow you";
+"notifications_followers_ask" = "%@ would like to follow you";
+"notifications_posts_replied" = "%@ replied to your post";
+"notifications_posts_repost" = "%@ shared your post";
+"notifications_posts_likes" = "%@ liked your post";

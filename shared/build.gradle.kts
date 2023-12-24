@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
     id("com.google.devtools.ksp")
     id("com.squareup.sqldelight")
+    id("com.rickclephas.kmp.nativecoroutines")
 }
 
 kotlin {
@@ -28,7 +29,10 @@ kotlin {
 
     sourceSets {
         all {
-            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+            languageSettings {
+                optIn("kotlinx.cinterop.ExperimentalForeignApi")
+                optIn("kotlin.experimental.ExperimentalObjCName")
+            }
         }
         val commonMain by getting {
             dependencies {

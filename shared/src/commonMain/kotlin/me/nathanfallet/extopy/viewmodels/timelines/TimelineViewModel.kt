@@ -2,6 +2,8 @@ package me.nathanfallet.extopy.viewmodels.timelines
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.asStateFlow
 import me.nathanfallet.extopy.models.posts.Post
 import me.nathanfallet.extopy.models.timelines.Timeline
@@ -16,13 +18,17 @@ class TimelineViewModel(
     // Properties
 
     private val _timeline = MutableStateFlow<Timeline?>(viewModelScope, null)
+    private val _search = MutableStateFlow<String?>(viewModelScope, null)
+
+    @NativeCoroutinesState
     val timeline = _timeline.asStateFlow()
 
-    private val _search = MutableStateFlow<String?>(viewModelScope, null)
+    @NativeCoroutinesState
     val search = _search.asStateFlow()
 
     // Methods
 
+    @NativeCoroutines
     suspend fun fetchTimeline() {
         _timeline.value = fetchTimelineUseCase(id)
     }

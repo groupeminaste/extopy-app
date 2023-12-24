@@ -29,7 +29,7 @@ fun SettingsView(
     code: String? = null,
 ) {
 
-    val viewModel: SettingsViewModel = viewModel<SettingsViewModel>().load(code)
+    val viewModel: SettingsViewModel = viewModel<SettingsViewModel>()
     val accounts by viewModel.getAccounts().observeAsState()
 
     Column(modifier) {

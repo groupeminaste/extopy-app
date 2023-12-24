@@ -8,6 +8,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover").version("0.7.4")
     id("com.google.devtools.ksp").version("1.9.20-1.0.13").apply(false)
     id("org.jetbrains.compose").version("1.5.10").apply(false)
+    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-19").apply(false)
 }
 
 allprojects {

@@ -17,9 +17,7 @@ class FetchTokenUseCase(
                 "secret", // TODO: Use a real secret from env
                 input
             )
-        ).also {
-            println(it)
-        }
+        )
     }
 
 }

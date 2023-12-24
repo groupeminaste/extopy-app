@@ -1,21 +1,13 @@
 package me.nathanfallet.extopy.ui.components.users
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.models.users.User
 
@@ -38,36 +30,12 @@ fun UserCard(
             modifier = Modifier.padding(16.dp)
         ) {
             Row {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                UserHeaderView(
+                    user = user,
                     modifier = Modifier.clickable {
                         navigate("timeline/user/${user.id}")
                     }
-                ) {
-                    AsyncImage(
-                        model = user.avatar,
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(44.dp)
-                            .clip(CircleShape)
-                    )
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(user.displayName)
-                        if (user.verified == true) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_baseline_verified_24),
-                                contentDescription = "Verified",
-                                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
-                                modifier = Modifier
-                                    .size(MaterialTheme.typography.bodyMedium.fontSize.value.dp)
-                            )
-                        }
-                    }
-                }
+                )
                 Spacer(modifier = Modifier.weight(1f))
             }
 

@@ -35,11 +35,11 @@ val useCaseModule = module {
 }
 
 val viewModelModule = module {
-    single { RootViewModel(get(), get()) }
-    single { AuthViewModel(get(), get(), get(), get(), get()) }
-    single { TimelineViewModel(it[0], get()) }
-    single { TimelineComposeViewModel(it[0], it[1], it[2]) }
-    single { NotificationsViewModel() }
+    factory { RootViewModel(get(), get()) }
+    factory { AuthViewModel(get(), get(), get(), get(), get()) }
+    factory { TimelineViewModel(it[0], get()) }
+    factory { TimelineComposeViewModel(it[0], it[1], it[2]) }
+    factory { NotificationsViewModel() }
 }
 
 val sharedModule = listOf(

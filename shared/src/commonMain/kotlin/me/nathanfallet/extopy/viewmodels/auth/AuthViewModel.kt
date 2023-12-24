@@ -1,6 +1,7 @@
 package me.nathanfallet.extopy.viewmodels.auth
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import me.nathanfallet.extopy.models.application.ExtopyEnvironment
 import me.nathanfallet.extopy.usecases.auth.IFetchTokenUseCase
 import me.nathanfallet.extopy.usecases.auth.ISetTokenUseCase
@@ -17,6 +18,7 @@ class AuthViewModel(
 
     val url = environment.baseUrl + "/auth/authorize?client_id=extopy"
 
+    @NativeCoroutines
     suspend fun authenticate(code: String) {
         val token = fetchTokenUseCase(code) ?: return
         val userId = token.idToken ?: return

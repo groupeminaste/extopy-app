@@ -1,25 +1,18 @@
 package me.nathanfallet.extopy.ui.components.posts
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.models.posts.Post
+import me.nathanfallet.extopy.ui.components.users.UserHeaderView
 
 @Composable
 fun PostCard(
@@ -40,35 +33,13 @@ fun PostCard(
             }
         ) {
             Row {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.clickable {
-                        navigate("timeline/user/${post.userId}")
-                    }
-                ) {
-                    AsyncImage(
-                        model = post.user?.avatar,
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(44.dp)
-                            .clip(CircleShape)
-                    )
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(post.user?.displayName ?: "")
-                        if (post.user?.verified == true) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_baseline_verified_24),
-                                contentDescription = "Verified",
-                                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
-                                modifier = Modifier
-                                    .size(MaterialTheme.typography.bodyMedium.fontSize.value.dp)
-                            )
+                post.user?.let { user ->
+                    UserHeaderView(
+                        user = user,
+                        modifier = Modifier.clickable {
+                            navigate("timeline/user/${user.id}")
                         }
-                    }
+                    )
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Text(

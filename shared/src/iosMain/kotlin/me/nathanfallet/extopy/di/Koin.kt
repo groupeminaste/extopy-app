@@ -2,6 +2,7 @@ package me.nathanfallet.extopy.di
 
 import me.nathanfallet.extopy.viewmodels.auth.AuthViewModel
 import me.nathanfallet.extopy.viewmodels.root.RootViewModel
+import me.nathanfallet.extopy.viewmodels.timelines.TimelineComposeViewModel
 import me.nathanfallet.extopy.viewmodels.timelines.TimelineViewModel
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
@@ -16,5 +17,13 @@ fun KoinApplication.Companion.start(): KoinApplication = startKoin {
 
 val Koin.rootViewModel: RootViewModel get() = get()
 val Koin.authViewModel: AuthViewModel get() = get()
-val Koin.timelineViewModel: (String) -> TimelineViewModel get() = { get { parametersOf(it) } }
+fun Koin.timelineViewModel(id: String): TimelineViewModel = get {
+    parametersOf(id)
+}
+
+fun Koin.timelineComposeViewModel(body: String, repliedToId: String?, repostOfId: String?): TimelineComposeViewModel =
+    get {
+        parametersOf(body, repliedToId, repostOfId)
+    }
+
 val Koin.notificationsViewModel: RootViewModel get() = get()

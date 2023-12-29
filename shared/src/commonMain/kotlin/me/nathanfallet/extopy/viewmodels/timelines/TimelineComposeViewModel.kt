@@ -2,13 +2,17 @@ package me.nathanfallet.extopy.viewmodels.timelines
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.asStateFlow
+import me.nathanfallet.extopy.models.posts.PostPayload
+import me.nathanfallet.extopy.usecases.posts.IUploadPostUseCase
 
 class TimelineComposeViewModel(
     body: String,
     val repliedToId: String?,
     val repostOfId: String?,
+    private val uploadPostUseCase: IUploadPostUseCase,
 ) : KMMViewModel() {
 
     // Properties
@@ -26,16 +30,15 @@ class TimelineComposeViewModel(
 
     // Methods
 
+    @NativeCoroutines
     suspend fun send() {
-        /*
-        sendPost(
-            PostUpload(
-                body = body.value ?: "",
-                repliedToId = repliedToId.value,
-                repostOfId = repostOfId.value
+        uploadPostUseCase(
+            PostPayload(
+                body = body.value,
+                repliedToId = repliedToId,
+                repostOfId = repostOfId,
             )
         )
-        */
     }
 
 }

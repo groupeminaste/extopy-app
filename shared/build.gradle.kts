@@ -49,7 +49,7 @@ kotlin {
                 api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-16")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
                 api("me.nathanfallet.usecases:usecases:1.5.5")
-                api("me.nathanfallet.extopy:extopy-commons:0.0.4")
+                api("me.nathanfallet.extopy:extopy-commons:0.0.5")
             }
         }
         val commonTest by getting {

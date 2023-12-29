@@ -11,7 +11,7 @@ import shared
 
 enum TimelineSheet: Identifiable {
     
-    case compose(user: Extopy_commonsUser, payload: Extopy_commonsPostPayload?)
+    case compose(repliedToId: String?, repostOfId: String?)
     case userEdit(user: Extopy_commonsUser)
     
     var id: String {

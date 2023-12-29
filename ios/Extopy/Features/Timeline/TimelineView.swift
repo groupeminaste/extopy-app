@@ -16,6 +16,8 @@ struct TimelineView: View {
     
     @StateViewModel var viewModel: TimelineViewModel
     
+    @State var sheet: TimelineSheet?
+    
     var body: some View {
         ZStack {
             /*
@@ -56,7 +58,9 @@ struct TimelineView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: { /*viewModel.showCompose */ }) {
+                Button(action: {
+                    self.sheet = .compose(repliedToId: nil, repostOfId: nil)
+                }) {
                     Image(systemName: "square.and.pencil")
                 }
             }
@@ -66,23 +70,27 @@ struct TimelineView: View {
             EmptyView()
         }
         .onSubmit(of: .search, viewModel.submitSearch)
-        .sheet(item: $viewModel.sheet) { sheet in
+         */
+        .sheet(item: $sheet) { sheet in
             switch (sheet) {
-            case .compose(let account, let upload):
-                TimelineComposeView(viewModel: TimelineComposeViewModel(
-                    account: account,
-                    upload: upload,
-                    onPostComposed: viewModel.onPostComposed
-                ))
-            case .userEdit(let account, let user):
+            case .compose(let repliedToId, let repostOfId):
+                TimelineComposeView(
+                    viewModel: KoinApplication.shared.koin.timelineComposeViewModel(
+                        body: "",
+                        repliedToId: repliedToId,
+                        repostOfId: repostOfId
+                    ),
+                    onPostComposed: {
+                        self.sheet = nil
+                    }
+                )
+            case .userEdit(let user):
                 TimelineUserEditView(viewModel: TimelineUserEditViewModel(
-                    account: account,
                     user: user,
-                    onUserEdited: viewModel.onUserEdited
+                    onUserEdited: { _ in }
                 ))
             }
         }
-        */
         .onAppear {
             Task {
                 try await asyncFunction(for: viewModel.fetchTimeline())

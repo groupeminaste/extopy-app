@@ -33,7 +33,7 @@ struct RootView: View {
     var tabView: some View {
         TabView {
             NavigationView {
-                TimelineView(viewModel: KoinApplication.shared.koin.timelineViewModel("default"))
+                TimelineView(viewModel: KoinApplication.shared.koin.timelineViewModel(id: "default"))
             }
             .tabItem {
                 Label("timeline_title", systemImage: "list.bullet")

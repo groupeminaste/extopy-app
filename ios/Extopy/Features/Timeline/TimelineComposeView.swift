@@ -9,10 +9,13 @@
 import SwiftUI
 import shared
 import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct TimelineComposeView: View {
     
     @StateViewModel var viewModel: TimelineComposeViewModel
+    
+    let onPostComposed: () -> Void
     
     var body: some View {
         NavigationView {
@@ -23,7 +26,8 @@ struct TimelineComposeView: View {
                 Section {
                     Button("timeline_compose_send") {
                         Task {
-                            try await viewModel.send()
+                            try await asyncFunction(for: viewModel.send())
+                            onPostComposed()
                         }
                     }
                     .disabled(viewModel.body.isEmpty)

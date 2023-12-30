@@ -17,6 +17,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.rickclephas.kmm.viewmodel.coroutineScope
+import kotlinx.coroutines.launch
 import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.ui.components.posts.PostCard
 import me.nathanfallet.extopy.ui.components.users.UserCard
@@ -131,16 +133,23 @@ fun TimelineView(
                 user = it,
                 viewedBy = null,
                 navigate = navigate,
-                counterClick = viewModel::counterClicked,
+                counterClick = { user, counter ->
+                    viewModel.viewModelScope.coroutineScope.launch {
+                        viewModel.counterClicked(user, counter)
+                    }
+                },
                 buttonClick = viewModel::buttonClicked
             )
         }
         items(timeline?.posts ?: listOf()) {
             PostCard(
                 post = it,
-                navigate = navigate,
-                counterClick = viewModel::counterClicked
-            )
+                navigate = navigate
+            ) { post, counter ->
+                viewModel.viewModelScope.coroutineScope.launch {
+                    viewModel.counterClicked(post, counter)
+                }
+            }
         }
         item {
             Spacer(modifier = Modifier.height(12.dp))

@@ -36,14 +36,18 @@ struct TimelineView: View {
                         UserCard(
                             user: user,
                             viewedBy: nil,
-                            counterClick: viewModel.counterClicked,
+                            counterClick: { _, _ in /*viewModel.counterClicked*/ },
                             buttonClick: { _, _ in /* viewModel.buttonClicked */ }
                         )
                     }
                     ForEach(viewModel.timeline?.posts ?? [], id: \.namespacedId) { post in
                         PostCard(
                             post: post,
-                            counterClick: viewModel.counterClicked
+                            counterClick: { post, counter in
+                                Task {
+                                    try await asyncFunction(for: viewModel.counterClicked(post: post, type: counter))
+                                }
+                            }
                         )
                     }
                 }

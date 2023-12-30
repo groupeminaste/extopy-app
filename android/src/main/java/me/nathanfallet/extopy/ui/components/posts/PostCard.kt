@@ -12,13 +12,14 @@ import androidx.compose.ui.unit.dp
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import me.nathanfallet.extopy.models.posts.Post
+import me.nathanfallet.extopy.models.posts.PostCounter
 import me.nathanfallet.extopy.ui.components.users.UserHeaderView
 
 @Composable
 fun PostCard(
     post: Post,
     navigate: (String) -> Unit,
-    counterClick: (Post, String) -> Unit,
+    counterClick: (Post, PostCounter) -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -52,35 +53,28 @@ fun PostCard(
             Text(post.body ?: "")
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(2.dp),
-                verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Spacer(modifier = Modifier.weight(1f))
-                /*
-                for (counter in post.counters) {
-                    Image(
-                        painter = painterResource(id = counter.id.counterToImage(counter.active)),
-                        contentDescription = counter.id,
-                        colorFilter = ColorFilter.tint(
-                            counter.id.counterToColor(counter.active)
-                                ?: MaterialTheme.colors.onSurface
-                        ),
-                        modifier = Modifier
-                            .size(MaterialTheme.typography.body2.fontSize.value.dp)
-                    )
-                    Text(
-                        text = counter.value.simplify(),
-                        style = MaterialTheme.typography.body2,
-                        color = counter.id.counterToColor(counter.active)
-                            ?: MaterialTheme.colors.onSurface,
-                        modifier = Modifier
-                            .clickable {
-                                counterClick(post, counter.id)
-                            }
-                    )
-                    Spacer(modifier = Modifier.weight(1f))
-                }
-                */
+                PostCounterView(
+                    type = PostCounter.LIKES,
+                    value = post.likesCount ?: 0,
+                    active = post.likesIn ?: false,
+                    onClick = { counterClick(post, it) }
+                )
+                PostCounterView(
+                    type = PostCounter.REPOSTS,
+                    value = post.repostsCount ?: 0,
+                    active = false,
+                    onClick = { counterClick(post, it) }
+                )
+                PostCounterView(
+                    type = PostCounter.REPLIES,
+                    value = post.repliesCount ?: 0,
+                    active = false,
+                    onClick = { counterClick(post, it) }
+                )
             }
         }
     }

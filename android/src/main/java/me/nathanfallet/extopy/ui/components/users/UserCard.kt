@@ -5,18 +5,20 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.models.users.User
+import me.nathanfallet.extopy.models.users.UserCounter
 
 @Composable
 fun UserCard(
     user: User,
     viewedBy: User?,
     navigate: (String) -> Unit,
-    counterClick: (User, String) -> Unit,
+    counterClick: (User, UserCounter) -> Unit,
     buttonClick: (User, Int) -> Unit,
 ) {
     Card(
@@ -41,22 +43,26 @@ fun UserCard(
 
             Text(user.biography ?: "")
 
-            Row {
-                Spacer(modifier = Modifier.weight(1f))
-                /*
-                for (counter in user.counters) {
-                    Text(
-                        text = stringResource(id = counter.id.counterToString()).format(counter.value.simplify()),
-                        style = MaterialTheme.typography.body2,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .clickable {
-                                counterClick(user, counter.id)
-                            }
-                    )
-                    Spacer(modifier = Modifier.weight(1f))
-                }
-                */
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                UserCounterView(
+                    type = UserCounter.POSTS,
+                    value = user.postsCount ?: 0,
+                    onClick = { counterClick(user, it) }
+                )
+                UserCounterView(
+                    type = UserCounter.FOLLOWERS,
+                    value = user.followersCount ?: 0,
+                    onClick = { counterClick(user, it) }
+                )
+                UserCounterView(
+                    type = UserCounter.FOLLOWING,
+                    value = user.followingCount ?: 0,
+                    onClick = { counterClick(user, it) }
+                )
             }
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)

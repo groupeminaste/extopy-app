@@ -4,9 +4,9 @@ import me.nathanfallet.extopy.client.IExtopyClient
 import me.nathanfallet.extopy.models.posts.Post
 import me.nathanfallet.extopy.models.posts.PostPayload
 
-class UploadPostUseCase(
+class CreatePostUseCase(
     private val client: IExtopyClient,
-) : IUploadPostUseCase {
+) : ICreatePostUseCase {
 
     override suspend fun invoke(input: PostPayload): Post? {
         return client.posts.create(input)

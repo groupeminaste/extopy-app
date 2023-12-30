@@ -3,12 +3,16 @@ package me.nathanfallet.extopy.di
 import me.nathanfallet.extopy.client.ExtopyClient
 import me.nathanfallet.extopy.client.IExtopyClient
 import me.nathanfallet.extopy.usecases.auth.*
-import me.nathanfallet.extopy.usecases.posts.IUploadPostUseCase
-import me.nathanfallet.extopy.usecases.posts.UploadPostUseCase
+import me.nathanfallet.extopy.usecases.posts.CreatePostUseCase
+import me.nathanfallet.extopy.usecases.posts.ICreatePostUseCase
+import me.nathanfallet.extopy.usecases.posts.IUpdateLikeInPostUseCase
+import me.nathanfallet.extopy.usecases.posts.UpdateLikeInPostUseCase
 import me.nathanfallet.extopy.usecases.timelines.FetchTimelineUseCase
 import me.nathanfallet.extopy.usecases.timelines.IFetchTimelineUseCase
 import me.nathanfallet.extopy.usecases.users.FetchUserUseCase
 import me.nathanfallet.extopy.usecases.users.IFetchUserUseCase
+import me.nathanfallet.extopy.usecases.users.IUpdateFollowInUserUseCase
+import me.nathanfallet.extopy.usecases.users.UpdateFollowInUserUseCase
 import me.nathanfallet.extopy.viewmodels.auth.AuthViewModel
 import me.nathanfallet.extopy.viewmodels.notifications.NotificationsViewModel
 import me.nathanfallet.extopy.viewmodels.root.RootViewModel
@@ -34,15 +38,17 @@ val useCaseModule = module {
 
     // Users
     single<IFetchUserUseCase> { FetchUserUseCase(get()) }
+    single<IUpdateFollowInUserUseCase> { UpdateFollowInUserUseCase(get(), get()) }
 
     // Posts
-    single<IUploadPostUseCase> { UploadPostUseCase(get()) }
+    single<ICreatePostUseCase> { CreatePostUseCase(get()) }
+    single<IUpdateLikeInPostUseCase> { UpdateLikeInPostUseCase(get(), get()) }
 }
 
 val viewModelModule = module {
     factory { RootViewModel(get(), get()) }
     factory { AuthViewModel(get(), get(), get(), get(), get()) }
-    factory { TimelineViewModel(it[0], get()) }
+    factory { TimelineViewModel(it[0], get(), get(), get()) }
     factory { TimelineComposeViewModel(it[0], it[1], it[2], get()) }
     factory { NotificationsViewModel() }
 }

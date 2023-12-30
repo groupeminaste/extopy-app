@@ -43,6 +43,7 @@
 		6AC04BC72B35FAEA009938B9 /* SentrySwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BC62B35FAEA009938B9 /* SentrySwiftUI */; };
 		6AE16935292A632700137822 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE16931292A62C600137822 /* NotificationsView.swift */; };
 		6AE16939292A768000137822 /* NumbersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE16937292A768000137822 /* NumbersExtension.swift */; };
+		6AE50DC92B3F22FE00E1AC2B /* PostCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE50DC82B3F22FE00E1AC2B /* PostCounterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		6AC04BBF2B35F46F009938B9 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
 		6AE16931292A62C600137822 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		6AE16937292A768000137822 /* NumbersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersExtension.swift; sourceTree = "<group>"; };
+		6AE50DC82B3F22FE00E1AC2B /* PostCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCounterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				6A2E9FE0291C4D3C0020672B /* PostCard.swift */,
+				6AE50DC82B3F22FE00E1AC2B /* PostCounterView.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				6AC04BC02B35F46F009938B9 /* UserHeaderView.swift in Sources */,
 				6A41FAA5292B3A1A002F6B81 /* NamespaceExtension.swift in Sources */,
 				6AE16935292A632700137822 /* NotificationsView.swift in Sources */,
+				6AE50DC92B3F22FE00E1AC2B /* PostCounterView.swift in Sources */,
 				6A3F2E4829215607006D64A7 /* PostCard.swift in Sources */,
 				6A3F2E4D29215607006D64A7 /* TimelineSheet.swift in Sources */,
 				6A3F2E5C29215607006D64A7 /* SafariView.swift in Sources */,

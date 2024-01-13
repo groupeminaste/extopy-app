@@ -17,15 +17,21 @@ struct AuthView: View {
     
     @State var sheet: AuthSheet?
     
+    let onUserLogged: () -> Void
+    
     var body: some View {
-        VStack {
-            Text("Time to get back to the basics. \u{F023}")
-            
-            Button("Authenticate") {
-                if let url = URL(string: viewModel.url) {
-                    sheet = .safari(url: url)
+        ZStack {
+            Color.accentColor.ignoresSafeArea()
+            VStack(spacing: 8) {
+                Text("Time to get back to the basics.")
+                
+                Button("Authenticate") {
+                    if let url = URL(string: viewModel.url) {
+                        sheet = .safari(url: url)
+                    }
                 }
             }
+            .foregroundColor(.white)
         }
         .sheet(item: $sheet) { sheet in
             switch (sheet) {
@@ -39,7 +45,10 @@ struct AuthView: View {
                     $0.name == "code"
                 })?.value else { return }
                 
-                try await asyncFunction(for: viewModel.authenticate(code: code))
+                try await asyncFunction(for: viewModel.authenticate(
+                    code: code,
+                    onUserLogged: onUserLogged
+                ))
             }
         }
     }

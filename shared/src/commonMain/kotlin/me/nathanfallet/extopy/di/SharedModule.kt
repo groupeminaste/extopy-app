@@ -46,7 +46,7 @@ val useCaseModule = module {
 }
 
 val viewModelModule = module {
-    factory { RootViewModel(get(), get()) }
+    factory { RootViewModel(get(), get(), get()) }
     factory { AuthViewModel(get(), get(), get(), get(), get()) }
     factory { TimelineViewModel(it[0], get(), get(), get()) }
     factory { TimelineComposeViewModel(it[0], it[1], it[2], get()) }

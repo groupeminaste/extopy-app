@@ -21,6 +21,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun AuthView(
     context: Context,
+    onUserLogged: () -> Unit,
     modifier: Modifier = Modifier,
     code: String? = null,
 ) {
@@ -29,7 +30,7 @@ fun AuthView(
 
     LaunchedEffect(code) {
         code?.let {
-            viewModel.authenticate(code)
+            viewModel.authenticate(code, onUserLogged)
         }
     }
 
@@ -40,7 +41,7 @@ fun AuthView(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("Time to get back to the basics. \uF023")
+        Text("Time to get back to the basics.")
 
         Button(
             modifier = modifier,

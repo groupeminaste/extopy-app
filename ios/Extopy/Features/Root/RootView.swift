@@ -20,7 +20,11 @@ struct RootView: View {
             if (viewModel.user != nil) {
                 tabView
             } else {
-                AuthView()
+                AuthView {
+                    Task {
+                        try await asyncFunction(for: viewModel.fetchUser())
+                    }
+                }
             }
         }
         .onAppear {

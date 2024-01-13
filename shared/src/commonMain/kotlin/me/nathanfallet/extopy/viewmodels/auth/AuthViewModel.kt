@@ -7,6 +7,7 @@ import me.nathanfallet.extopy.usecases.auth.IFetchTokenUseCase
 import me.nathanfallet.extopy.usecases.auth.ISetTokenUseCase
 import me.nathanfallet.extopy.usecases.auth.ISetUserIdUseCase
 import me.nathanfallet.extopy.usecases.users.IFetchUserUseCase
+import me.nathanfallet.ktorx.models.exceptions.APIException
 
 class AuthViewModel(
     environment: ExtopyEnvironment,
@@ -19,14 +20,18 @@ class AuthViewModel(
     val url = environment.baseUrl + "/auth/authorize?client_id=extopy"
 
     @NativeCoroutines
-    suspend fun authenticate(code: String) {
-        val token = fetchTokenUseCase(code) ?: return
-        val userId = token.idToken ?: return
-        setTokenUseCase(token.accessToken)
-        setUserIdUseCase(userId)
-        fetchUserUseCase(userId)
+    suspend fun authenticate(code: String, onUserLogged: () -> Unit) {
+        try {
+            val token = fetchTokenUseCase(code) ?: return
+            val userId = token.idToken ?: return
+            setTokenUseCase(token.accessToken)
+            setUserIdUseCase(userId)
+            fetchUserUseCase(userId)
 
-        // TODO: Find a way to update the UI and go back to home
+            onUserLogged()
+        } catch (e: APIException) {
+
+        }
     }
 
 }

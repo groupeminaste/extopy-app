@@ -79,7 +79,15 @@ class TimelineViewModel(
                     }
                 )
             }
+
+            UserButton.SETTINGS -> {}
+            UserButton.DC -> {}
         }
+    }
+
+    @NativeCoroutines
+    suspend fun doSearch() {
+
     }
 
 }

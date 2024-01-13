@@ -65,7 +65,11 @@ fun TimelineView(
                                 imeAction = ImeAction.Search
                             ),
                             keyboardActions = KeyboardActions(
-                                onSearch = { viewModel.search() }
+                                onSearch = {
+                                    viewModel.viewModelScope.coroutineScope.launch {
+                                        viewModel.doSearch()
+                                    }
+                                }
                             )
                         )
                     } ?: run {
@@ -93,7 +97,11 @@ fun TimelineView(
                         }
                     }
                     IconButton(
-                        onClick = viewModel::search
+                        onClick = {
+                            viewModel.viewModelScope.coroutineScope.launch {
+                                viewModel.doSearch()
+                            }
+                        }
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_search_24),
@@ -138,7 +146,11 @@ fun TimelineView(
                         viewModel.counterClicked(user, counter)
                     }
                 },
-                buttonClick = viewModel::buttonClicked
+                buttonClick = { user, button ->
+                    viewModel.viewModelScope.coroutineScope.launch {
+                        viewModel.buttonClicked(user, button)
+                    }
+                }
             )
         }
         items(timeline?.posts ?: listOf()) {

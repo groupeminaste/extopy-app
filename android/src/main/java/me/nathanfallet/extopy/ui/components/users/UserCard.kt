@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.models.users.User
+import me.nathanfallet.extopy.models.users.UserButton
 import me.nathanfallet.extopy.models.users.UserCounter
 
 @Composable
@@ -19,7 +20,7 @@ fun UserCard(
     viewedBy: User?,
     navigate: (String) -> Unit,
     counterClick: (User, UserCounter) -> Unit,
-    buttonClick: (User, Int) -> Unit,
+    buttonClick: (User, UserButton) -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -80,7 +81,10 @@ fun UserCard(
                     false
                 Button(
                     onClick = {
-                        buttonClick(user, textButton1)
+                        buttonClick(
+                            user,
+                            if (textButton1 == R.string.timeline_button_edit) UserButton.EDIT else UserButton.FOLLOW
+                        )
                     },
                     border = if (filledButton1) null else BorderStroke(
                         1.dp,
@@ -93,7 +97,10 @@ fun UserCard(
                 }
                 Button(
                     onClick = {
-                        buttonClick(user, textButton2)
+                        buttonClick(
+                            user,
+                            if (textButton2 == R.string.timeline_button_settings) UserButton.SETTINGS else UserButton.DC
+                        )
                     },
                     border = if (filledButton2) null else BorderStroke(
                         1.dp,

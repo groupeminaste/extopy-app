@@ -36,19 +36,33 @@ struct TimelineView: View {
                         UserCard(
                             user: user,
                             viewedBy: nil,
-                            counterClick: { _, _ in /*viewModel.counterClicked*/ },
-                            buttonClick: { _, _ in /* viewModel.buttonClicked */ }
+                            onPostsClicked: { _ in },
+                            onFollowersClicked: { _ in },
+                            onFollowingClicked: { _ in },
+                            onEditClicked: { _ in },
+                            onFollowClicked: { user in
+                                Task {
+                                    try await asyncFunction(for: viewModel.onFollowClicked(user: user))
+                                }
+                            },
+                            onSettingsClicked: { _ in },
+                            onDirectMessageClicked: { _ in }
                         )
                     }
                     ForEach(viewModel.timeline?.posts ?? [], id: \.namespacedId) { post in
                         PostCard(
                             post: post,
-                            counterClick: { post, counter in
+                            onLikeClicked: { post in
                                 Task {
-                                    try await asyncFunction(for: viewModel.counterClicked(post: post, type: counter))
+                                    try await asyncFunction(for: viewModel.onLikeClicked(post: post))
                                 }
-                            }
+                            },
+                            onRepostClicked: { _ in },
+                            onReplyClicked: { _ in }
                         )
+                        .onAppear {
+                            // TODO: Load more
+                        }
                     }
                 }
                 .padding()

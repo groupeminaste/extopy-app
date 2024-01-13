@@ -2,6 +2,6 @@ package me.nathanfallet.extopy.models.users
 
 enum class UserButton {
 
-    EDIT, FOLLOW, SETTINGS, DC
+    EDIT, FOLLOW, FOLLOWING, ASKED, SETTINGS, DC
 
 }

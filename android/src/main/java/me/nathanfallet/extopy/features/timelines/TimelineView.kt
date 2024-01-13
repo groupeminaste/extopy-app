@@ -141,27 +141,48 @@ fun TimelineView(
                 user = it,
                 viewedBy = null,
                 navigate = navigate,
-                counterClick = { user, counter ->
+                onPostsClicked = { user ->
+                    navigate.invoke("timeline/user/${user.id}/posts")
+                },
+                onFollowersClicked = { user ->
+                    navigate.invoke("timeline/user/${user.id}/followers")
+                },
+                onFollowingClicked = { user ->
+                    navigate.invoke("timeline/user/${user.id}/following")
+                },
+                onEditClicked = {
+
+                },
+                onFollowClicked = { user ->
                     viewModel.viewModelScope.coroutineScope.launch {
-                        viewModel.counterClicked(user, counter)
+                        viewModel.onFollowClicked(user)
                     }
                 },
-                buttonClick = { user, button ->
-                    viewModel.viewModelScope.coroutineScope.launch {
-                        viewModel.buttonClicked(user, button)
-                    }
+                onSettingsClicked = {
+
+                },
+                onDirectMessageClicked = {
+
                 }
             )
         }
         items(timeline?.posts ?: listOf()) {
             PostCard(
                 post = it,
-                navigate = navigate
-            ) { post, counter ->
-                viewModel.viewModelScope.coroutineScope.launch {
-                    viewModel.counterClicked(post, counter)
+                navigate = navigate,
+                onLikeClicked = { post ->
+                    viewModel.viewModelScope.coroutineScope.launch {
+                        viewModel.onLikeClicked(post)
+                    }
+                },
+                onRepostClicked = { post ->
+                    navigate.invoke("timeline/compose?repostOfId=${post.id}")
+                },
+                onReplyClicked = { post ->
+                    navigate.invoke("timeline/compose?repliedToId=${post.id}")
                 }
-            }
+            )
+            // TODO: Load more
         }
         item {
             Spacer(modifier = Modifier.height(12.dp))

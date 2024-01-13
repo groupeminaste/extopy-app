@@ -15,14 +15,14 @@ import me.nathanfallet.extopy.models.users.UserCounter
 fun UserCounterView(
     type: UserCounter,
     value: Long,
-    onClick: (UserCounter) -> Unit,
+    onClick: () -> Unit,
 ) {
 
     Text(
         text = stringResource(id = stringForCounter(type)).format(value.simplify()),
         style = MaterialTheme.typography.bodyMedium,
         textAlign = TextAlign.Center,
-        modifier = Modifier.clickable { onClick(type) }
+        modifier = Modifier.clickable(onClick = onClick)
     )
 
 }

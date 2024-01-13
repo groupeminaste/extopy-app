@@ -14,19 +14,19 @@ struct PostCounterView: View {
     let type: PostCounter
     let value: Int64
     let active: Bool
-    let onClick: (PostCounter) -> Void
+    let onClick: () -> Void
     
     var body: some View {
-        Button(action: { onClick(type) }) {
-            Image(systemName: symbolForCounter(type: type, active: active))
+        Button(action: onClick) {
+            Image(systemName: symbolForCounter)
                 .resizable()
                 .frame(width: 16, height: 16)
             Text(value.simplify())
         }
-        .foregroundColor(colorForCounter(type: type, active: active) ?? .secondary)
+        .foregroundColor(colorForCounter ?? .secondary)
     }
     
-    func symbolForCounter(type: PostCounter, active: Bool) -> String {
+    var symbolForCounter: String {
         switch (type) {
         case .likes:
             return active ? "heart.fill" : "heart"
@@ -39,7 +39,7 @@ struct PostCounterView: View {
         }
     }
     
-    func colorForCounter(type: PostCounter, active: Bool) -> Color? {
+    var colorForCounter: Color? {
         switch (type) {
         case .likes:
             return active ? Color("LikedColor") : nil

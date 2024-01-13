@@ -19,7 +19,9 @@ import me.nathanfallet.extopy.ui.components.users.UserHeaderView
 fun PostCard(
     post: Post,
     navigate: (String) -> Unit,
-    counterClick: (Post, PostCounter) -> Unit,
+    onLikeClicked: (Post) -> Unit,
+    onRepostClicked: (Post) -> Unit,
+    onReplyClicked: (Post) -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -61,19 +63,19 @@ fun PostCard(
                     type = PostCounter.LIKES,
                     value = post.likesCount ?: 0,
                     active = post.likesIn ?: false,
-                    onClick = { counterClick(post, it) }
+                    onClick = { onLikeClicked(post) }
                 )
                 PostCounterView(
                     type = PostCounter.REPOSTS,
                     value = post.repostsCount ?: 0,
                     active = false,
-                    onClick = { counterClick(post, it) }
+                    onClick = { onRepostClicked(post) }
                 )
                 PostCounterView(
                     type = PostCounter.REPLIES,
                     value = post.repliesCount ?: 0,
                     active = false,
-                    onClick = { counterClick(post, it) }
+                    onClick = { onReplyClicked(post) }
                 )
             }
         }

@@ -25,7 +25,7 @@ fun PostCounterView(
     type: PostCounter,
     value: Long,
     active: Boolean,
-    onClick: (PostCounter) -> Unit,
+    onClick: () -> Unit,
 ) {
 
     val color = colorForCounter(type, active) ?: MaterialTheme.colorScheme.onSurface
@@ -33,7 +33,7 @@ fun PostCounterView(
     Row(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable { onClick(type) }
+        modifier = Modifier.clickable(onClick = onClick)
     ) {
         Image(
             painter = painterResource(id = imageForCounter(type, active)),

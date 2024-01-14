@@ -8,6 +8,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover").version("0.7.4")
     id("com.google.devtools.ksp").version("1.9.20-1.0.13").apply(false)
     id("org.jetbrains.compose").version("1.5.10").apply(false)
+    id("app.cash.sqldelight").version("2.0.0").apply(false)
     id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-19").apply(false)
 }
 
@@ -16,14 +17,6 @@ allprojects {
         mavenCentral()
         google()
         maven("https://jitpack.io")
-    }
-}
-
-buildscript {
-    val sqlDelightVersion = "1.5.3"
-
-    dependencies {
-        classpath("com.squareup.sqldelight:gradle-plugin:$sqlDelightVersion")
     }
 }
 

@@ -4,7 +4,7 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.kotlinx.kover")
     id("com.google.devtools.ksp")
-    id("com.squareup.sqldelight")
+    id("app.cash.sqldelight")
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -25,7 +25,7 @@ kotlin {
     val coroutinesVersion = "1.7.3"
     val ktorVersion = "2.3.7"
     val koinVersion = "3.5.3"
-    val sqlDelightVersion = "1.5.3"
+    val sqlDelightVersion = "2.0.0"
 
     sourceSets {
         all {
@@ -44,7 +44,7 @@ kotlin {
                 implementation("io.insert-koin:koin-core:$koinVersion")
                 implementation("io.sentry:sentry-kotlin-multiplatform:0.2.1")
 
-                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+                implementation("app.cash.sqldelight:runtime:$sqlDelightVersion")
 
                 api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-16")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
@@ -56,7 +56,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
-                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
+                implementation("app.cash.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
         val androidUnitTest by getting {
@@ -75,7 +75,7 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
+                implementation("app.cash.sqldelight:native-driver:$sqlDelightVersion")
             }
         }
         val iosX64Test by getting
@@ -109,7 +109,9 @@ koverReport {
 }
 
 sqldelight {
-    database("AppDatabase") {
-        packageName = "me.nathanfallet.extopy.database"
+    databases {
+        create("AppDatabase") {
+            packageName.set("me.nathanfallet.extopy.database")
+        }
     }
 }

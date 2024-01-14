@@ -20,7 +20,11 @@ struct RootView: View {
             if (viewModel.user != nil) {
                 tabView
             } else {
-                AuthView()
+                AuthView {
+                    Task {
+                        try await asyncFunction(for: viewModel.fetchUser())
+                    }
+                }
             }
         }
         .onAppear {
@@ -33,7 +37,10 @@ struct RootView: View {
     var tabView: some View {
         TabView {
             NavigationView {
-                TimelineView(viewModel: KoinApplication.shared.koin.timelineViewModel(id: "default"))
+                TimelineView(
+                    viewModel: KoinApplication.shared.koin.timelineViewModel(id: "default"),
+                    viewedBy: viewModel.user!
+                )
             }
             .tabItem {
                 Label("timeline_title", systemImage: "list.bullet")

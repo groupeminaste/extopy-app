@@ -17,7 +17,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.rickclephas.kmm.viewmodel.coroutineScope
+import kotlinx.coroutines.launch
 import me.nathanfallet.extopy.R
+import me.nathanfallet.extopy.models.users.User
 import me.nathanfallet.extopy.ui.components.posts.PostCard
 import me.nathanfallet.extopy.ui.components.users.UserCard
 import me.nathanfallet.extopy.viewmodels.timelines.TimelineViewModel
@@ -28,6 +31,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun TimelineView(
     id: String,
+    viewedBy: User,
     navigate: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -63,7 +67,11 @@ fun TimelineView(
                                 imeAction = ImeAction.Search
                             ),
                             keyboardActions = KeyboardActions(
-                                onSearch = { viewModel.search() }
+                                onSearch = {
+                                    viewModel.viewModelScope.coroutineScope.launch {
+                                        viewModel.doSearch()
+                                    }
+                                }
                             )
                         )
                     } ?: run {
@@ -91,7 +99,11 @@ fun TimelineView(
                         }
                     }
                     IconButton(
-                        onClick = viewModel::search
+                        onClick = {
+                            viewModel.viewModelScope.coroutineScope.launch {
+                                viewModel.doSearch()
+                            }
+                        }
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_search_24),
@@ -104,43 +116,53 @@ fun TimelineView(
         item {
             Spacer(modifier = Modifier.height(12.dp))
         }
-        /*
-        item {
-            user?.let {
-                UserCard(
-                    user = it,
-                    viewedBy = null,
-                    navigate = navigate,
-                    counterClick = viewModel::counterClicked,
-                    buttonClick = viewModel::buttonClicked
-                )
-            }
-        }
-        item {
-            post?.let {
-                PostCard(
-                    post = it,
-                    navigate = navigate,
-                    counterClick = viewModel::counterClicked
-                )
-            }
-        }
-        */
         items(timeline?.users ?: listOf()) {
             UserCard(
                 user = it,
-                viewedBy = null,
+                viewedBy = viewedBy,
                 navigate = navigate,
-                counterClick = viewModel::counterClicked,
-                buttonClick = viewModel::buttonClicked
+                onPostsClicked = { user ->
+                    navigate.invoke("timeline/user/${user.id}/posts")
+                },
+                onFollowersClicked = { user ->
+                    navigate.invoke("timeline/user/${user.id}/followers")
+                },
+                onFollowingClicked = { user ->
+                    navigate.invoke("timeline/user/${user.id}/following")
+                },
+                onEditClicked = {
+
+                },
+                onFollowClicked = { user ->
+                    viewModel.viewModelScope.coroutineScope.launch {
+                        viewModel.onFollowClicked(user)
+                    }
+                },
+                onSettingsClicked = {
+
+                },
+                onDirectMessageClicked = {
+
+                }
             )
         }
         items(timeline?.posts ?: listOf()) {
             PostCard(
                 post = it,
                 navigate = navigate,
-                counterClick = viewModel::counterClicked
+                onLikeClicked = { post ->
+                    viewModel.viewModelScope.coroutineScope.launch {
+                        viewModel.onLikeClicked(post)
+                    }
+                },
+                onRepostClicked = { post ->
+                    navigate.invoke("timeline/compose?repostOfId=${post.id}")
+                },
+                onReplyClicked = { post ->
+                    navigate.invoke("timeline/compose?repliedToId=${post.id}")
+                }
             )
+            // TODO: Load more
         }
         item {
             Spacer(modifier = Modifier.height(12.dp))

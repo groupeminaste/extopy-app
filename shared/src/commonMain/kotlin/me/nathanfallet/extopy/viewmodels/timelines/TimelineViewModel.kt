@@ -8,11 +8,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import me.nathanfallet.extopy.models.posts.Post
 import me.nathanfallet.extopy.models.timelines.Timeline
 import me.nathanfallet.extopy.models.users.User
+import me.nathanfallet.extopy.usecases.posts.IUpdateLikeInPostUseCase
 import me.nathanfallet.extopy.usecases.timelines.IFetchTimelineUseCase
+import me.nathanfallet.extopy.usecases.users.IUpdateFollowInUserUseCase
 
 class TimelineViewModel(
     private val id: String,
     private val fetchTimelineUseCase: IFetchTimelineUseCase,
+    private val updateLikeInPostUseCase: IUpdateLikeInPostUseCase,
+    private val updateFollowInUserUseCase: IUpdateFollowInUserUseCase,
 ) : KMMViewModel() {
 
     // Properties
@@ -37,55 +41,30 @@ class TimelineViewModel(
         _search.value = search
     }
 
-    fun counterClicked(post: Post, id: String) {
-        when (id) {
-            //"replies" -> navigate?.invoke("timeline/compose?repliedToId=${post.id}")
-            //"reposts" -> navigate?.invoke("timeline/compose?repostOfId=${post.id}")
-            "likes" -> {
-                try {
-                    //post.sendLike(post.id, !post.likesIn)
-                    //fetchTimeline()
-                } catch (e: Exception) {
-                    e.printStackTrace()
+    @NativeCoroutines
+    suspend fun onLikeClicked(post: Post) {
+        updateLikeInPostUseCase(post)?.let {
+            _timeline.value = _timeline.value?.copy(
+                posts = _timeline.value?.posts?.toMutableList()?.apply {
+                    set(indexOf(post), it)
                 }
-            }
+            )
         }
     }
 
-    fun counterClicked(user: User, id: String) {
-
-    }
-
-    fun buttonClicked(user: User, id: Int) {
-        /*
-        when (id) {
-            R.string.timeline_button_edit -> {}
-            R.string.timeline_button_follow -> {
-                viewModelScope.launch {
-                    try {
-                        //user.sendFollow(user.id, true)
-                        loadTimelines()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+    @NativeCoroutines
+    suspend fun onFollowClicked(user: User) {
+        updateFollowInUserUseCase(user)?.let {
+            _timeline.value = _timeline.value?.copy(
+                users = _timeline.value?.users?.toMutableList()?.apply {
+                    set(indexOf(user), it)
                 }
-            }
-
-            R.string.timeline_button_following -> {
-                viewModelScope.launch {
-                    try {
-                        //user.sendFollow(user.id, false)
-                        loadTimelines()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-            }
+            )
         }
-        */
     }
 
-    fun search() {
+    @NativeCoroutines
+    suspend fun doSearch() {
 
     }
 

@@ -1,23 +1,29 @@
 package me.nathanfallet.extopy.ui.components.users
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.models.users.User
+import me.nathanfallet.extopy.models.users.UserButton
+import me.nathanfallet.extopy.models.users.UserCounter
 
 @Composable
 fun UserCard(
     user: User,
-    viewedBy: User?,
+    viewedBy: User,
     navigate: (String) -> Unit,
-    counterClick: (User, String) -> Unit,
-    buttonClick: (User, Int) -> Unit,
+    onPostsClicked: (User) -> Unit,
+    onFollowersClicked: (User) -> Unit,
+    onFollowingClicked: (User) -> Unit,
+    onEditClicked: (User) -> Unit,
+    onFollowClicked: (User) -> Unit,
+    onSettingsClicked: (User) -> Unit,
+    onDirectMessageClicked: (User) -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -41,63 +47,57 @@ fun UserCard(
 
             Text(user.biography ?: "")
 
-            Row {
-                Spacer(modifier = Modifier.weight(1f))
-                /*
-                for (counter in user.counters) {
-                    Text(
-                        text = stringResource(id = counter.id.counterToString()).format(counter.value.simplify()),
-                        style = MaterialTheme.typography.body2,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .clickable {
-                                counterClick(user, counter.id)
-                            }
-                    )
-                    Spacer(modifier = Modifier.weight(1f))
-                }
-                */
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                UserCounterView(
+                    type = UserCounter.POSTS,
+                    value = user.postsCount ?: 0,
+                    onClick = { onPostsClicked(user) }
+                )
+                UserCounterView(
+                    type = UserCounter.FOLLOWERS,
+                    value = user.followersCount ?: 0,
+                    onClick = { onFollowersClicked(user) }
+                )
+                UserCounterView(
+                    type = UserCounter.FOLLOWING,
+                    value = user.followingCount ?: 0,
+                    onClick = { onFollowingClicked(user) }
+                )
             }
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                val textButton1 =
-                    if (user.id == viewedBy?.id) R.string.timeline_button_edit
-                    else if (user.followersIn == true) R.string.timeline_button_following
-                    else R.string.timeline_button_follow
-                val filledButton1 =
-                    textButton1 == R.string.timeline_button_following || textButton1 == R.string.timeline_button_asked
-                val textButton2 =
-                    if (user.id == viewedBy?.id) R.string.timeline_button_settings
-                    else R.string.timeline_button_dc
-                val filledButton2 =
-                    false
-                Button(
+                val button1 =
+                    if (user.id == viewedBy.id) UserButton.EDIT
+                    else if (user.followersIn == true) UserButton.FOLLOWING
+                    else UserButton.FOLLOW
+                val filledButton1 = button1 == UserButton.FOLLOWING || button1 == UserButton.ASKED
+                val button2 =
+                    if (user.id == viewedBy.id) UserButton.SETTINGS
+                    else UserButton.DC
+
+                UserButtonView(
+                    type = button1,
+                    filled = filledButton1,
                     onClick = {
-                        buttonClick(user, textButton1)
+                        if (button1 == UserButton.EDIT) onEditClicked(user)
+                        else onFollowClicked(user)
                     },
-                    border = if (filledButton1) null else BorderStroke(
-                        1.dp,
-                        MaterialTheme.colorScheme.primary
-                    ),
-                    colors = if (filledButton1) ButtonDefaults.buttonColors() else ButtonDefaults.outlinedButtonColors(),
                     modifier = Modifier.weight(1f)
-                ) {
-                    Text(text = stringResource(id = textButton1))
-                }
-                Button(
+                )
+                UserButtonView(
+                    type = button2,
+                    filled = false,
                     onClick = {
-                        buttonClick(user, textButton2)
+                        if (button2 == UserButton.SETTINGS) onSettingsClicked(user)
+                        else onDirectMessageClicked(user)
                     },
-                    border = if (filledButton2) null else BorderStroke(
-                        1.dp,
-                        MaterialTheme.colorScheme.primary
-                    ),
-                    colors = if (filledButton2) ButtonDefaults.buttonColors() else ButtonDefaults.outlinedButtonColors(),
                     modifier = Modifier.weight(1f)
-                ) {
-                    Text(text = stringResource(id = textButton2))
-                }
+                )
             }
         }
     }

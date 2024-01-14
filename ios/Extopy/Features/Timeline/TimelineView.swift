@@ -18,6 +18,8 @@ struct TimelineView: View {
     
     @State var sheet: TimelineSheet?
     
+    let viewedBy: Extopy_commonsUser
+    
     var body: some View {
         ZStack {
             /*
@@ -35,16 +37,35 @@ struct TimelineView: View {
                     ForEach(viewModel.timeline?.users ?? [], id: \.namespacedId) { user in
                         UserCard(
                             user: user,
-                            viewedBy: nil,
-                            counterClick: viewModel.counterClicked,
-                            buttonClick: { _, _ in /* viewModel.buttonClicked */ }
+                            viewedBy: viewedBy,
+                            onPostsClicked: { _ in },
+                            onFollowersClicked: { _ in },
+                            onFollowingClicked: { _ in },
+                            onEditClicked: { _ in },
+                            onFollowClicked: { user in
+                                Task {
+                                    try await asyncFunction(for: viewModel.onFollowClicked(user: user))
+                                }
+                            },
+                            onSettingsClicked: { _ in },
+                            onDirectMessageClicked: { _ in }
                         )
                     }
                     ForEach(viewModel.timeline?.posts ?? [], id: \.namespacedId) { post in
                         PostCard(
                             post: post,
-                            counterClick: viewModel.counterClicked
+                            viewedBy: viewedBy,
+                            onLikeClicked: { post in
+                                Task {
+                                    try await asyncFunction(for: viewModel.onLikeClicked(post: post))
+                                }
+                            },
+                            onRepostClicked: { _ in },
+                            onReplyClicked: { _ in }
                         )
+                        .onAppear {
+                            // TODO: Load more
+                        }
                     }
                 }
                 .padding()

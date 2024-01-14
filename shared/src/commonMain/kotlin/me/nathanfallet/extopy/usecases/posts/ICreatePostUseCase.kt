@@ -4,4 +4,4 @@ import me.nathanfallet.extopy.models.posts.Post
 import me.nathanfallet.extopy.models.posts.PostPayload
 import me.nathanfallet.usecases.base.ISuspendUseCase
 
-interface IUploadPostUseCase : ISuspendUseCase<PostPayload, Post?>
+interface ICreatePostUseCase : ISuspendUseCase<PostPayload, Post?>

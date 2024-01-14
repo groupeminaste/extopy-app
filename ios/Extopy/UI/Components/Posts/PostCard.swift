@@ -13,22 +13,16 @@ import shared
 struct PostCard: View {
     
     let post: Extopy_commonsPost
-    let counterClick: (Extopy_commonsPost, String) -> Void
+    let viewedBy: Extopy_commonsUser
+    let onLikeClicked: (Extopy_commonsPost) -> Void
+    let onRepostClicked: (Extopy_commonsPost) -> Void
+    let onReplyClicked: (Extopy_commonsPost) -> Void
     
-    @State var userShown = false
     @State var postShown = false
     
     var body: some View {
         ZStack {
             /*
-            NavigationLink(
-                destination: TimelineView(viewModel: TimelineViewModel(
-                    type: .user(account: post.account, id: post.user.id)
-                )),
-                isActive: $userShown
-            ) {
-                EmptyView()
-            }
             NavigationLink(
                 destination: TimelineView(viewModel: TimelineViewModel(
                     type: .post(account: post.account, id: post.id)
@@ -41,10 +35,13 @@ struct PostCard: View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(alignment: .top) {
                     if let user = post.user {
-                        UserHeaderView(user: user)
-                            .onTapGesture {
-                                userShown = true
-                            }
+                        NavigationLink(destination: ProfileView(
+                            viewModel: KoinApplication.shared.koin.profileViewModel(id: user.id),
+                            viewedBy: viewedBy
+                        )) {
+                            UserHeaderView(user: user)
+                                .foregroundColor(.primary)
+                        }
                     }
                     Spacer()
                     Text(post.published?.timeAgo ?? "")
@@ -55,20 +52,27 @@ struct PostCard: View {
                 
                 HStack {
                     Spacer()
-                    /*
-                    ForEach(post.counters, id: \.id) { counter in
-                        Button(action: {
-                            counterClick(post, counter.id)
-                        }) {
-                            Image(systemName: counter.id.counterToSFSymbol(active: counter.active))
-                                .resizable()
-                                .frame(width: 16, height: 16)
-                            Text(counter.value.simplify())
-                        }
-                        .foregroundColor(counter.id.counterToColor(active: counter.active))
-                        Spacer()
-                    }
-                    */
+                    PostCounterView(
+                        type: .likes,
+                        value: post.likesCount?.int64Value ?? 0,
+                        active: post.likesIn == true,
+                        onClick: { onLikeClicked(post) }
+                    )
+                    Spacer()
+                    PostCounterView(
+                        type: .reposts,
+                        value: post.repostsCount?.int64Value ?? 0,
+                        active: false,
+                        onClick: { onRepostClicked(post) }
+                    )
+                    Spacer()
+                    PostCounterView(
+                        type: .replies,
+                        value: post.repliesCount?.int64Value ?? 0,
+                        active: false,
+                        onClick: { onReplyClicked(post) }
+                    )
+                    Spacer()
                 }
             }
             .cardView().onTapGesture {

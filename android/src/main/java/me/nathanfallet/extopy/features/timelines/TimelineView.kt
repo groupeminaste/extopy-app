@@ -45,6 +45,8 @@ fun TimelineView(
     }
 
     val timeline by viewModel.timeline.collectAsState()
+    val users by viewModel.users.collectAsState()
+    val posts by viewModel.posts.collectAsState()
     val search by viewModel.search.collectAsState()
 
     LazyColumn(
@@ -116,7 +118,7 @@ fun TimelineView(
         item {
             Spacer(modifier = Modifier.height(12.dp))
         }
-        items(timeline?.users ?: listOf()) {
+        items(users ?: listOf()) {
             UserCard(
                 user = it,
                 viewedBy = viewedBy,
@@ -146,7 +148,7 @@ fun TimelineView(
                 }
             )
         }
-        items(timeline?.posts ?: listOf()) {
+        items(posts ?: listOf()) {
             PostCard(
                 post = it,
                 navigate = navigate,
@@ -162,7 +164,7 @@ fun TimelineView(
                     navigate.invoke("timeline/compose?repliedToId=${post.id}")
                 }
             )
-            // TODO: Load more
+            viewModel.loadMoreIfNeeded(it.id)
         }
         item {
             Spacer(modifier = Modifier.height(12.dp))

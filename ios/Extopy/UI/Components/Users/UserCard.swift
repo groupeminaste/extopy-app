@@ -75,6 +75,7 @@ struct UserCard: View {
                 )
             }
         }
+        .foregroundColor(.primary)
         .cardView()
     }
     

@@ -34,37 +34,47 @@ struct TimelineView: View {
             */
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    ForEach(viewModel.timeline?.users ?? [], id: \.namespacedId) { user in
-                        UserCard(
-                            user: user,
-                            viewedBy: viewedBy,
-                            onPostsClicked: { _ in },
-                            onFollowersClicked: { _ in },
-                            onFollowingClicked: { _ in },
-                            onEditClicked: { _ in },
-                            onFollowClicked: { user in
-                                Task {
-                                    try await asyncFunction(for: viewModel.onFollowClicked(user: user))
-                                }
-                            },
-                            onSettingsClicked: { _ in },
-                            onDirectMessageClicked: { _ in }
-                        )
+                    ForEach(viewModel.users ?? [], id: \.namespacedId) { user in
+                        NavigationLink(destination: ProfileView(
+                            viewModel: KoinApplication.shared.koin.profileViewModel(id: user.id),
+                            viewedBy: viewedBy
+                        )) {
+                            UserCard(
+                                user: user,
+                                viewedBy: viewedBy,
+                                onPostsClicked: { _ in },
+                                onFollowersClicked: { _ in },
+                                onFollowingClicked: { _ in },
+                                onEditClicked: { _ in },
+                                onFollowClicked: { user in
+                                    Task {
+                                        try await asyncFunction(for: viewModel.onFollowClicked(user: user))
+                                    }
+                                },
+                                onSettingsClicked: { _ in },
+                                onDirectMessageClicked: { _ in }
+                            )
+                        }
                     }
-                    ForEach(viewModel.timeline?.posts ?? [], id: \.namespacedId) { post in
-                        PostCard(
-                            post: post,
-                            viewedBy: viewedBy,
-                            onLikeClicked: { post in
-                                Task {
-                                    try await asyncFunction(for: viewModel.onLikeClicked(post: post))
-                                }
-                            },
-                            onRepostClicked: { _ in },
-                            onReplyClicked: { _ in }
-                        )
-                        .onAppear {
-                            // TODO: Load more
+                    ForEach(viewModel.posts ?? [], id: \.namespacedId) { post in
+                        NavigationLink(destination: PostView(
+                            viewModel: KoinApplication.shared.koin.postViewModel(id: post.id),
+                            viewedBy: viewedBy
+                        )) {
+                            PostCard(
+                                post: post,
+                                viewedBy: viewedBy,
+                                onLikeClicked: { post in
+                                    Task {
+                                        try await asyncFunction(for: viewModel.onLikeClicked(post: post))
+                                    }
+                                },
+                                onRepostClicked: { _ in },
+                                onReplyClicked: { _ in }
+                            )
+                            .onAppear {
+                                viewModel.loadMoreIfNeeded(postId: post.id)
+                            }
                         }
                     }
                 }

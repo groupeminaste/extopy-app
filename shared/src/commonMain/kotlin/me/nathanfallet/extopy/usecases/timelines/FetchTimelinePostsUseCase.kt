@@ -1,14 +1,14 @@
-package me.nathanfallet.extopy.usecases.posts
+package me.nathanfallet.extopy.usecases.timelines
 
 import me.nathanfallet.extopy.client.IExtopyClient
 import me.nathanfallet.extopy.models.posts.Post
 
-class FetchUserPostsUseCase(
+class FetchTimelinePostsUseCase(
     private val client: IExtopyClient,
-) : IFetchUserPostsUseCase {
+) : IFetchTimelinePostsUseCase {
 
     override suspend fun invoke(input1: String, input2: Long, input3: Long): List<Post> {
-        return client.users.getPosts(input1, input2, input3)
+        return client.timelines.getPosts(input1, input2, input3)
     }
 
 }

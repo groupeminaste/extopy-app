@@ -1,4 +1,4 @@
-package me.nathanfallet.extopy.viewmodels.users
+package me.nathanfallet.extopy.viewmodels.posts
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
@@ -8,27 +8,24 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import me.nathanfallet.extopy.models.posts.Post
-import me.nathanfallet.extopy.models.users.User
+import me.nathanfallet.extopy.usecases.posts.IFetchPostRepliesUseCase
+import me.nathanfallet.extopy.usecases.posts.IFetchPostUseCase
 import me.nathanfallet.extopy.usecases.posts.IUpdateLikeInPostUseCase
-import me.nathanfallet.extopy.usecases.users.IFetchUserPostsUseCase
-import me.nathanfallet.extopy.usecases.users.IFetchUserUseCase
-import me.nathanfallet.extopy.usecases.users.IUpdateFollowInUserUseCase
 
-class ProfileViewModel(
+class PostViewModel(
     private val id: String,
-    private val fetchUserUseCase: IFetchUserUseCase,
-    private val fetchUserPostsUseCase: IFetchUserPostsUseCase,
+    private val fetchPostUseCase: IFetchPostUseCase,
+    private val fetchPostRepliesUseCase: IFetchPostRepliesUseCase,
     private val updateLikeInPostUseCase: IUpdateLikeInPostUseCase,
-    private val updateFollowInUserUseCase: IUpdateFollowInUserUseCase,
 ) : KMMViewModel() {
 
     // Properties
 
-    private val _user = MutableStateFlow<User?>(viewModelScope, null)
+    private val _post = MutableStateFlow<Post?>(viewModelScope, null)
     private val _posts = MutableStateFlow<List<Post>?>(viewModelScope, null)
 
     @NativeCoroutinesState
-    val user = _user.asStateFlow()
+    val post = _post.asStateFlow()
 
     @NativeCoroutinesState
     val posts = _posts.asStateFlow()
@@ -38,19 +35,19 @@ class ProfileViewModel(
     // Methods
 
     @NativeCoroutines
-    suspend fun fetchUser() {
-        _user.value = fetchUserUseCase(id)
-        fetchPosts(true)
+    suspend fun fetchPost() {
+        _post.value = fetchPostUseCase(id)
+        fetchReplies(true)
     }
 
     @NativeCoroutines
-    suspend fun fetchPosts(reset: Boolean = false) {
+    suspend fun fetchReplies(reset: Boolean = false) {
         if (reset) {
-            _posts.value = fetchUserPostsUseCase(id, 25, 0).also {
+            _posts.value = fetchPostRepliesUseCase(id, 25, 0).also {
                 hasMore = it.isNotEmpty()
             }
         } else {
-            _posts.value = (_posts.value ?: emptyList()) + fetchUserPostsUseCase(
+            _posts.value = (_posts.value ?: emptyList()) + fetchPostRepliesUseCase(
                 id, 25, posts.value?.size?.toLong() ?: 0
             ).also {
                 hasMore = it.isNotEmpty()
@@ -67,18 +64,10 @@ class ProfileViewModel(
         }
     }
 
-    @NativeCoroutines
-    suspend fun onFollowClicked() {
-        val user = user.value ?: return
-        updateFollowInUserUseCase(user)?.let {
-            _user.value = it
-        }
-    }
-
     fun loadMoreIfNeeded(postId: String) {
         if (!hasMore || posts.value?.lastOrNull()?.id != postId) return
         viewModelScope.coroutineScope.launch {
-            fetchPosts()
+            fetchReplies()
         }
     }
 

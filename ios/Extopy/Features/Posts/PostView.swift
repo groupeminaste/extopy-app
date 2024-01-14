@@ -1,8 +1,8 @@
 //
-//  ProfileView.swift
+//  PostView.swift
 //  Extopy
 //
-//  Created by Nathan Fallet on 13/01/2024.
+//  Created by Nathan Fallet on 14/01/2024.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
@@ -12,9 +12,9 @@ import Kingfisher
 import KMMViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
-struct ProfileView: View {
+struct PostView: View {
     
-    @StateViewModel var viewModel: ProfileViewModel
+    @StateViewModel var viewModel: PostViewModel
     
     let viewedBy: Extopy_commonsUser
     
@@ -22,25 +22,21 @@ struct ProfileView: View {
         ZStack {
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    if let user = viewModel.user {
-                        NavigationLink(destination: ProfileView(
-                            viewModel: KoinApplication.shared.koin.profileViewModel(id: user.id),
+                    if let post = viewModel.post {
+                        NavigationLink(destination: PostView(
+                            viewModel: KoinApplication.shared.koin.postViewModel(id: post.id),
                             viewedBy: viewedBy
                         )) {
-                            UserCard(
-                                user: user,
+                            PostCard(
+                                post: post,
                                 viewedBy: viewedBy,
-                                onPostsClicked: { _ in },
-                                onFollowersClicked: { _ in },
-                                onFollowingClicked: { _ in },
-                                onEditClicked: { _ in },
-                                onFollowClicked: { _ in
+                                onLikeClicked: { post in
                                     Task {
-                                        try await asyncFunction(for: viewModel.onFollowClicked())
+                                        try await asyncFunction(for: viewModel.onLikeClicked(post: post))
                                     }
                                 },
-                                onSettingsClicked: { _ in },
-                                onDirectMessageClicked: { _ in }
+                                onRepostClicked: { _ in },
+                                onReplyClicked: { _ in }
                             )
                         }
                     }
@@ -69,15 +65,15 @@ struct ProfileView: View {
                 .padding()
             }
         }
-        .navigationTitle("timeline_user_title")
+        .navigationTitle("timeline_post_title")
         .refreshable {
             Task {
-                try await asyncFunction(for: viewModel.fetchUser())
+                try await asyncFunction(for: viewModel.fetchPost())
             }
         }
         .onAppear {
             Task {
-                try await asyncFunction(for: viewModel.fetchUser())
+                try await asyncFunction(for: viewModel.fetchPost())
             }
         }
     }

@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.features.auth.AuthView
 import me.nathanfallet.extopy.features.notifications.NotificationsView
+import me.nathanfallet.extopy.features.posts.PostView
 import me.nathanfallet.extopy.features.settings.SettingsView
 import me.nathanfallet.extopy.features.timelines.TimelineComposeView
 import me.nathanfallet.extopy.features.timelines.TimelineView
@@ -142,6 +143,14 @@ fun TabNavigation(
         }
         composable("timeline/user/{id}") { backStackEntry ->
             ProfileView(
+                id = backStackEntry.arguments?.getString("id")!!,
+                viewedBy = viewedBy,
+                navigate = navController::navigate,
+                modifier = Modifier.padding(padding)
+            )
+        }
+        composable("timeline/post/{id}") { backStackEntry ->
+            PostView(
                 id = backStackEntry.arguments?.getString("id")!!,
                 viewedBy = viewedBy,
                 navigate = navController::navigate,

@@ -75,6 +75,7 @@ struct PostCard: View {
                     Spacer()
                 }
             }
+            .foregroundColor(.primary)
             .cardView().onTapGesture {
                 postShown = true
             }

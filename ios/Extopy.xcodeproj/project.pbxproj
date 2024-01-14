@@ -47,6 +47,7 @@
 		6AE16935292A632700137822 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE16931292A62C600137822 /* NotificationsView.swift */; };
 		6AE16939292A768000137822 /* NumbersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE16937292A768000137822 /* NumbersExtension.swift */; };
 		6AE50DC92B3F22FE00E1AC2B /* PostCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE50DC82B3F22FE00E1AC2B /* PostCounterView.swift */; };
+		6AFD935F2B5428D900ED8EB5 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFD935E2B5428D900ED8EB5 /* PostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		6AE16931292A62C600137822 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		6AE16937292A768000137822 /* NumbersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersExtension.swift; sourceTree = "<group>"; };
 		6AE50DC82B3F22FE00E1AC2B /* PostCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCounterView.swift; sourceTree = "<group>"; };
+		6AFD935E2B5428D900ED8EB5 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,16 +136,17 @@
 			isa = PBXGroup;
 			children = (
 				6AB01AE22B360595001AF7FF /* Auth */,
+				6AE16930292A629B00137822 /* Notifications */,
+				6AFD935D2B5428A400ED8EB5 /* Posts */,
 				6A1A52D22927FA6900D38779 /* Root */,
 				6A49D8D6291C3E5700C19937 /* Settings */,
-				6AE16930292A629B00137822 /* Notifications */,
-				6A49D8D1291C3DAC00C19937 /* Timeline */,
+				6A49D8D1291C3DAC00C19937 /* Timelines */,
 				6A3AAA422B5308A00096C48C /* Users */,
 			);
 			path = Features;
 			sourceTree = "<group>";
 		};
-		6A49D8D1291C3DAC00C19937 /* Timeline */ = {
+		6A49D8D1291C3DAC00C19937 /* Timelines */ = {
 			isa = PBXGroup;
 			children = (
 				6A49D8D2291C3DB900C19937 /* TimelineView.swift */,
@@ -152,7 +155,7 @@
 				6A0F580F292A958C00A7B1F5 /* TimelineUserEditViewModel.swift */,
 				6A996E58291EB51300F36B8C /* TimelineSheet.swift */,
 			);
-			path = Timeline;
+			path = Timelines;
 			sourceTree = "<group>";
 		};
 		6A49D8D6291C3E5700C19937 /* Settings */ = {
@@ -258,6 +261,14 @@
 				6AE16931292A62C600137822 /* NotificationsView.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		6AFD935D2B5428A400ED8EB5 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				6AFD935E2B5428D900ED8EB5 /* PostView.swift */,
+			);
+			path = Posts;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -429,6 +440,7 @@
 				6AE50DC92B3F22FE00E1AC2B /* PostCounterView.swift in Sources */,
 				6A3F2E4829215607006D64A7 /* PostCard.swift in Sources */,
 				6A3AAA3F2B52F8330096C48C /* UserCounterView.swift in Sources */,
+				6AFD935F2B5428D900ED8EB5 /* PostView.swift in Sources */,
 				6A3F2E4D29215607006D64A7 /* TimelineSheet.swift in Sources */,
 				6A3F2E5C29215607006D64A7 /* SafariView.swift in Sources */,
 				6A442CEA29294710009E10AE /* UserCard.swift in Sources */,

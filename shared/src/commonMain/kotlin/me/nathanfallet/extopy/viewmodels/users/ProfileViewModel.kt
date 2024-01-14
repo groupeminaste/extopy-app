@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import me.nathanfallet.extopy.models.posts.Post
 import me.nathanfallet.extopy.models.users.User
-import me.nathanfallet.extopy.usecases.posts.IFetchUserPostsUseCase
 import me.nathanfallet.extopy.usecases.posts.IUpdateLikeInPostUseCase
+import me.nathanfallet.extopy.usecases.users.IFetchUserPostsUseCase
 import me.nathanfallet.extopy.usecases.users.IFetchUserUseCase
 import me.nathanfallet.extopy.usecases.users.IUpdateFollowInUserUseCase
 
@@ -46,12 +46,12 @@ class ProfileViewModel(
     @NativeCoroutines
     suspend fun fetchPosts(reset: Boolean = false) {
         if (reset) {
-            _posts.value = fetchUserPostsUseCase(id, 0, 25).also {
+            _posts.value = fetchUserPostsUseCase(id, 25, 0).also {
                 hasMore = it.isNotEmpty()
             }
         } else {
             _posts.value = (_posts.value ?: emptyList()) + fetchUserPostsUseCase(
-                id, posts.value?.size?.toLong() ?: 0, 25
+                id, 25, posts.value?.size?.toLong() ?: 0
             ).also {
                 hasMore = it.isNotEmpty()
             }

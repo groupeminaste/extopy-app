@@ -3,13 +3,15 @@ package me.nathanfallet.extopy.di
 import me.nathanfallet.extopy.client.ExtopyClient
 import me.nathanfallet.extopy.client.IExtopyClient
 import me.nathanfallet.extopy.usecases.auth.*
-import me.nathanfallet.extopy.usecases.posts.*
+import me.nathanfallet.extopy.usecases.posts.CreatePostUseCase
+import me.nathanfallet.extopy.usecases.posts.ICreatePostUseCase
+import me.nathanfallet.extopy.usecases.posts.IUpdateLikeInPostUseCase
+import me.nathanfallet.extopy.usecases.posts.UpdateLikeInPostUseCase
+import me.nathanfallet.extopy.usecases.timelines.FetchTimelinePostsUseCase
 import me.nathanfallet.extopy.usecases.timelines.FetchTimelineUseCase
+import me.nathanfallet.extopy.usecases.timelines.IFetchTimelinePostsUseCase
 import me.nathanfallet.extopy.usecases.timelines.IFetchTimelineUseCase
-import me.nathanfallet.extopy.usecases.users.FetchUserUseCase
-import me.nathanfallet.extopy.usecases.users.IFetchUserUseCase
-import me.nathanfallet.extopy.usecases.users.IUpdateFollowInUserUseCase
-import me.nathanfallet.extopy.usecases.users.UpdateFollowInUserUseCase
+import me.nathanfallet.extopy.usecases.users.*
 import me.nathanfallet.extopy.viewmodels.auth.AuthViewModel
 import me.nathanfallet.extopy.viewmodels.notifications.NotificationsViewModel
 import me.nathanfallet.extopy.viewmodels.root.RootViewModel
@@ -33,6 +35,7 @@ val useCaseModule = module {
 
     // Timelines
     single<IFetchTimelineUseCase> { FetchTimelineUseCase(get()) }
+    single<IFetchTimelinePostsUseCase> { FetchTimelinePostsUseCase(get()) }
 
     // Users
     single<IFetchUserUseCase> { FetchUserUseCase(get()) }
@@ -47,7 +50,7 @@ val useCaseModule = module {
 val viewModelModule = module {
     factory { RootViewModel(get(), get(), get()) }
     factory { AuthViewModel(get(), get(), get(), get(), get()) }
-    factory { TimelineViewModel(it[0], get(), get(), get()) }
+    factory { TimelineViewModel(it[0], get(), get(), get(), get()) }
     factory { TimelineComposeViewModel(it[0], it[1], it[2], get()) }
     factory { ProfileViewModel(it[0], get(), get(), get(), get()) }
     factory { NotificationsViewModel() }

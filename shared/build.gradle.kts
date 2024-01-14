@@ -24,7 +24,7 @@ kotlin {
 
     val coroutinesVersion = "1.7.3"
     val ktorVersion = "2.3.7"
-    val koinVersion = "3.5.0"
+    val koinVersion = "3.5.3"
     val sqlDelightVersion = "1.5.3"
 
     sourceSets {
@@ -49,7 +49,7 @@ kotlin {
                 api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-16")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
                 api("me.nathanfallet.usecases:usecases:1.5.5")
-                api("me.nathanfallet.extopy:extopy-commons:0.0.5")
+                api("me.nathanfallet.extopy:extopy-commons:0.1.0")
             }
         }
         val commonTest by getting {
@@ -99,14 +99,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_19
         targetCompatibility = JavaVersion.VERSION_19
     }
-}
-
-dependencies {
-    configurations
-        .filter { it.name.startsWith("ksp") && it.name.contains("Test") }
-        .forEach {
-            add(it.name, "io.mockative:mockative-processor:2.0.1")
-        }
 }
 
 koverReport {

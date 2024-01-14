@@ -34,7 +34,7 @@ struct TimelineView: View {
             */
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    ForEach(viewModel.timeline?.users ?? [], id: \.namespacedId) { user in
+                    ForEach(viewModel.users ?? [], id: \.namespacedId) { user in
                         UserCard(
                             user: user,
                             viewedBy: viewedBy,
@@ -51,7 +51,7 @@ struct TimelineView: View {
                             onDirectMessageClicked: { _ in }
                         )
                     }
-                    ForEach(viewModel.timeline?.posts ?? [], id: \.namespacedId) { post in
+                    ForEach(viewModel.posts ?? [], id: \.namespacedId) { post in
                         PostCard(
                             post: post,
                             viewedBy: viewedBy,
@@ -64,7 +64,7 @@ struct TimelineView: View {
                             onReplyClicked: { _ in }
                         )
                         .onAppear {
-                            // TODO: Load more
+                            viewModel.loadMoreIfNeeded(postId: post.id)
                         }
                     }
                 }

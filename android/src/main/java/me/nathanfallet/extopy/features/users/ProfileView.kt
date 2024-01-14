@@ -103,7 +103,7 @@ fun ProfileView(
                     navigate.invoke("timeline/compose?repliedToId=${post.id}")
                 }
             )
-            // TODO: Load more
+            viewModel.loadMoreIfNeeded(it.id)
         }
         item {
             Spacer(modifier = Modifier.height(12.dp))

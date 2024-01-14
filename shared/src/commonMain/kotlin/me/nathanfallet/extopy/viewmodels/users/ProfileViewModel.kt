@@ -2,9 +2,11 @@ package me.nathanfallet.extopy.viewmodels.users
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
+import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import me.nathanfallet.extopy.models.posts.Post
 import me.nathanfallet.extopy.models.users.User
 import me.nathanfallet.extopy.usecases.posts.IFetchUserPostsUseCase
@@ -31,12 +33,29 @@ class ProfileViewModel(
     @NativeCoroutinesState
     val posts = _posts.asStateFlow()
 
+    private var hasMore = true
+
     // Methods
 
     @NativeCoroutines
     suspend fun fetchUser() {
         _user.value = fetchUserUseCase(id)
-        _posts.value = fetchUserPostsUseCase(id, 0, 25)
+        fetchPosts(true)
+    }
+
+    @NativeCoroutines
+    suspend fun fetchPosts(reset: Boolean = false) {
+        if (reset) {
+            _posts.value = fetchUserPostsUseCase(id, 0, 25).also {
+                hasMore = it.isNotEmpty()
+            }
+        } else {
+            _posts.value = (_posts.value ?: emptyList()) + fetchUserPostsUseCase(
+                id, posts.value?.size?.toLong() ?: 0, 25
+            ).also {
+                hasMore = it.isNotEmpty()
+            }
+        }
     }
 
     @NativeCoroutines
@@ -53,6 +72,13 @@ class ProfileViewModel(
         val user = user.value ?: return
         updateFollowInUserUseCase(user)?.let {
             _user.value = it
+        }
+    }
+
+    fun loadMoreIfNeeded(postId: String) {
+        if (!hasMore || posts.value?.lastOrNull()?.id != postId) return
+        viewModelScope.coroutineScope.launch {
+            fetchPosts()
         }
     }
 

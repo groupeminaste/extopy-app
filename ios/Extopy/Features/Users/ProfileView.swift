@@ -52,7 +52,7 @@ struct ProfileView: View {
                             onReplyClicked: { _ in }
                         )
                         .onAppear {
-                            // TODO: Load more
+                            viewModel.loadMoreIfNeeded(postId: post.id)
                         }
                     }
                 }

@@ -13,24 +13,16 @@ import shared
 struct PostCard: View {
     
     let post: Extopy_commonsPost
+    let viewedBy: Extopy_commonsUser
     let onLikeClicked: (Extopy_commonsPost) -> Void
     let onRepostClicked: (Extopy_commonsPost) -> Void
     let onReplyClicked: (Extopy_commonsPost) -> Void
     
-    @State var userShown = false
     @State var postShown = false
     
     var body: some View {
         ZStack {
             /*
-            NavigationLink(
-                destination: TimelineView(viewModel: TimelineViewModel(
-                    type: .user(account: post.account, id: post.user.id)
-                )),
-                isActive: $userShown
-            ) {
-                EmptyView()
-            }
             NavigationLink(
                 destination: TimelineView(viewModel: TimelineViewModel(
                     type: .post(account: post.account, id: post.id)
@@ -43,10 +35,13 @@ struct PostCard: View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(alignment: .top) {
                     if let user = post.user {
-                        UserHeaderView(user: user)
-                            .onTapGesture {
-                                userShown = true
-                            }
+                        NavigationLink(destination: ProfileView(
+                            viewModel: KoinApplication.shared.koin.profileViewModel(id: user.id),
+                            viewedBy: viewedBy
+                        )) {
+                            UserHeaderView(user: user)
+                                .foregroundColor(.primary)
+                        }
                     }
                     Spacer()
                     Text(post.published?.timeAgo ?? "")

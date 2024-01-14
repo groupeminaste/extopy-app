@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import kotlinx.coroutines.launch
 import me.nathanfallet.extopy.R
+import me.nathanfallet.extopy.models.users.User
 import me.nathanfallet.extopy.ui.components.posts.PostCard
 import me.nathanfallet.extopy.ui.components.users.UserCard
 import me.nathanfallet.extopy.viewmodels.timelines.TimelineViewModel
@@ -30,6 +31,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun TimelineView(
     id: String,
+    viewedBy: User,
     navigate: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -114,32 +116,10 @@ fun TimelineView(
         item {
             Spacer(modifier = Modifier.height(12.dp))
         }
-        /*
-        item {
-            user?.let {
-                UserCard(
-                    user = it,
-                    viewedBy = null,
-                    navigate = navigate,
-                    counterClick = viewModel::counterClicked,
-                    buttonClick = viewModel::buttonClicked
-                )
-            }
-        }
-        item {
-            post?.let {
-                PostCard(
-                    post = it,
-                    navigate = navigate,
-                    counterClick = viewModel::counterClicked
-                )
-            }
-        }
-        */
         items(timeline?.users ?: listOf()) {
             UserCard(
                 user = it,
-                viewedBy = null,
+                viewedBy = viewedBy,
                 navigate = navigate,
                 onPostsClicked = { user ->
                     navigate.invoke("timeline/user/${user.id}/posts")

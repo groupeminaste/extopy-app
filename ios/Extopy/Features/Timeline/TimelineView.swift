@@ -18,6 +18,8 @@ struct TimelineView: View {
     
     @State var sheet: TimelineSheet?
     
+    let viewedBy: Extopy_commonsUser
+    
     var body: some View {
         ZStack {
             /*
@@ -35,7 +37,7 @@ struct TimelineView: View {
                     ForEach(viewModel.timeline?.users ?? [], id: \.namespacedId) { user in
                         UserCard(
                             user: user,
-                            viewedBy: nil,
+                            viewedBy: viewedBy,
                             onPostsClicked: { _ in },
                             onFollowersClicked: { _ in },
                             onFollowingClicked: { _ in },
@@ -52,6 +54,7 @@ struct TimelineView: View {
                     ForEach(viewModel.timeline?.posts ?? [], id: \.namespacedId) { post in
                         PostCard(
                             post: post,
+                            viewedBy: viewedBy,
                             onLikeClicked: { post in
                                 Task {
                                     try await asyncFunction(for: viewModel.onLikeClicked(post: post))

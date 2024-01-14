@@ -8,12 +8,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import me.nathanfallet.extopy.models.posts.Post
 import me.nathanfallet.extopy.models.users.User
 import me.nathanfallet.extopy.usecases.posts.IFetchUserPostsUseCase
+import me.nathanfallet.extopy.usecases.posts.IUpdateLikeInPostUseCase
 import me.nathanfallet.extopy.usecases.users.IFetchUserUseCase
+import me.nathanfallet.extopy.usecases.users.IUpdateFollowInUserUseCase
 
 class ProfileViewModel(
     private val id: String,
     private val fetchUserUseCase: IFetchUserUseCase,
     private val fetchUserPostsUseCase: IFetchUserPostsUseCase,
+    private val updateLikeInPostUseCase: IUpdateLikeInPostUseCase,
+    private val updateFollowInUserUseCase: IUpdateFollowInUserUseCase,
 ) : KMMViewModel() {
 
     // Properties
@@ -32,7 +36,24 @@ class ProfileViewModel(
     @NativeCoroutines
     suspend fun fetchUser() {
         _user.value = fetchUserUseCase(id)
-        _posts.value = fetchUserPostsUseCase(id)
+        _posts.value = fetchUserPostsUseCase(id, 0, 25)
+    }
+
+    @NativeCoroutines
+    suspend fun onLikeClicked(post: Post) {
+        updateLikeInPostUseCase(post)?.let {
+            _posts.value = posts.value?.toMutableList()?.apply {
+                set(indexOf(post), it)
+            }
+        }
+    }
+
+    @NativeCoroutines
+    suspend fun onFollowClicked() {
+        val user = user.value ?: return
+        updateFollowInUserUseCase(user)?.let {
+            _user.value = it
+        }
     }
 
 }

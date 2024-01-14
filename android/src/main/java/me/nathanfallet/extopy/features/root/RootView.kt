@@ -27,6 +27,8 @@ import me.nathanfallet.extopy.features.notifications.NotificationsView
 import me.nathanfallet.extopy.features.settings.SettingsView
 import me.nathanfallet.extopy.features.timelines.TimelineComposeView
 import me.nathanfallet.extopy.features.timelines.TimelineView
+import me.nathanfallet.extopy.features.users.ProfileView
+import me.nathanfallet.extopy.models.users.User
 import me.nathanfallet.extopy.viewmodels.root.RootViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -77,13 +79,14 @@ fun RootView(
             }
         }
     ) { padding ->
-        if (user != null) {
+        user?.let {
             TabNavigation(
+                viewedBy = it,
                 context = context,
                 navController = navController,
                 padding = padding
             )
-        } else {
+        } ?: run {
             AuthNavigation(
                 context = context,
                 navController = navController,
@@ -100,6 +103,7 @@ fun RootView(
 
 @Composable
 fun TabNavigation(
+    viewedBy: User,
     context: Context,
     navController: NavHostController,
     padding: PaddingValues,
@@ -111,6 +115,7 @@ fun TabNavigation(
         composable("timeline") {
             TimelineView(
                 id = "default",
+                viewedBy = viewedBy,
                 navigate = navController::navigate,
                 modifier = Modifier.padding(padding)
             )
@@ -133,6 +138,14 @@ fun TabNavigation(
                 onPostComposed = navController::navigateUp,
                 repliedToId = backStackEntry.arguments?.getString("repliedToId"),
                 repostOfId = backStackEntry.arguments?.getString("repostOfId")
+            )
+        }
+        composable("timeline/user/{id}") { backStackEntry ->
+            ProfileView(
+                id = backStackEntry.arguments?.getString("id")!!,
+                viewedBy = viewedBy,
+                navigate = navController::navigate,
+                modifier = Modifier.padding(padding)
             )
         }
         composable("direct_message") {

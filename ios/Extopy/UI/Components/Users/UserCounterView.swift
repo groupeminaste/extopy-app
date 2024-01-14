@@ -18,6 +18,7 @@ struct UserCounterView: View {
     var body: some View {
         Button(action: onClick) {
             Text(stringForCounter.localized().format(value.simplify()))
+                .foregroundColor(.primary)
         }
     }
     

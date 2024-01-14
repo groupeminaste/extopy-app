@@ -15,7 +15,7 @@ import me.nathanfallet.extopy.models.users.UserCounter
 @Composable
 fun UserCard(
     user: User,
-    viewedBy: User?,
+    viewedBy: User,
     navigate: (String) -> Unit,
     onPostsClicked: (User) -> Unit,
     onFollowersClicked: (User) -> Unit,
@@ -72,12 +72,12 @@ fun UserCard(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 val button1 =
-                    if (user.id == viewedBy?.id) UserButton.EDIT
+                    if (user.id == viewedBy.id) UserButton.EDIT
                     else if (user.followersIn == true) UserButton.FOLLOWING
                     else UserButton.FOLLOW
                 val filledButton1 = button1 == UserButton.FOLLOWING || button1 == UserButton.ASKED
                 val button2 =
-                    if (user.id == viewedBy?.id) UserButton.SETTINGS
+                    if (user.id == viewedBy.id) UserButton.SETTINGS
                     else UserButton.DC
 
                 UserButtonView(

@@ -42,16 +42,12 @@ class PostViewModel(
 
     @NativeCoroutines
     suspend fun fetchReplies(reset: Boolean = false) {
-        if (reset) {
-            _posts.value = fetchPostRepliesUseCase(id, 25, 0).also {
-                hasMore = it.isNotEmpty()
-            }
-        } else {
-            _posts.value = (_posts.value ?: emptyList()) + fetchPostRepliesUseCase(
-                id, 25, posts.value?.size?.toLong() ?: 0
-            ).also {
-                hasMore = it.isNotEmpty()
-            }
+        _posts.value = if (reset) fetchPostRepliesUseCase(id, 25, 0).also {
+            hasMore = it.isNotEmpty()
+        } else (_posts.value ?: emptyList()) + fetchPostRepliesUseCase(
+            id, 25, posts.value?.size?.toLong() ?: 0
+        ).also {
+            hasMore = it.isNotEmpty()
         }
     }
 

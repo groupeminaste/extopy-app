@@ -54,16 +54,12 @@ class TimelineViewModel(
 
     @NativeCoroutines
     suspend fun fetchPosts(reset: Boolean = false) {
-        if (reset) {
-            _posts.value = fetchTimelinePostsUseCase(id, 25, 0).also {
-                hasMore = it.isNotEmpty()
-            }
-        } else {
-            _posts.value = (_posts.value ?: emptyList()) + fetchTimelinePostsUseCase(
-                id, 25, posts.value?.size?.toLong() ?: 0
-            ).also {
-                hasMore = it.isNotEmpty()
-            }
+        _posts.value = if (reset) fetchTimelinePostsUseCase(id, 25, 0).also {
+            hasMore = it.isNotEmpty()
+        } else (_posts.value ?: emptyList()) + fetchTimelinePostsUseCase(
+            id, 25, posts.value?.size?.toLong() ?: 0
+        ).also {
+            hasMore = it.isNotEmpty()
         }
     }
 

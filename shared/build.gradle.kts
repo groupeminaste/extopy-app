@@ -47,6 +47,7 @@ kotlin {
                 implementation("io.sentry:sentry-kotlin-multiplatform:0.2.1")
 
                 implementation("app.cash.sqldelight:runtime:$sqlDelightVersion")
+                implementation("co.touchlab:stately-common:2.0.5")
 
                 api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-16")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")

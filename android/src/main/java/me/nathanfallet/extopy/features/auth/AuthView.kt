@@ -1,6 +1,5 @@
 package me.nathanfallet.extopy.features.auth
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
@@ -13,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import me.nathanfallet.extopy.ui.theme.primaryColor
 import me.nathanfallet.extopy.viewmodels.auth.AuthViewModel
@@ -20,11 +20,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AuthView(
-    context: Context,
     onUserLogged: () -> Unit,
     modifier: Modifier = Modifier,
     code: String? = null,
 ) {
+
+    val context = LocalContext.current
 
     val viewModel = koinViewModel<AuthViewModel>()
 

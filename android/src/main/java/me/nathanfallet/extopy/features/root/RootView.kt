@@ -1,6 +1,5 @@
 package me.nathanfallet.extopy.features.root
 
-import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
@@ -34,9 +33,8 @@ import me.nathanfallet.extopy.viewmodels.root.RootViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun RootView(
-    context: Context,
-) {
+fun RootView() {
+
     val viewModel = koinViewModel<RootViewModel>()
 
     val user by viewModel.user.collectAsState()
@@ -83,13 +81,11 @@ fun RootView(
         user?.let {
             TabNavigation(
                 viewedBy = it,
-                context = context,
                 navController = navController,
                 padding = padding
             )
         } ?: run {
             AuthNavigation(
-                context = context,
                 navController = navController,
                 padding = padding,
                 onUserLogged = {
@@ -105,7 +101,6 @@ fun RootView(
 @Composable
 fun TabNavigation(
     viewedBy: User,
-    context: Context,
     navController: NavHostController,
     padding: PaddingValues,
 ) {
@@ -174,7 +169,6 @@ fun TabNavigation(
 
 @Composable
 fun AuthNavigation(
-    context: Context,
     navController: NavHostController,
     padding: PaddingValues,
     onUserLogged: () -> Unit,
@@ -185,7 +179,6 @@ fun AuthNavigation(
     ) {
         composable("auth") {
             AuthView(
-                context = context,
                 onUserLogged = onUserLogged,
                 modifier = Modifier.padding(padding)
             )
@@ -202,7 +195,6 @@ fun AuthNavigation(
             )
         ) { backStackEntry ->
             AuthView(
-                context = context,
                 onUserLogged = onUserLogged,
                 modifier = Modifier.padding(padding),
                 code = backStackEntry.arguments?.getString("code")

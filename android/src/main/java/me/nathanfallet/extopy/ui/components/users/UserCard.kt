@@ -39,7 +39,7 @@ fun UserCard(
                 UserHeaderView(
                     user = user,
                     modifier = Modifier.clickable {
-                        navigate("timeline/user/${user.id}")
+                        navigate("timelines/users/${user.id}")
                     }
                 )
                 Spacer(modifier = Modifier.weight(1f))

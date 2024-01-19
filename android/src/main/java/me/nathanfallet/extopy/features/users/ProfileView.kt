@@ -65,10 +65,10 @@ fun ProfileView(
                     navigate = navigate,
                     onPostsClicked = {},
                     onFollowersClicked = { user ->
-                        navigate.invoke("timeline/user/${user.id}/followers")
+                        navigate.invoke("timelines/users/${user.id}/followers")
                     },
                     onFollowingClicked = { user ->
-                        navigate.invoke("timeline/user/${user.id}/following")
+                        navigate.invoke("timelines/users/${user.id}/following")
                     },
                     onEditClicked = {
 
@@ -97,10 +97,10 @@ fun ProfileView(
                     }
                 },
                 onRepostClicked = { post ->
-                    navigate.invoke("timeline/compose?repostOfId=${post.id}")
+                    navigate.invoke("timelines/compose?repostOfId=${post.id}")
                 },
                 onReplyClicked = { post ->
-                    navigate.invoke("timeline/compose?repliedToId=${post.id}")
+                    navigate.invoke("timelines/compose?repliedToId=${post.id}")
                 }
             )
             viewModel.loadMoreIfNeeded(it.id)

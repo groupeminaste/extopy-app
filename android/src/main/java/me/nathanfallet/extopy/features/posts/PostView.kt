@@ -67,10 +67,10 @@ fun PostView(
                         }
                     },
                     onRepostClicked = { post ->
-                        navigate.invoke("timeline/compose?repostOfId=${post.id}")
+                        navigate.invoke("timelines/compose?repostOfId=${post.id}")
                     },
                     onReplyClicked = { post ->
-                        navigate.invoke("timeline/compose?repliedToId=${post.id}")
+                        navigate.invoke("timelines/compose?repliedToId=${post.id}")
                     }
                 )
             }
@@ -85,10 +85,10 @@ fun PostView(
                     }
                 },
                 onRepostClicked = { post ->
-                    navigate.invoke("timeline/compose?repostOfId=${post.id}")
+                    navigate.invoke("timelines/compose?repostOfId=${post.id}")
                 },
                 onReplyClicked = { post ->
-                    navigate.invoke("timeline/compose?repliedToId=${post.id}")
+                    navigate.invoke("timelines/compose?repliedToId=${post.id}")
                 }
             )
             viewModel.loadMoreIfNeeded(it.id)

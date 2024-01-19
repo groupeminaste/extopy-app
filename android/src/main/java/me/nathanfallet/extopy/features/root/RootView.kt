@@ -106,9 +106,9 @@ fun TabNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "timeline"
+        startDestination = "timelines"
     ) {
-        composable("timeline") {
+        composable("timelines") {
             TimelineView(
                 id = "default",
                 viewedBy = viewedBy,
@@ -117,7 +117,7 @@ fun TabNavigation(
             )
         }
         composable(
-            "timeline/compose?repliedToId={repliedToId}&repostOfId={repostOfId}",
+            "timelines/compose?repliedToId={repliedToId}&repostOfId={repostOfId}",
             arguments = listOf(
                 navArgument("repliedToId") {
                     type = NavType.StringType
@@ -136,17 +136,17 @@ fun TabNavigation(
                 repostOfId = backStackEntry.arguments?.getString("repostOfId")
             )
         }
-        composable("timeline/user/{id}") { backStackEntry ->
+        composable("timelines/users/{userId}") { backStackEntry ->
             ProfileView(
-                id = backStackEntry.arguments?.getString("id")!!,
+                id = backStackEntry.arguments?.getString("userId")!!,
                 viewedBy = viewedBy,
                 navigate = navController::navigate,
                 modifier = Modifier.padding(padding)
             )
         }
-        composable("timeline/post/{id}") { backStackEntry ->
+        composable("timelines/posts/{postId}") { backStackEntry ->
             PostView(
-                id = backStackEntry.arguments?.getString("id")!!,
+                id = backStackEntry.arguments?.getString("postId")!!,
                 viewedBy = viewedBy,
                 navigate = navController::navigate,
                 modifier = Modifier.padding(padding)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" untranslatable="true">Extopy</string>
+    <string name="app_name" translatable="false">Extopy</string>
     <string name="timeline_title">Timeline</string>
     <string name="timeline_user_title">User profile</string>
     <string name="timeline_post_title">Post details</string>

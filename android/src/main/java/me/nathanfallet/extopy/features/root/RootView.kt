@@ -203,7 +203,11 @@ fun AuthNavigation(
     }
 }
 
-enum class NavigationItem(var route: String, var icon: Int, var title: Int) {
+enum class NavigationItem(
+    val route: String,
+    val icon: Int,
+    val title: Int,
+) {
 
     TIMELINE("timeline", R.drawable.ic_baseline_menu_24, R.string.timeline_title),
     DIRECT_MESSAGE(

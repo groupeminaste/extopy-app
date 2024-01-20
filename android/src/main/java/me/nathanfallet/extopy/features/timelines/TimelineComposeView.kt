@@ -25,7 +25,7 @@ fun TimelineComposeView(
     repostOfId: String?,
 ) {
 
-    val viewModel: TimelineComposeViewModel = koinViewModel<TimelineComposeViewModel>(
+    val viewModel = koinViewModel<TimelineComposeViewModel>(
         parameters = { parametersOf("", repliedToId, repostOfId) }
     )
 

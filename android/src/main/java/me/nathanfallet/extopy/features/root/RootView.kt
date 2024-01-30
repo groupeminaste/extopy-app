@@ -42,7 +42,7 @@ fun RootView() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
-    LaunchedEffect("user") {
+    LaunchedEffect(Unit) {
         viewModel.fetchUser()
     }
 

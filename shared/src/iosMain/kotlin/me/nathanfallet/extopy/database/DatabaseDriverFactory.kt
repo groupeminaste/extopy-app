@@ -5,8 +5,7 @@ import app.cash.sqldelight.driver.native.NativeSqliteDriver
 
 actual class DatabaseDriverFactory {
 
-    actual fun createDriver(): SqlDriver {
-        return NativeSqliteDriver(AppDatabase.Schema, "solar.db")
-    }
+    actual fun createDriver(): SqlDriver =
+        NativeSqliteDriver(AppDatabase.Schema, "extopy.db")
 
 }

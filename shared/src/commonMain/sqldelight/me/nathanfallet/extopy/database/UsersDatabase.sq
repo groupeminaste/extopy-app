@@ -1,0 +1,37 @@
+CREATE TABLE users (
+    id TEXT PRIMARY KEY NOT NULL,
+    displayName TEXT NOT NULL,
+    username TEXT NOT NULL,
+    email TEXT,
+    biography TEXT,
+    avatar TEXT,
+    expiresFromCacheAt TEXT NOT NULL
+);
+
+upsert {
+    UPDATE users
+    SET displayName = :displayName,
+        username = :username,
+        email = :email,
+        biography = :biography,
+        avatar = :avatar,
+        expiresFromCacheAt = :expiresFromCacheAt
+    WHERE id = :id;
+
+    INSERT OR IGNORE INTO users (id, displayName, username, email, biography, avatar, expiresFromCacheAt)
+    VALUES (
+    :id,
+    :displayName,
+    :username,
+    :email,
+    :biography,
+    :avatar,
+    :expiresFromCacheAt
+    );
+}
+
+get:
+SELECT * FROM users WHERE id = ?;
+
+delete:
+DELETE FROM users WHERE id = ?;

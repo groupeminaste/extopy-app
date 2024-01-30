@@ -1,0 +1,15 @@
+CREATE TABLE posts (
+    id TEXT PRIMARY KEY,
+    userId TEXT,
+    body TEXT
+);
+
+insert:
+INSERT INTO posts (id, userId, body)
+VALUES (?, ? , ?);
+
+get:
+SELECT * FROM posts WHERE id = ?;
+
+delete:
+DELETE FROM posts WHERE id = ?;

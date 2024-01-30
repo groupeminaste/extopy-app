@@ -8,30 +8,18 @@ CREATE TABLE users (
     expiresFromCacheAt TEXT NOT NULL
 );
 
-upsert {
-    UPDATE users
-    SET displayName = :displayName,
-        username = :username,
-        email = :email,
-        biography = :biography,
-        avatar = :avatar,
-        expiresFromCacheAt = :expiresFromCacheAt
-    WHERE id = :id;
-
-    INSERT OR IGNORE INTO users (id, displayName, username, email, biography, avatar, expiresFromCacheAt)
-    VALUES (
-    :id,
-    :displayName,
-    :username,
-    :email,
-    :biography,
-    :avatar,
-    :expiresFromCacheAt
-    );
-}
+save:
+INSERT OR REPLACE INTO users
+VALUES ?;
 
 get:
-SELECT * FROM users WHERE id = ?;
+SELECT * FROM users WHERE id = ? AND expiresFromCacheAt > ?;
 
 delete:
 DELETE FROM users WHERE id = ?;
+
+deleteAll:
+DELETE FROM users;
+
+deleteExpired:
+DELETE FROM users WHERE expiresFromCacheAt < ?;

@@ -1,9 +1,7 @@
 package me.nathanfallet.extopy.repositories.users
 
 import kotlinx.datetime.Clock
-import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.plus
+import kotlinx.datetime.Instant
 import me.nathanfallet.extopy.database.Database
 import me.nathanfallet.extopy.database.Users
 import me.nathanfallet.extopy.models.users.User
@@ -12,28 +10,38 @@ class UsersRepository(
     private val database: Database,
 ) : IUsersRepository {
 
-    override fun upsert(user: User) = database.usersQueries.upsert(
-        id = user.id,
-        displayName = user.displayName,
-        username = user.username,
-        email = user.email,
-        biography = user.biography,
-        avatar = user.avatar,
-        expiresFromCacheAt = Clock.System.now()
-            .plus(60, DateTimeUnit.SECOND, TimeZone.currentSystemDefault())
-            .toString()
-    )
+    override fun save(user: User, expiresFromCacheAt: Instant) =
+        database.usersQueries.save(
+            Users(
+                id = user.id,
+                displayName = user.displayName,
+                username = user.username,
+                email = user.email,
+                biography = user.biography,
+                avatar = user.avatar,
+                expiresFromCacheAt = expiresFromCacheAt.toString()
+            )
+        )
 
-    override fun get(id: String): User? = database.usersQueries.get(id)
-        .executeAsOneOrNull()?.toUser()
+    override fun get(id: String): User? =
+        database.usersQueries.get(id, Clock.System.now().toString()).executeAsOneOrNull()?.let {
+            User(
+                id = it.id,
+                displayName = it.displayName,
+                username = it.username,
+                email = it.email,
+                biography = it.biography,
+                avatar = it.avatar
+            )
+        }
 
-    private fun Users.toUser() = User(
-        id = id,
-        displayName = displayName,
-        username = username,
-        email = email,
-        biography = biography,
-        avatar = avatar
-    )
+    override fun delete(id: String) =
+        database.usersQueries.delete(id)
+
+    override fun deleteAll() =
+        database.usersQueries.deleteAll()
+
+    override fun deleteExpired() =
+        database.usersQueries.deleteExpired(Clock.System.now().toString())
 
 }

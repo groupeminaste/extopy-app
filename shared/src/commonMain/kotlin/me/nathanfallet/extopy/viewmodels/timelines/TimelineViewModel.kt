@@ -14,6 +14,7 @@ import me.nathanfallet.extopy.usecases.posts.IUpdateLikeInPostUseCase
 import me.nathanfallet.extopy.usecases.timelines.IFetchTimelinePostsUseCase
 import me.nathanfallet.extopy.usecases.timelines.IFetchTimelineUseCase
 import me.nathanfallet.extopy.usecases.users.IUpdateFollowInUserUseCase
+import me.nathanfallet.usecases.pagination.Pagination
 
 class TimelineViewModel(
     private val id: String,
@@ -54,10 +55,10 @@ class TimelineViewModel(
 
     @NativeCoroutines
     suspend fun fetchPosts(reset: Boolean = false) {
-        _posts.value = if (reset) fetchTimelinePostsUseCase(id, 25, 0).also {
+        _posts.value = if (reset) fetchTimelinePostsUseCase(id, Pagination(25, 0)).also {
             hasMore = it.isNotEmpty()
         } else (_posts.value ?: emptyList()) + fetchTimelinePostsUseCase(
-            id, 25, posts.value?.size?.toLong() ?: 0
+            id, Pagination(25, posts.value?.size?.toLong() ?: 0)
         ).also {
             hasMore = it.isNotEmpty()
         }

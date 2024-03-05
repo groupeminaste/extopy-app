@@ -13,13 +13,12 @@ class FetchUserUseCase(
     private val usersRepository: IUsersRepository,
 ) : IFetchUserUseCase {
 
-    override suspend fun invoke(input: String): User? {
-        return usersRepository.get(input) ?: client.users.get(input)?.also {
+    override suspend fun invoke(input: String): User? =
+        usersRepository.get(input) ?: client.users.get(input)?.also {
             usersRepository.save(
                 it,
                 Clock.System.now().plus(60, DateTimeUnit.SECOND, TimeZone.currentSystemDefault())
             )
         }
-    }
 
 }

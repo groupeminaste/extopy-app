@@ -15,9 +15,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.jamal.composeprefs.ui.GroupHeader
-import com.jamal.composeprefs.ui.PrefsScreen
-import com.jamal.composeprefs.ui.prefs.TextPref
+import com.jamal.composeprefs3.ui.GroupHeader
+import com.jamal.composeprefs3.ui.PrefsScreen
+import com.jamal.composeprefs3.ui.prefs.TextPref
 import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.extensions.dataStore
 

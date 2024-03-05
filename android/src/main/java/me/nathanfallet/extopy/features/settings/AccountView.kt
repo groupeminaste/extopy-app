@@ -2,7 +2,7 @@ package me.nathanfallet.extopy.features.settings
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.jamal.composeprefs.ui.prefs.TextPref
+import com.jamal.composeprefs3.ui.prefs.TextPref
 import me.nathanfallet.extopy.models.users.User
 
 @Composable

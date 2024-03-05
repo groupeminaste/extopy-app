@@ -13,13 +13,12 @@ class FetchPostUseCase(
     private val postsRepository: IPostsRepository,
 ) : IFetchPostUseCase {
 
-    override suspend fun invoke(input: String): Post? {
-        return postsRepository.get(input) ?: client.posts.get(input)?.also {
+    override suspend fun invoke(input: String): Post? =
+        postsRepository.get(input) ?: client.posts.get(input)?.also {
             postsRepository.save(
                 it,
                 Clock.System.now().plus(60, DateTimeUnit.SECOND, TimeZone.currentSystemDefault())
             )
         }
-    }
 
 }

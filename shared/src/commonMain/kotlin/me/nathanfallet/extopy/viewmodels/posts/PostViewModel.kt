@@ -11,6 +11,7 @@ import me.nathanfallet.extopy.models.posts.Post
 import me.nathanfallet.extopy.usecases.posts.IFetchPostRepliesUseCase
 import me.nathanfallet.extopy.usecases.posts.IFetchPostUseCase
 import me.nathanfallet.extopy.usecases.posts.IUpdateLikeInPostUseCase
+import me.nathanfallet.usecases.pagination.Pagination
 
 class PostViewModel(
     private val id: String,
@@ -42,10 +43,10 @@ class PostViewModel(
 
     @NativeCoroutines
     suspend fun fetchReplies(reset: Boolean = false) {
-        _posts.value = if (reset) fetchPostRepliesUseCase(id, 25, 0).also {
+        _posts.value = if (reset) fetchPostRepliesUseCase(id, Pagination(25, 0)).also {
             hasMore = it.isNotEmpty()
         } else (_posts.value ?: emptyList()) + fetchPostRepliesUseCase(
-            id, 25, posts.value?.size?.toLong() ?: 0
+            id, Pagination(25, posts.value?.size?.toLong() ?: 0)
         ).also {
             hasMore = it.isNotEmpty()
         }

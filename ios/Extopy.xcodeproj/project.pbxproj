@@ -203,7 +203,6 @@
 			children = (
 				6AB01AE32B3605A1001AF7FF /* AuthView.swift */,
 				6A7D0795291D8C5F0023BE5B /* AuthSheet.swift */,
-				6A7D0793291D81950023BE5B /* SafariView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -231,6 +230,7 @@
 			children = (
 				6AC04BBE2B35B682009938B9 /* Posts */,
 				6AC04BBD2B35B67A009938B9 /* Users */,
+				6A7D0793291D81950023BE5B /* SafariView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

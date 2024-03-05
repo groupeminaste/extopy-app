@@ -15,7 +15,7 @@ fun KoinApplication.Companion.start(): KoinApplication = startKoin {
     modules(sharedModule)
 }
 
-// MARK: - View models (we should not call any other class from iOS directly, only use cases)
+// MARK: - View models (we should not call any other class from iOS directly, only view models)
 
 val Koin.rootViewModel: RootViewModel get() = get()
 val Koin.authViewModel: AuthViewModel get() = get()

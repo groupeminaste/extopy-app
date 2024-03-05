@@ -1,0 +1,25 @@
+CREATE TABLE users (
+    id TEXT PRIMARY KEY NOT NULL,
+    displayName TEXT NOT NULL,
+    username TEXT NOT NULL,
+    email TEXT,
+    biography TEXT,
+    avatar TEXT,
+    expiresFromCacheAt TEXT NOT NULL
+);
+
+save:
+INSERT OR REPLACE INTO users
+VALUES ?;
+
+get:
+SELECT * FROM users WHERE id = ? AND expiresFromCacheAt > ?;
+
+delete:
+DELETE FROM users WHERE id = ?;
+
+deleteAll:
+DELETE FROM users;
+
+deleteExpired:
+DELETE FROM users WHERE expiresFromCacheAt < ?;

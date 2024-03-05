@@ -22,8 +22,8 @@ kotlin {
         }
     }
 
-    val coroutinesVersion = "1.7.3"
-    val ktorVersion = "2.3.7"
+    val coroutinesVersion = "1.8.0"
+    val ktorVersion = "2.3.9"
     val koinVersion = "3.5.3"
     val sqlDelightVersion = "2.0.0"
 
@@ -44,7 +44,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("io.insert-koin:koin-core:$koinVersion")
-                implementation("io.sentry:sentry-kotlin-multiplatform:0.2.1")
+                implementation("io.sentry:sentry-kotlin-multiplatform:0.4.0")
 
                 implementation("app.cash.sqldelight:runtime:$sqlDelightVersion")
                 implementation("co.touchlab:stately-common:2.0.5")

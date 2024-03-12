@@ -18,6 +18,7 @@ import me.nathanfallet.extopy.viewmodels.auth.AuthViewModel
 import me.nathanfallet.extopy.viewmodels.notifications.NotificationsViewModel
 import me.nathanfallet.extopy.viewmodels.posts.PostViewModel
 import me.nathanfallet.extopy.viewmodels.root.RootViewModel
+import me.nathanfallet.extopy.viewmodels.timelines.SearchViewModel
 import me.nathanfallet.extopy.viewmodels.timelines.TimelineComposeViewModel
 import me.nathanfallet.extopy.viewmodels.timelines.TimelineViewModel
 import me.nathanfallet.extopy.viewmodels.users.ProfileViewModel
@@ -50,6 +51,7 @@ val useCaseModule = module {
     single<IFetchTimelinePostsUseCase> { FetchTimelinePostsUseCase(get()) }
 
     // Users
+    single<IFetchUsersUseCase> { FetchUsersUseCase(get()) }
     single<IFetchUserUseCase> { FetchUserUseCase(get(), get()) }
     single<IUpdateFollowInUserUseCase> { UpdateFollowInUserUseCase(get(), get()) }
     single<IFetchUserPostsUseCase> { FetchUserPostsUseCase(get(), get()) }
@@ -57,6 +59,7 @@ val useCaseModule = module {
     // Posts
     single<ICreatePostUseCase> { CreatePostUseCase(get(), get()) }
     single<IUpdateLikeInPostUseCase> { UpdateLikeInPostUseCase(get(), get()) }
+    single<IFetchPostsUseCase> { FetchPostsUseCase(get()) }
     single<IFetchPostUseCase> { FetchPostUseCase(get(), get()) }
     single<IFetchPostRepliesUseCase> { FetchPostRepliesUseCase(get(), get()) }
 }
@@ -66,6 +69,7 @@ val viewModelModule = module {
     factory { AuthViewModel(get(), get(), get(), get(), get()) }
     factory { TimelineViewModel(it[0], get(), get(), get(), get()) }
     factory { TimelineComposeViewModel(it[0], it[1], it[2], get()) }
+    factory { SearchViewModel(get(), get()) }
     factory { PostViewModel(it[0], get(), get(), get()) }
     factory { ProfileViewModel(it[0], get(), get(), get(), get()) }
     factory { NotificationsViewModel() }

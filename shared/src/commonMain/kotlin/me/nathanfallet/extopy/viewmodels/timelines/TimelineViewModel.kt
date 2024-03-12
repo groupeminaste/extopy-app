@@ -29,7 +29,6 @@ class TimelineViewModel(
     private val _timeline = MutableStateFlow<Timeline?>(viewModelScope, null)
     private val _users = MutableStateFlow<List<User>?>(viewModelScope, null)
     private val _posts = MutableStateFlow<List<Post>?>(viewModelScope, null)
-    private val _search = MutableStateFlow<String?>(viewModelScope, null)
 
     @NativeCoroutinesState
     val timeline = _timeline.asStateFlow()
@@ -39,9 +38,6 @@ class TimelineViewModel(
 
     @NativeCoroutinesState
     val posts = _posts.asStateFlow()
-
-    @NativeCoroutinesState
-    val search = _search.asStateFlow()
 
     private var hasMore = true
 
@@ -64,10 +60,6 @@ class TimelineViewModel(
         }
     }
 
-    fun updateSearch(search: String?) {
-        _search.value = search
-    }
-
     @NativeCoroutines
     suspend fun onLikeClicked(post: Post) {
         updateLikeInPostUseCase(post)?.let {
@@ -84,11 +76,6 @@ class TimelineViewModel(
                 set(indexOf(user), it)
             }
         }
-    }
-
-    @NativeCoroutines
-    suspend fun doSearch() {
-
     }
 
     fun loadMoreIfNeeded(postId: String) {

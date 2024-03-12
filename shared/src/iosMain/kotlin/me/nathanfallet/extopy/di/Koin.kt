@@ -3,6 +3,7 @@ package me.nathanfallet.extopy.di
 import me.nathanfallet.extopy.viewmodels.auth.AuthViewModel
 import me.nathanfallet.extopy.viewmodels.posts.PostViewModel
 import me.nathanfallet.extopy.viewmodels.root.RootViewModel
+import me.nathanfallet.extopy.viewmodels.timelines.SearchViewModel
 import me.nathanfallet.extopy.viewmodels.timelines.TimelineComposeViewModel
 import me.nathanfallet.extopy.viewmodels.timelines.TimelineViewModel
 import me.nathanfallet.extopy.viewmodels.users.ProfileViewModel
@@ -27,6 +28,8 @@ fun Koin.timelineComposeViewModel(body: String, repliedToId: String?, repostOfId
     get {
         parametersOf(body, repliedToId, repostOfId)
     }
+
+val Koin.searchViewModel: SearchViewModel get() = get()
 
 fun Koin.postViewModel(id: String): PostViewModel = get {
     parametersOf(id)

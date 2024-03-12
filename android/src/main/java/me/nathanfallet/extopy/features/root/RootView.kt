@@ -209,7 +209,7 @@ enum class NavigationItem(
     val title: Int,
 ) {
 
-    TIMELINE("timeline", R.drawable.ic_baseline_menu_24, R.string.timeline_title),
+    TIMELINE("timelines", R.drawable.ic_baseline_menu_24, R.string.timeline_title),
     DIRECT_MESSAGE(
         "direct_message",
         R.drawable.ic_baseline_message_24,

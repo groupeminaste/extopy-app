@@ -17,7 +17,7 @@ class AuthViewModel(
     private val fetchUserUseCase: IFetchUserUseCase,
 ) : KMMViewModel() {
 
-    val url = environment.baseUrl + "/auth/authorize?client_id=extopy"
+    val url = environment.baseUrl + "/auth/authorize?clientId=extopy"
 
     @NativeCoroutines
     suspend fun authenticate(code: String, onUserLogged: () -> Unit) {

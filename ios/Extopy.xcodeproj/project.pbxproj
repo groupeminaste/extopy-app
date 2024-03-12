@@ -80,7 +80,7 @@
 		6A996E58291EB51300F36B8C /* TimelineSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSheet.swift; sourceTree = "<group>"; };
 		6AB01ADD2B3602C5001AF7FF /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
 		6AB01AE32B3605A1001AF7FF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
-		6AC04BB02B35A804009938B9 /* KoinExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoinExtension.swift; sourceTree = SOURCE_ROOT; };
+		6AC04BB02B35A804009938B9 /* KoinExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KoinExtension.swift; path = Extopy/DI/KoinExtension.swift; sourceTree = SOURCE_ROOT; };
 		6AC04BB22B35A897009938B9 /* InjectStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectStateViewModel.swift; sourceTree = "<group>"; };
 		6AC04BB62B35A983009938B9 /* KMMViewModelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModelExtension.swift; sourceTree = "<group>"; };
 		6AC04BBF2B35F46F009938B9 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };

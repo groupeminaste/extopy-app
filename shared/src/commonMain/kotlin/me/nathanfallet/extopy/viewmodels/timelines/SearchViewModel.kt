@@ -66,7 +66,10 @@ class SearchViewModel(
 
     @NativeCoroutines
     suspend fun fetchUsers(reset: Boolean = false) {
-        val search = search.value.trim().takeIf { it.isNotBlank() } ?: return
+        val search = search.value.trim().takeIf { it.isNotBlank() } ?: run {
+            _users.value = null
+            return
+        }
         _users.value = if (reset) fetchUsersUseCase(Pagination(25, 0, SearchOptions(search))).also {
             _hasMoreUsers.value = it.isNotEmpty()
         } else (_users.value ?: emptyList()) + fetchUsersUseCase(
@@ -85,7 +88,10 @@ class SearchViewModel(
 
     @NativeCoroutines
     suspend fun fetchPosts(reset: Boolean = false) {
-        val search = search.value.trim().takeIf { it.isNotBlank() } ?: return
+        val search = search.value.trim().takeIf { it.isNotBlank() } ?: run {
+            _posts.value = null
+            return
+        }
         _posts.value = if (reset) fetchPostsUseCase(Pagination(25, 0, SearchOptions(search))).also {
             _hasMorePosts.value = it.isNotEmpty()
         } else (_posts.value ?: emptyList()) + fetchPostsUseCase(

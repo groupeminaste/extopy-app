@@ -10,6 +10,7 @@
 "timeline_user_title" = "User profile";
 "timeline_post_title" = "Post details";
 "timeline_search_title" = "Search results";
+"timeline_search_field" = "Search…";
 "timeline_compose_title" = "Compose a post";
 "timeline_compose_reply_title" = "Reply to a post";
 "timeline_compose_repost_title" = "Repost a post";

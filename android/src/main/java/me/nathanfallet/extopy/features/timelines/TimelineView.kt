@@ -1,10 +1,11 @@
 package me.nathanfallet.extopy.features.timelines
 
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import me.nathanfallet.extopy.R
 import me.nathanfallet.extopy.models.users.User
 import me.nathanfallet.extopy.ui.components.posts.PostCard
 import me.nathanfallet.extopy.ui.components.users.UserCard
+import me.nathanfallet.extopy.viewmodels.timelines.SearchViewModel
 import me.nathanfallet.extopy.viewmodels.timelines.TimelineViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -39,6 +41,7 @@ fun TimelineView(
     val viewModel = koinViewModel<TimelineViewModel>(
         parameters = { parametersOf(id) }
     )
+    val searchViewModel = koinViewModel<SearchViewModel>()
 
     LaunchedEffect(id) {
         viewModel.fetchTimeline()
@@ -47,69 +50,24 @@ fun TimelineView(
     val timeline by viewModel.timeline.collectAsState()
     val users by viewModel.users.collectAsState()
     val posts by viewModel.posts.collectAsState()
-    val search by viewModel.search.collectAsState()
+
+    val search by searchViewModel.search.collectAsState()
+    val searchUsers by searchViewModel.users.collectAsState()
+    val searchPosts by searchViewModel.posts.collectAsState()
 
     LazyColumn(
         modifier
     ) {
         item {
             TopAppBar(
-                title = {
-                    search?.let { search ->
-                        TextField(
-                            value = search,
-                            onValueChange = viewModel::updateSearch,
-                            placeholder = {
-                                Text(
-                                    text = stringResource(id = R.string.timeline_search_field),
-                                    color = Color.LightGray
-                                )
-                            },
-                            keyboardOptions = KeyboardOptions(
-                                imeAction = ImeAction.Search
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onSearch = {
-                                    viewModel.viewModelScope.coroutineScope.launch {
-                                        viewModel.doSearch()
-                                    }
-                                }
-                            )
-                        )
-                    } ?: run {
-                        Text(stringResource(R.string.timeline_title))
-                    }
-                },
+                title = { Text(stringResource(R.string.timeline_title)) },
                 actions = {
-                    if (search != null) {
-                        IconButton(
-                            onClick = { viewModel.updateSearch(null) }
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_baseline_close_24),
-                                contentDescription = stringResource(id = R.string.timeline_search_cancel)
-                            )
-                        }
-                    } else {
-                        IconButton(
-                            onClick = { navigate("timelines/compose") }
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_baseline_create_24),
-                                contentDescription = stringResource(id = R.string.timeline_compose_title)
-                            )
-                        }
-                    }
                     IconButton(
-                        onClick = {
-                            viewModel.viewModelScope.coroutineScope.launch {
-                                viewModel.doSearch()
-                            }
-                        }
+                        onClick = { navigate("timelines/compose") }
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_baseline_search_24),
-                            contentDescription = stringResource(id = R.string.timeline_search_title)
+                            painter = painterResource(id = R.drawable.ic_baseline_create_24),
+                            contentDescription = stringResource(id = R.string.timeline_compose_title)
                         )
                     }
                 }
@@ -118,7 +76,25 @@ fun TimelineView(
         item {
             Spacer(modifier = Modifier.height(12.dp))
         }
-        items(users ?: listOf()) {
+        item {
+            TextField(
+                value = search,
+                onValueChange = searchViewModel::updateSearch,
+                placeholder = {
+                    Text(
+                        text = stringResource(id = R.string.timeline_search_field),
+                        color = Color.LightGray
+                    )
+                },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Search
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            )
+        }
+        items(searchUsers?.takeIf { it.isNotEmpty() } ?: users ?: listOf()) {
             UserCard(
                 user = it,
                 viewedBy = viewedBy,
@@ -148,7 +124,7 @@ fun TimelineView(
                 }
             )
         }
-        items(posts ?: listOf()) {
+        items(searchPosts?.takeIf { it.isNotEmpty() } ?: posts ?: listOf()) {
             PostCard(
                 post = it,
                 navigate = navigate,

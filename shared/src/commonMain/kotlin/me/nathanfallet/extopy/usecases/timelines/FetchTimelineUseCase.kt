@@ -7,8 +7,6 @@ class FetchTimelineUseCase(
     private val client: IExtopyClient,
 ) : IFetchTimelineUseCase {
 
-    override suspend fun invoke(input: String): Timeline? {
-        return client.timelines.get(input)
-    }
+    override suspend fun invoke(input: String): Timeline? = client.timelines.get(input)
 
 }

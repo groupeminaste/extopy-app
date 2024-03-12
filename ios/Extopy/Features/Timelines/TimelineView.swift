@@ -15,6 +15,7 @@ import KMPNativeCoroutinesAsync
 struct TimelineView: View {
     
     @StateViewModel var viewModel: TimelineViewModel
+    @InjectStateViewModel var searchViewModel: SearchViewModel
     
     @State var sheet: TimelineSheet?
     
@@ -22,19 +23,9 @@ struct TimelineView: View {
     
     var body: some View {
         ZStack {
-            /*
-            NavigationLink(
-                destination: TimelineView(viewModel: TimelineViewModel(
-                    type: .search(search: viewModel.searchText)
-                )),
-                isActive: $viewModel.searchShown
-            ) {
-                EmptyView()
-            }
-            */
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    ForEach(viewModel.users ?? [], id: \.namespacedId) { user in
+                    ForEach(searchViewModel.users ?? viewModel.users ?? [], id: \.namespacedId) { user in
                         NavigationLink(destination: ProfileView(
                             viewModel: KoinApplication.shared.koin.profileViewModel(id: user.id),
                             viewedBy: viewedBy
@@ -56,7 +47,7 @@ struct TimelineView: View {
                             )
                         }
                     }
-                    ForEach(viewModel.posts ?? [], id: \.namespacedId) { post in
+                    ForEach(searchViewModel.posts ?? viewModel.posts ?? [], id: \.namespacedId) { post in
                         NavigationLink(destination: PostView(
                             viewModel: KoinApplication.shared.koin.postViewModel(id: post.id),
                             viewedBy: viewedBy
@@ -96,12 +87,7 @@ struct TimelineView: View {
                 }
             }
         }
-        /*
-        .searchable(text: $viewModel.searchText) {
-            EmptyView()
-        }
-        .onSubmit(of: .search, viewModel.submitSearch)
-         */
+        .searchable(text: Binding(get: { searchViewModel.search }, set: searchViewModel.updateSearch))
         .sheet(item: $sheet) { sheet in
             switch (sheet) {
             case .compose(let repliedToId, let repostOfId):

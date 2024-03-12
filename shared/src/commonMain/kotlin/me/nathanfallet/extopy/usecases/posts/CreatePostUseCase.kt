@@ -14,13 +14,12 @@ class CreatePostUseCase(
     private val postsRepository: IPostsRepository,
 ) : ICreatePostUseCase {
 
-    override suspend fun invoke(input: PostPayload): Post? {
-        return client.posts.create(input)?.also {
+    override suspend fun invoke(input: PostPayload): Post? =
+        client.posts.create(input)?.also {
             postsRepository.save(
                 it,
                 Clock.System.now().plus(60, DateTimeUnit.SECOND, TimeZone.currentSystemDefault())
             )
         }
-    }
 
 }

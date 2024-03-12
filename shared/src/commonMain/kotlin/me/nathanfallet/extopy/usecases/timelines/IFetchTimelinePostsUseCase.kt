@@ -1,6 +1,7 @@
 package me.nathanfallet.extopy.usecases.timelines
 
 import me.nathanfallet.extopy.models.posts.Post
-import me.nathanfallet.usecases.base.ITripleSuspendUseCase
+import me.nathanfallet.usecases.base.IPairSuspendUseCase
+import me.nathanfallet.usecases.pagination.Pagination
 
-interface IFetchTimelinePostsUseCase : ITripleSuspendUseCase<String, Long, Long, List<Post>>
+interface IFetchTimelinePostsUseCase : IPairSuspendUseCase<String, Pagination, List<Post>>

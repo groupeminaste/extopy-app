@@ -24,7 +24,7 @@ struct TimelineView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                LazyVStack(spacing: 16) {
+                LazyVStack(spacing: 8) {
                     ForEach(searchViewModel.users ?? viewModel.users ?? [], id: \.namespacedId) { user in
                         NavigationLink(destination: ProfileView(
                             viewModel: KoinApplication.shared.koin.profileViewModel(id: user.id),

@@ -1,6 +1,6 @@
 package me.nathanfallet.extopy.database
 
-class Database(databaseDriverFactory: DatabaseDriverFactory) {
+class Database(databaseDriverFactory: IDatabaseDriverFactory) {
 
     private val database = AppDatabase(databaseDriverFactory.createDriver())
 

@@ -17,7 +17,7 @@ class ExtopyApplication : Application() {
             modules(sharedModule + androidModule)
         }
         if (!BuildConfig.DEBUG) {
-            initializeSentry(this)
+            initializeSentry()
         }
     }
 

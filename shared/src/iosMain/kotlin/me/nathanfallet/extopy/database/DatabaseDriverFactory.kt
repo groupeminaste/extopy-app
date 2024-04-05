@@ -3,9 +3,9 @@ package me.nathanfallet.extopy.database
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 
-actual class DatabaseDriverFactory {
+class DatabaseDriverFactory : IDatabaseDriverFactory {
 
-    actual fun createDriver(): SqlDriver =
+    override fun createDriver(): SqlDriver =
         NativeSqliteDriver(AppDatabase.Schema, "extopy.db")
 
 }

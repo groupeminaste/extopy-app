@@ -12,15 +12,15 @@ import shared
 
 struct UserCard: View {
     
-    let user: Extopy_commonsUser
-    let viewedBy: Extopy_commonsUser
-    let onPostsClicked: (Extopy_commonsUser) -> Void
-    let onFollowersClicked: (Extopy_commonsUser) -> Void
-    let onFollowingClicked: (Extopy_commonsUser) -> Void
-    let onEditClicked: (Extopy_commonsUser) -> Void
-    let onFollowClicked: (Extopy_commonsUser) -> Void
-    let onSettingsClicked: (Extopy_commonsUser) -> Void
-    let onDirectMessageClicked: (Extopy_commonsUser) -> Void
+    let user: CommonsUser
+    let viewedBy: CommonsUser
+    let onPostsClicked: (CommonsUser) -> Void
+    let onFollowersClicked: (CommonsUser) -> Void
+    let onFollowingClicked: (CommonsUser) -> Void
+    let onEditClicked: (CommonsUser) -> Void
+    let onFollowClicked: (CommonsUser) -> Void
+    let onSettingsClicked: (CommonsUser) -> Void
+    let onDirectMessageClicked: (CommonsUser) -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {

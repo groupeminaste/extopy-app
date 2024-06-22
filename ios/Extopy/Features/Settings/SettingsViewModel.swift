@@ -11,10 +11,10 @@ import shared
 
 class SettingsViewModel: ObservableObject {
     
-    @Published var accounts = [Extopy_commonsUser]()
+    @Published var accounts = [CommonsUser]()
     @Published var badge = 0
     
-    func handleAccountClick(account: Extopy_commonsUser) {
+    func handleAccountClick(account: CommonsUser) {
         
     }
     

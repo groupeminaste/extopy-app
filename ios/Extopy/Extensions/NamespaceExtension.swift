@@ -9,14 +9,14 @@
 import Foundation
 import shared
 
-extension Extopy_commonsUser {
+extension CommonsUser {
     var namespacedId: String { "users/\(id)" }
 }
 
-extension Extopy_commonsPost {
+extension CommonsPost {
     var namespacedId: String { "posts/\(id)" }
 }
 
-extension Extopy_commonsNotification {
+extension CommonsNotification {
     var namespacedId: String { "notifications/\(id)" }
 }

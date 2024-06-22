@@ -22,8 +22,8 @@ kotlin {
         }
     }
 
-    val coroutinesVersion = "1.8.0"
-    val ktorVersion = "2.3.9"
+    val coroutinesVersion = "1.8.1"
+    val ktorVersion = "2.3.11"
     val koinVersion = "3.5.3"
     val sqlDelightVersion = "2.0.0"
 
@@ -44,15 +44,13 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("io.insert-koin:koin-core:$koinVersion")
-                implementation("io.sentry:sentry-kotlin-multiplatform:0.4.0")
+                implementation("io.sentry:sentry-kotlin-multiplatform:0.7.1")
 
                 implementation("app.cash.sqldelight:runtime:$sqlDelightVersion")
                 implementation("co.touchlab:stately-common:2.0.5")
 
-                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-16")
-                api("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
-                api("me.nathanfallet.usecases:usecases:1.6.0")
-                api("me.nathanfallet.extopy:extopy-commons:0.1.1")
+                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-1-kotlin-2.0.0-RC2")
+                api("com.extopy:commons:0.1.1")
             }
         }
         val commonTest by getting
@@ -65,7 +63,7 @@ kotlin {
         val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("io.mockk:mockk:1.13.8")
+                implementation("io.mockk:mockk:1.13.11")
             }
         }
         val iosX64Main by getting
@@ -94,27 +92,29 @@ kotlin {
 }
 
 android {
-    namespace = "me.nathanfallet.extopy.shared"
+    namespace = "com.extopy.shared"
     compileSdk = 34
     defaultConfig {
         minSdk = 21
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_19
-        targetCompatibility = JavaVersion.VERSION_19
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
-koverReport {
-    defaults {
-        mergeWith("debug")
+kover {
+    currentProject {
+        createVariant("custom") {
+            addWithDependencies("debug")
+        }
     }
 }
 
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("me.nathanfallet.extopy.database")
+            packageName.set("com.extopy.database")
         }
     }
 }

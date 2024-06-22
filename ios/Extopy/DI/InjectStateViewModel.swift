@@ -7,19 +7,19 @@
 //
 
 import SwiftUI
-import KMMViewModelCore
-import KMMViewModelSwiftUI
+import KMPObservableViewModelCore
+import KMPObservableViewModelSwiftUI
 
 @propertyWrapper
-struct InjectStateViewModel<ViewModel: KMMViewModel>: DynamicProperty {
+struct InjectStateViewModel<ViewModelType: ViewModel>: DynamicProperty {
     
-    @StateViewModel private var viewModel: ViewModel
+    @StateViewModel private var viewModel: ViewModelType
     
-    var wrappedValue: ViewModel {
+    var wrappedValue: ViewModelType {
         _viewModel.wrappedValue
     }
     
-    var projectedValue: ObservableViewModel<ViewModel>.Projection {
+    var projectedValue: ObservableViewModel<ViewModelType>.Projection {
         _viewModel.projectedValue
     }
     

@@ -1,0 +1,23 @@
+CREATE TABLE posts (
+    id TEXT PRIMARY KEY,
+    userId TEXT NOT NULL,
+    body TEXT,
+    publishedAt TEXT NOT NULL,
+    expiresFromCacheAt TEXT NOT NULL
+);
+
+save:
+INSERT OR REPLACE INTO posts
+VALUES ?;
+
+get:
+SELECT * FROM posts WHERE id = ? AND expiresFromCacheAt > ?;
+
+delete:
+DELETE FROM posts WHERE id = ?;
+
+deleteAll:
+DELETE FROM posts;
+
+deleteExpired:
+DELETE FROM posts WHERE expiresFromCacheAt < ?;

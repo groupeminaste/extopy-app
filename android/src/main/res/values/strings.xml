@@ -50,4 +50,7 @@
     <string name="notifications_posts_replied">%s replied to your post</string>
     <string name="notifications_posts_repost">%s shared your post</string>
     <string name="notifications_posts_likes">%s liked your post</string>
+    <string name="auth_title">Time to get back to the basics</string>
+    <string name="auth_description">Join your friends on Extopy by clicking on Continue</string>
+    <string name="auth_button_login">Continue</string>
 </resources>

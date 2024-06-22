@@ -8,7 +8,7 @@
 
 import SwiftUI
 import shared
-import KMMViewModelSwiftUI
+import KMPObservableViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
 struct AuthView: View {
@@ -19,20 +19,16 @@ struct AuthView: View {
     
     let onUserLogged: () -> Void
     
-    var body: some View {
-        ZStack {
-            Color.accentColor.ignoresSafeArea()
-            VStack(spacing: 8) {
-                Text("Time to get back to the basics.")
-                
-                Button("Authenticate") {
-                    if let url = URL(string: viewModel.url) {
-                        sheet = .safari(url: url)
-                    }
-                }
-            }
-            .foregroundColor(.white)
+    func loginRegisterClicked() {
+        if let url = URL(string: viewModel.url) {
+            sheet = .safari(url: url)
         }
+    }
+    
+    var body: some View {
+        AuthRootView(
+            loginClicked: loginRegisterClicked
+        )
         .sheet(item: $sheet) { sheet in
             switch (sheet) {
             case .safari(let url):

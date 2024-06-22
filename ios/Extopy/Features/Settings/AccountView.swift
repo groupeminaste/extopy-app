@@ -11,7 +11,7 @@ import shared
 
 struct AccountView: View {
     
-    let user: Extopy_commonsUser
+    let user: CommonsUser
     
     var body: some View {
         VStack(alignment: .leading) {

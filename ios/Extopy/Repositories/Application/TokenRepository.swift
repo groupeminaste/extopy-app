@@ -17,9 +17,17 @@ class TokenRepository: ITokenRepository {
     func getToken() -> String? {
         keychain.value(forKey: "token") as? String
     }
+
+    func getRefreshToken() -> String? {
+        keychain.value(forKey: "refreshToken") as? String
+    }
     
-    func getUserId() -> String? {
-        keychain.value(forKey: "userId") as? String
+    func getUserId() -> CoreUUID? {
+        if let uuid = keychain.value(forKey: "userId") as? UUID {
+            CoreUUID(nsUUID: uuid)
+        } else {
+            nil
+        }
     }
     
     func setToken(token: String?) {
@@ -29,10 +37,18 @@ class TokenRepository: ITokenRepository {
             keychain.remove(forKey: "token")
         }
     }
-    
-    func setUserId(userId: String?) {
+
+    func setRefreshToken(token: String?) {
+        let _ = if let token {
+            keychain.save(token, forKey: "refreshToken")
+        } else {
+            keychain.remove(forKey: "refreshToken")
+        }
+    }
+
+    func setUserId(userId: CoreUUID?) {
         let _ = if let userId {
-            keychain.save(userId, forKey: "userId")
+            keychain.save(userId.nsUUID, forKey: "userId")
         } else {
             keychain.remove(forKey: "userId")
         }

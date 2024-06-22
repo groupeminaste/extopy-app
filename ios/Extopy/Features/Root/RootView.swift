@@ -8,7 +8,7 @@
 
 import SwiftUI
 import shared
-import KMMViewModelSwiftUI
+import KMPObservableViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
 struct RootView: View {
@@ -38,7 +38,7 @@ struct RootView: View {
         TabView {
             NavigationView {
                 TimelineView(
-                    viewModel: KoinApplication.shared.koin.timelineViewModel(id: "default"),
+                    viewModel: KoinApplication.shared.koin.timelineViewModel(id: CommonsTimeline.companion.defaultId),
                     viewedBy: viewModel.user!
                 )
             }

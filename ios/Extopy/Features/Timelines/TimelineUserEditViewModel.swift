@@ -11,13 +11,13 @@ import shared
 
 class TimelineUserEditViewModel: ObservableObject {
     
-    let onUserEdited: (Extopy_commonsUser) -> Void
+    let onUserEdited: (CommonsUser) -> Void
     
     @Published var username: String
     @Published var displayName: String
     @Published var biography: String
     
-    init(user: Extopy_commonsUser, onUserEdited: @escaping (Extopy_commonsUser) -> Void) {
+    init(user: CommonsUser, onUserEdited: @escaping (CommonsUser) -> Void) {
         self.username = user.username
         self.displayName = user.displayName
         self.biography = user.biography ?? ""

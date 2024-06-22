@@ -12,11 +12,11 @@ import shared
 
 struct PostCard: View {
     
-    let post: Extopy_commonsPost
-    let viewedBy: Extopy_commonsUser
-    let onLikeClicked: (Extopy_commonsPost) -> Void
-    let onRepostClicked: (Extopy_commonsPost) -> Void
-    let onReplyClicked: (Extopy_commonsPost) -> Void
+    let post: CommonsPost
+    let viewedBy: CommonsUser
+    let onLikeClicked: (CommonsPost) -> Void
+    let onRepostClicked: (CommonsPost) -> Void
+    let onReplyClicked: (CommonsPost) -> Void
     
     @State var postShown = false
     
@@ -44,7 +44,7 @@ struct PostCard: View {
                         }
                     }
                     Spacer()
-                    Text(post.published?.timeAgo ?? "")
+                    Text(post.publishedAt.timeAgo)
                         .foregroundColor(.secondary)
                 }
                 

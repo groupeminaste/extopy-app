@@ -23,10 +23,10 @@ extension KoinApplication {
         return shared
     }
     
-    private static var environment: Extopy_commonsExtopyEnvironment {
+    private static var environment: CommonsExtopyEnvironment {
         Bundle.main.bundleIdentifier?.hasSuffix(".dev") == true ?
-            Extopy_commonsExtopyEnvironment.development :
-            Extopy_commonsExtopyEnvironment.production
+            CommonsExtopyEnvironment.development :
+            CommonsExtopyEnvironment.production
     }
     
     private static let keyPaths: [PartialKeyPath<Koin>] = [

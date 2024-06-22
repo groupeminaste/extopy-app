@@ -8,7 +8,8 @@
 
 import shared
 import SwiftUI
-import KMMViewModelSwiftUI
+import KMPObservableViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct NotificationsView: View {
     

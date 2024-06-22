@@ -12,7 +12,7 @@ import shared
 
 struct UserHeaderView: View {
     
-    let user: Extopy_commonsUser
+    let user: CommonsUser
     
     var body: some View {
         HStack(alignment: .top) {

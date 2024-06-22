@@ -54,3 +54,6 @@
 "notifications_posts_replied" = "%@ replied to your post";
 "notifications_posts_repost" = "%@ shared your post";
 "notifications_posts_likes" = "%@ liked your post";
+"auth_title" = "Time to get back to the basics";
+"auth_description" = "Join your friends on Extopy by clicking on Continue";
+"auth_button_login" = "Continue";

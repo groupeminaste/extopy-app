@@ -9,14 +9,14 @@
 import shared
 import SwiftUI
 import Kingfisher
-import KMMViewModelSwiftUI
+import KMPObservableViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
 struct ProfileView: View {
     
     @StateViewModel var viewModel: ProfileViewModel
     
-    let viewedBy: Extopy_commonsUser
+    let viewedBy: CommonsUser
     
     var body: some View {
         ZStack {

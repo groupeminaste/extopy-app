@@ -32,15 +32,22 @@
 		6A3F2E6529215ABF006D64A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		6A41FAA5292B3A1A002F6B81 /* NamespaceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41FAA3292B3A1A002F6B81 /* NamespaceExtension.swift */; };
 		6A442CEA29294710009E10AE /* UserCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A442CE829294710009E10AE /* UserCard.swift */; };
-		6A6ADAD32B38007E0020ADCD /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 6A6ADAD22B38007E0020ADCD /* KMPNativeCoroutinesAsync */; };
+		6A507C642C2724E20085909A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A507C632C2724E20085909A /* LottieView.swift */; };
+		6A507C672C2725070085909A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6A507C662C2725070085909A /* Lottie */; };
+		6A507C6A2C2725B80085909A /* AuthRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A507C692C2725B80085909A /* AuthRootView.swift */; };
+		6A507C6D2C2725EB0085909A /* BackgroundColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A507C6C2C2725EB0085909A /* BackgroundColorStyle.swift */; };
+		6A507C6F2C2726140085909A /* DefaultButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A507C6E2C2726140085909A /* DefaultButtonStyle.swift */; };
+		6A507C712C27265F0085909A /* social.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A507C702C27265F0085909A /* social.json */; };
 		6AB01ADE2B3602C5001AF7FF /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB01ADD2B3602C5001AF7FF /* TokenRepository.swift */; };
 		6AB01AE12B3602FB001AF7FF /* Keychain in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB01AE02B3602FB001AF7FF /* Keychain */; };
 		6AB01AE42B3605A1001AF7FF /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB01AE32B3605A1001AF7FF /* AuthView.swift */; };
+		6AB3B52E2C27222C00E0D76A /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */; };
+		6AB3B5302C27222C00E0D76A /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B52F2C27222C00E0D76A /* KMPNativeCoroutinesCore */; };
+		6AB3B5332C27223A00E0D76A /* KMPObservableViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B5322C27223A00E0D76A /* KMPObservableViewModelCore */; };
+		6AB3B5352C27223A00E0D76A /* KMPObservableViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B5342C27223A00E0D76A /* KMPObservableViewModelSwiftUI */; };
 		6AC04BB12B35A804009938B9 /* KoinExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC04BB02B35A804009938B9 /* KoinExtension.swift */; };
 		6AC04BB32B35A897009938B9 /* InjectStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC04BB22B35A897009938B9 /* InjectStateViewModel.swift */; };
 		6AC04BB72B35A983009938B9 /* KMMViewModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC04BB62B35A983009938B9 /* KMMViewModelExtension.swift */; };
-		6AC04BB92B35A99E009938B9 /* KMMViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BB82B35A99E009938B9 /* KMMViewModelCore */; };
-		6AC04BBB2B35A99E009938B9 /* KMMViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BBA2B35A99E009938B9 /* KMMViewModelSwiftUI */; };
 		6AC04BC02B35F46F009938B9 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC04BBF2B35F46F009938B9 /* UserHeaderView.swift */; };
 		6AC04BC32B35FAEA009938B9 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BC22B35FAEA009938B9 /* Sentry */; };
 		6AC04BC72B35FAEA009938B9 /* SentrySwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BC62B35FAEA009938B9 /* SentrySwiftUI */; };
@@ -72,6 +79,11 @@
 		6A49D8D9291C3E7400C19937 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		6A49D8DC291C40C300C19937 /* DatabaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseExtension.swift; sourceTree = "<group>"; };
 		6A49D8E1291C417A00C19937 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6A507C632C2724E20085909A /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		6A507C692C2725B80085909A /* AuthRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRootView.swift; sourceTree = "<group>"; };
+		6A507C6C2C2725EB0085909A /* BackgroundColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorStyle.swift; sourceTree = "<group>"; };
+		6A507C6E2C2726140085909A /* DefaultButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButtonStyle.swift; sourceTree = "<group>"; };
+		6A507C702C27265F0085909A /* social.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = social.json; sourceTree = "<group>"; };
 		6A7D0791291D7F5F0023BE5B /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		6A7D0793291D81950023BE5B /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		6A7D0795291D8C5F0023BE5B /* AuthSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSheet.swift; sourceTree = "<group>"; };
@@ -96,11 +108,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AC04BC72B35FAEA009938B9 /* SentrySwiftUI in Frameworks */,
-				6A6ADAD32B38007E0020ADCD /* KMPNativeCoroutinesAsync in Frameworks */,
-				6AC04BB92B35A99E009938B9 /* KMMViewModelCore in Frameworks */,
-				6AC04BBB2B35A99E009938B9 /* KMMViewModelSwiftUI in Frameworks */,
+				6AB3B5352C27223A00E0D76A /* KMPObservableViewModelSwiftUI in Frameworks */,
+				6A507C672C2725070085909A /* Lottie in Frameworks */,
 				6A3F2E2B292155CA006D64A7 /* Kingfisher in Frameworks */,
+				6AB3B5332C27223A00E0D76A /* KMPObservableViewModelCore in Frameworks */,
+				6AB3B5302C27222C00E0D76A /* KMPNativeCoroutinesCore in Frameworks */,
 				6AB01AE12B3602FB001AF7FF /* Keychain in Frameworks */,
+				6AB3B52E2C27222C00E0D76A /* KMPNativeCoroutinesAsync in Frameworks */,
 				6AC04BC32B35FAEA009938B9 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +196,39 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		6A507C612C2724CC0085909A /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				6A507C702C27265F0085909A /* social.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		6A507C622C2724D40085909A /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				6A507C632C2724E20085909A /* LottieView.swift */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		6A507C682C2725AE0085909A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				6A507C692C2725B80085909A /* AuthRootView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		6A507C6B2C2725D60085909A /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				6A507C6C2C2725EB0085909A /* BackgroundColorStyle.swift */,
+				6A507C6E2C2726140085909A /* DefaultButtonStyle.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		6AB01ADB2B3602A4001AF7FF /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,7 +267,9 @@
 		6AC04BB42B35A921009938B9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6A507C612C2724CC0085909A /* Lottie */,
 				6AC04BB52B35A925009938B9 /* Components */,
+				6A507C6B2C2725D60085909A /* Theme */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -228,6 +277,8 @@
 		6AC04BB52B35A925009938B9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6A507C622C2724D40085909A /* Lottie */,
+				6A507C682C2725AE0085909A /* Auth */,
 				6AC04BBE2B35B682009938B9 /* Posts */,
 				6AC04BBD2B35B67A009938B9 /* Users */,
 				6A7D0793291D81950023BE5B /* SafariView.swift */,
@@ -330,12 +381,14 @@
 			name = Extopy;
 			packageProductDependencies = (
 				6A3F2E2A292155CA006D64A7 /* Kingfisher */,
-				6AC04BB82B35A99E009938B9 /* KMMViewModelCore */,
-				6AC04BBA2B35A99E009938B9 /* KMMViewModelSwiftUI */,
 				6AC04BC22B35FAEA009938B9 /* Sentry */,
 				6AC04BC62B35FAEA009938B9 /* SentrySwiftUI */,
 				6AB01AE02B3602FB001AF7FF /* Keychain */,
-				6A6ADAD22B38007E0020ADCD /* KMPNativeCoroutinesAsync */,
+				6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */,
+				6AB3B52F2C27222C00E0D76A /* KMPNativeCoroutinesCore */,
+				6AB3B5322C27223A00E0D76A /* KMPObservableViewModelCore */,
+				6AB3B5342C27223A00E0D76A /* KMPObservableViewModelSwiftUI */,
+				6A507C662C2725070085909A /* Lottie */,
 			);
 			productName = Extopy;
 			productReference = 6A117C1D29214F17008388A3 /* Extopy.app */;
@@ -367,10 +420,11 @@
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
 				6A996E5A291ED45A00F36B8C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				6AC04BAA2B35A3CA009938B9 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */,
-				6AC04BBC2B35AD8A009938B9 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
 				6AC04BC12B35FAEA009938B9 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				6AB01ADF2B3602FB001AF7FF /* XCRemoteSwiftPackageReference "Keychain" */,
+				6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
+				6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */,
+				6A507C652C2725070085909A /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -386,6 +440,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A507C712C27265F0085909A /* social.json in Resources */,
 				6A3F2E5F2921583A006D64A7 /* Localizable.strings in Resources */,
 				6A3F2E6529215ABF006D64A7 /* Assets.xcassets in Resources */,
 			);
@@ -419,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A3F2E4729215607006D64A7 /* StringExtension.swift in Sources */,
+				6A507C6F2C2726140085909A /* DefaultButtonStyle.swift in Sources */,
 				6AE16939292A768000137822 /* NumbersExtension.swift in Sources */,
 				6A3F2E4629215607006D64A7 /* SettingsView.swift in Sources */,
 				6A3F2E5D29215607006D64A7 /* DateExtension.swift in Sources */,
@@ -438,10 +494,12 @@
 				6AE16935292A632700137822 /* NotificationsView.swift in Sources */,
 				6A3AAA442B5308D80096C48C /* ProfileView.swift in Sources */,
 				6AE50DC92B3F22FE00E1AC2B /* PostCounterView.swift in Sources */,
+				6A507C642C2724E20085909A /* LottieView.swift in Sources */,
 				6A3F2E4829215607006D64A7 /* PostCard.swift in Sources */,
 				6A3AAA3F2B52F8330096C48C /* UserCounterView.swift in Sources */,
 				6AFD935F2B5428D900ED8EB5 /* PostView.swift in Sources */,
 				6A3F2E4D29215607006D64A7 /* TimelineSheet.swift in Sources */,
+				6A507C6D2C2725EB0085909A /* BackgroundColorStyle.swift in Sources */,
 				6A3F2E5C29215607006D64A7 /* SafariView.swift in Sources */,
 				6A442CEA29294710009E10AE /* UserCard.swift in Sources */,
 				6A3F2E5329215607006D64A7 /* TimelineComposeView.swift in Sources */,
@@ -449,6 +507,7 @@
 				6A3F2E27292155A0006D64A7 /* ExtopyApp.swift in Sources */,
 				6A3F2E5929215607006D64A7 /* SettingsViewModel.swift in Sources */,
 				6A0F5811292A958C00A7B1F5 /* TimelineUserEditViewModel.swift in Sources */,
+				6A507C6A2C2725B80085909A /* AuthRootView.swift in Sources */,
 				6A3F2E5029215607006D64A7 /* TimelineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,6 +602,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -652,6 +712,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -754,6 +815,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -827,6 +889,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -917,6 +980,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6A507C652C2725070085909A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
 		6A996E5A291ED45A00F36B8C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -933,17 +1004,17 @@
 				minimumVersion = 1.0.5;
 			};
 		};
-		6AC04BAA2B35A3CA009938B9 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */ = {
+		6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rickclephas/KMM-ViewModel.git";
+			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines";
 			requirement = {
 				branch = master;
 				kind = branch;
 			};
 		};
-		6AC04BBC2B35AD8A009938B9 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
+		6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
+			repositoryURL = "https://github.com/rickclephas/KMP-ObservableViewModel";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -953,8 +1024,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
 			requirement = {
-				kind = exactVersion;
-				version = 8.4.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -965,25 +1036,35 @@
 			package = 6A996E5A291ED45A00F36B8C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		6A6ADAD22B38007E0020ADCD /* KMPNativeCoroutinesAsync */ = {
+		6A507C662C2725070085909A /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6AC04BBC2B35AD8A009938B9 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
-			productName = KMPNativeCoroutinesAsync;
+			package = 6A507C652C2725070085909A /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		6AB01AE02B3602FB001AF7FF /* Keychain */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6AB01ADF2B3602FB001AF7FF /* XCRemoteSwiftPackageReference "Keychain" */;
 			productName = Keychain;
 		};
-		6AC04BB82B35A99E009938B9 /* KMMViewModelCore */ = {
+		6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6AC04BAA2B35A3CA009938B9 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */;
-			productName = KMMViewModelCore;
+			package = 6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesAsync;
 		};
-		6AC04BBA2B35A99E009938B9 /* KMMViewModelSwiftUI */ = {
+		6AB3B52F2C27222C00E0D76A /* KMPNativeCoroutinesCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6AC04BAA2B35A3CA009938B9 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */;
-			productName = KMMViewModelSwiftUI;
+			package = 6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesCore;
+		};
+		6AB3B5322C27223A00E0D76A /* KMPObservableViewModelCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */;
+			productName = KMPObservableViewModelCore;
+		};
+		6AB3B5342C27223A00E0D76A /* KMPObservableViewModelSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */;
+			productName = KMPObservableViewModelSwiftUI;
 		};
 		6AC04BC22B35FAEA009938B9 /* Sentry */ = {
 			isa = XCSwiftPackageProductDependency;

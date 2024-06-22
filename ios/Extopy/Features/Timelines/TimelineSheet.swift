@@ -11,8 +11,8 @@ import shared
 
 enum TimelineSheet: Identifiable {
     
-    case compose(repliedToId: String?, repostOfId: String?)
-    case userEdit(user: Extopy_commonsUser)
+    case compose(repliedToId: CoreUUID?, repostOfId: CoreUUID?)
+    case userEdit(user: CommonsUser)
     
     var id: String {
         switch (self) {

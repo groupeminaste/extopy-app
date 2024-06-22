@@ -9,7 +9,7 @@
 import shared
 import SwiftUI
 import Kingfisher
-import KMMViewModelSwiftUI
+import KMPObservableViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
 struct TimelineView: View {
@@ -19,7 +19,7 @@ struct TimelineView: View {
     
     @State var sheet: TimelineSheet?
     
-    let viewedBy: Extopy_commonsUser
+    let viewedBy: CommonsUser
     
     var body: some View {
         ZStack {

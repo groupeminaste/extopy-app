@@ -9,7 +9,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover").version("0.8.0")
     id("com.google.devtools.ksp").version("2.0.0-1.0.21").apply(false)
     id("app.cash.sqldelight").version("2.0.0").apply(false)
-    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-19").apply(false)
+    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-37").apply(false)
 }
 
 allprojects {

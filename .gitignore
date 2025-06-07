@@ -1,10 +1,15 @@
 *.iml
 .gradle
+.kotlin
 .idea
+.fleet
 .DS_Store
 build
 *.apk
 *.aab
+*.p8
+key.json
+keystore.jks
 captures
 .externalNativeBuild
 .cxx

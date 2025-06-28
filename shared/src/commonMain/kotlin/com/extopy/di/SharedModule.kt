@@ -3,6 +3,8 @@ package com.extopy.di
 import com.extopy.client.ExtopyClient
 import com.extopy.client.IExtopyClient
 import com.extopy.database.Database
+import com.extopy.repositories.application.ApplicationRepository
+import com.extopy.repositories.application.IApplicationRepository
 import com.extopy.repositories.posts.IPostsRepository
 import com.extopy.repositories.posts.PostsRepository
 import com.extopy.repositories.users.IUsersRepository
@@ -34,6 +36,9 @@ val databaseModule = module {
 val repositoryModule = module {
     // Remote client
     single<IExtopyClient> { ExtopyClient(get(), get(), get(), get()) }
+
+    // Application repository
+    single<IApplicationRepository> { ApplicationRepository(get()) }
 
     // Local cache
     single<IUsersRepository> { UsersRepository(get()) }

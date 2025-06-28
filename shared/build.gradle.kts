@@ -25,6 +25,7 @@ kotlin {
     val ktorVersion = "2.3.13"
     val koinVersion = "3.5.3"
     val sqlDelightVersion = "2.0.0"
+    val kacceleroVersion = "0.4.4"
 
     sourceSets {
         all {
@@ -47,8 +48,9 @@ kotlin {
                 implementation("app.cash.sqldelight:runtime:$sqlDelightVersion")
                 implementation("co.touchlab:stately-common:2.0.5")
 
+                api("dev.kaccelero:settings:${kacceleroVersion}")
                 api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-7")
-                api("com.extopy:commons:0.1.3")
+                api("com.extopy:commons:0.1.4")
             }
         }
         val commonTest by getting

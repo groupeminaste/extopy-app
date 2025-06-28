@@ -1,10 +1,10 @@
 package com.extopy.usecases.auth
 
 import com.extopy.models.auth.AuthToken
-import com.extopy.repositories.application.ITokenRepository
+import com.extopy.repositories.application.IApplicationRepository
 
 class SetTokenUseCase(
-    private val tokenRepository: ITokenRepository,
+    private val tokenRepository: IApplicationRepository,
 ) : ISetTokenUseCase {
 
     override fun invoke(input: AuthToken?) {

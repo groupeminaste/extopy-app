@@ -3,104 +3,37 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A0F580E292A957A00A7B1F5 /* TimelineUserEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F580C292A957A00A7B1F5 /* TimelineUserEditView.swift */; };
-		6A0F5811292A958C00A7B1F5 /* TimelineUserEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F580F292A958C00A7B1F5 /* TimelineUserEditViewModel.swift */; };
-		6A3AAA3F2B52F8330096C48C /* UserCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AAA3E2B52F8330096C48C /* UserCounterView.swift */; };
-		6A3AAA412B52F9F70096C48C /* UserButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AAA402B52F9F60096C48C /* UserButtonView.swift */; };
-		6A3AAA442B5308D80096C48C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AAA432B5308D80096C48C /* ProfileView.swift */; };
-		6A3F2E27292155A0006D64A7 /* ExtopyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* ExtopyApp.swift */; };
 		6A3F2E2B292155CA006D64A7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6A3F2E2A292155CA006D64A7 /* Kingfisher */; };
-		6A3F2E4629215607006D64A7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A49D8D7291C3E6200C19937 /* SettingsView.swift */; };
-		6A3F2E4729215607006D64A7 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2E9FE2291C4FC70020672B /* StringExtension.swift */; };
-		6A3F2E4829215607006D64A7 /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2E9FE0291C4D3C0020672B /* PostCard.swift */; };
-		6A3F2E4B29215607006D64A7 /* DatabaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A49D8DC291C40C300C19937 /* DatabaseExtension.swift */; };
-		6A3F2E4D29215607006D64A7 /* TimelineSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A996E58291EB51300F36B8C /* TimelineSheet.swift */; };
-		6A3F2E4F29215607006D64A7 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2E9FE4291C4FCF0020672B /* ViewExtension.swift */; };
-		6A3F2E5029215607006D64A7 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A49D8D2291C3DB900C19937 /* TimelineView.swift */; };
-		6A3F2E5329215607006D64A7 /* TimelineComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A996E54291EB2C100F36B8C /* TimelineComposeView.swift */; };
-		6A3F2E5529215607006D64A7 /* AuthSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D0795291D8C5F0023BE5B /* AuthSheet.swift */; };
-		6A3F2E5829215607006D64A7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A49D8CF291C3D9F00C19937 /* RootView.swift */; };
-		6A3F2E5929215607006D64A7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A49D8D9291C3E7400C19937 /* SettingsViewModel.swift */; };
-		6A3F2E5A29215607006D64A7 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D0791291D7F5F0023BE5B /* AccountView.swift */; };
-		6A3F2E5C29215607006D64A7 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D0793291D81950023BE5B /* SafariView.swift */; };
-		6A3F2E5D29215607006D64A7 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2E9FE6291C68040020672B /* DateExtension.swift */; };
-		6A3F2E5F2921583A006D64A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A49D8E2291C417A00C19937 /* Localizable.strings */; };
-		6A3F2E6529215ABF006D64A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
-		6A41FAA5292B3A1A002F6B81 /* NamespaceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41FAA3292B3A1A002F6B81 /* NamespaceExtension.swift */; };
-		6A442CEA29294710009E10AE /* UserCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A442CE829294710009E10AE /* UserCard.swift */; };
-		6A507C642C2724E20085909A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A507C632C2724E20085909A /* LottieView.swift */; };
 		6A507C672C2725070085909A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6A507C662C2725070085909A /* Lottie */; };
-		6A507C6A2C2725B80085909A /* AuthRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A507C692C2725B80085909A /* AuthRootView.swift */; };
-		6A507C6D2C2725EB0085909A /* BackgroundColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A507C6C2C2725EB0085909A /* BackgroundColorStyle.swift */; };
-		6A507C6F2C2726140085909A /* DefaultButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A507C6E2C2726140085909A /* DefaultButtonStyle.swift */; };
-		6A507C712C27265F0085909A /* social.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A507C702C27265F0085909A /* social.json */; };
-		6AB01ADE2B3602C5001AF7FF /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB01ADD2B3602C5001AF7FF /* TokenRepository.swift */; };
-		6AB01AE12B3602FB001AF7FF /* Keychain in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB01AE02B3602FB001AF7FF /* Keychain */; };
-		6AB01AE42B3605A1001AF7FF /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB01AE32B3605A1001AF7FF /* AuthView.swift */; };
 		6AB3B52E2C27222C00E0D76A /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */; };
 		6AB3B5302C27222C00E0D76A /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B52F2C27222C00E0D76A /* KMPNativeCoroutinesCore */; };
 		6AB3B5332C27223A00E0D76A /* KMPObservableViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B5322C27223A00E0D76A /* KMPObservableViewModelCore */; };
 		6AB3B5352C27223A00E0D76A /* KMPObservableViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B5342C27223A00E0D76A /* KMPObservableViewModelSwiftUI */; };
-		6AC04BB12B35A804009938B9 /* KoinExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC04BB02B35A804009938B9 /* KoinExtension.swift */; };
-		6AC04BB32B35A897009938B9 /* InjectStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC04BB22B35A897009938B9 /* InjectStateViewModel.swift */; };
-		6AC04BB72B35A983009938B9 /* KMMViewModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC04BB62B35A983009938B9 /* KMMViewModelExtension.swift */; };
-		6AC04BC02B35F46F009938B9 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC04BBF2B35F46F009938B9 /* UserHeaderView.swift */; };
 		6AC04BC32B35FAEA009938B9 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BC22B35FAEA009938B9 /* Sentry */; };
 		6AC04BC72B35FAEA009938B9 /* SentrySwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BC62B35FAEA009938B9 /* SentrySwiftUI */; };
-		6AE16935292A632700137822 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE16931292A62C600137822 /* NotificationsView.swift */; };
-		6AE16939292A768000137822 /* NumbersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE16937292A768000137822 /* NumbersExtension.swift */; };
-		6AE50DC92B3F22FE00E1AC2B /* PostCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE50DC82B3F22FE00E1AC2B /* PostCounterView.swift */; };
-		6AFD935F2B5428D900ED8EB5 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFD935E2B5428D900ED8EB5 /* PostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2152FB032600AC8F00CF470E /* ExtopyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtopyApp.swift; sourceTree = "<group>"; };
-		6A0F580C292A957A00A7B1F5 /* TimelineUserEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineUserEditView.swift; sourceTree = "<group>"; };
-		6A0F580F292A958C00A7B1F5 /* TimelineUserEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineUserEditViewModel.swift; sourceTree = "<group>"; };
 		6A117C1D29214F17008388A3 /* Extopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Extopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A2E9FE0291C4D3C0020672B /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
-		6A2E9FE2291C4FC70020672B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		6A2E9FE4291C4FCF0020672B /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
-		6A2E9FE6291C68040020672B /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		6A3AAA3E2B52F8330096C48C /* UserCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCounterView.swift; sourceTree = "<group>"; };
-		6A3AAA402B52F9F60096C48C /* UserButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButtonView.swift; sourceTree = "<group>"; };
-		6A3AAA432B5308D80096C48C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		6A41FAA3292B3A1A002F6B81 /* NamespaceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamespaceExtension.swift; sourceTree = "<group>"; };
-		6A442CE829294710009E10AE /* UserCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCard.swift; sourceTree = "<group>"; };
-		6A49D8CF291C3D9F00C19937 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		6A49D8D2291C3DB900C19937 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
-		6A49D8D7291C3E6200C19937 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		6A49D8D9291C3E7400C19937 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		6A49D8DC291C40C300C19937 /* DatabaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseExtension.swift; sourceTree = "<group>"; };
-		6A49D8E1291C417A00C19937 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6A507C632C2724E20085909A /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		6A507C692C2725B80085909A /* AuthRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRootView.swift; sourceTree = "<group>"; };
-		6A507C6C2C2725EB0085909A /* BackgroundColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorStyle.swift; sourceTree = "<group>"; };
-		6A507C6E2C2726140085909A /* DefaultButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButtonStyle.swift; sourceTree = "<group>"; };
-		6A507C702C27265F0085909A /* social.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = social.json; sourceTree = "<group>"; };
-		6A7D0791291D7F5F0023BE5B /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
-		6A7D0793291D81950023BE5B /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
-		6A7D0795291D8C5F0023BE5B /* AuthSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSheet.swift; sourceTree = "<group>"; };
-		6A95E46F2925AC460060C7EA /* Extopy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extopy.entitlements; sourceTree = "<group>"; };
-		6A996E54291EB2C100F36B8C /* TimelineComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineComposeView.swift; sourceTree = "<group>"; };
-		6A996E58291EB51300F36B8C /* TimelineSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSheet.swift; sourceTree = "<group>"; };
-		6AB01ADD2B3602C5001AF7FF /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
-		6AB01AE32B3605A1001AF7FF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
-		6AC04BB02B35A804009938B9 /* KoinExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KoinExtension.swift; path = Extopy/DI/KoinExtension.swift; sourceTree = SOURCE_ROOT; };
-		6AC04BB22B35A897009938B9 /* InjectStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectStateViewModel.swift; sourceTree = "<group>"; };
-		6AC04BB62B35A983009938B9 /* KMMViewModelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModelExtension.swift; sourceTree = "<group>"; };
-		6AC04BBF2B35F46F009938B9 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
-		6AE16931292A62C600137822 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
-		6AE16937292A768000137822 /* NumbersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersExtension.swift; sourceTree = "<group>"; };
-		6AE50DC82B3F22FE00E1AC2B /* PostCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCounterView.swift; sourceTree = "<group>"; };
-		6AFD935E2B5428D900ED8EB5 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6ABBFAB22E10439C00DA616B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/Preview Assets.xcassets",
+			);
+			target = 6A117C1C29214F17008388A3 /* Extopy */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6ABBFA892E10439C00DA616B /* Extopy */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6ABBFAB22E10439C00DA616B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Extopy; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		6A117C1A29214F17008388A3 /* Frameworks */ = {
@@ -113,7 +46,6 @@
 				6A3F2E2B292155CA006D64A7 /* Kingfisher in Frameworks */,
 				6AB3B5332C27223A00E0D76A /* KMPObservableViewModelCore in Frameworks */,
 				6AB3B5302C27222C00E0D76A /* KMPNativeCoroutinesCore in Frameworks */,
-				6AB01AE12B3602FB001AF7FF /* Keychain in Frameworks */,
 				6AB3B52E2C27222C00E0D76A /* KMPNativeCoroutinesAsync in Frameworks */,
 				6AC04BC32B35FAEA009938B9 /* Sentry in Frameworks */,
 			);
@@ -122,210 +54,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		058557D7273AAEEB004C7B11 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		6A1A52D22927FA6900D38779 /* Root */ = {
-			isa = PBXGroup;
-			children = (
-				6A49D8CF291C3D9F00C19937 /* RootView.swift */,
-			);
-			path = Root;
-			sourceTree = "<group>";
-		};
-		6A3AAA422B5308A00096C48C /* Users */ = {
-			isa = PBXGroup;
-			children = (
-				6A3AAA432B5308D80096C48C /* ProfileView.swift */,
-			);
-			path = Users;
-			sourceTree = "<group>";
-		};
-		6A49D8CE291C3D8300C19937 /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				6AB01AE22B360595001AF7FF /* Auth */,
-				6AE16930292A629B00137822 /* Notifications */,
-				6AFD935D2B5428A400ED8EB5 /* Posts */,
-				6A1A52D22927FA6900D38779 /* Root */,
-				6A49D8D6291C3E5700C19937 /* Settings */,
-				6A49D8D1291C3DAC00C19937 /* Timelines */,
-				6A3AAA422B5308A00096C48C /* Users */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		6A49D8D1291C3DAC00C19937 /* Timelines */ = {
-			isa = PBXGroup;
-			children = (
-				6A49D8D2291C3DB900C19937 /* TimelineView.swift */,
-				6A996E54291EB2C100F36B8C /* TimelineComposeView.swift */,
-				6A0F580C292A957A00A7B1F5 /* TimelineUserEditView.swift */,
-				6A0F580F292A958C00A7B1F5 /* TimelineUserEditViewModel.swift */,
-				6A996E58291EB51300F36B8C /* TimelineSheet.swift */,
-			);
-			path = Timelines;
-			sourceTree = "<group>";
-		};
-		6A49D8D6291C3E5700C19937 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				6A49D8D7291C3E6200C19937 /* SettingsView.swift */,
-				6A49D8D9291C3E7400C19937 /* SettingsViewModel.swift */,
-				6A7D0791291D7F5F0023BE5B /* AccountView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		6A49D8DB291C40B700C19937 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				6A49D8DC291C40C300C19937 /* DatabaseExtension.swift */,
-				6A2E9FE2291C4FC70020672B /* StringExtension.swift */,
-				6A2E9FE4291C4FCF0020672B /* ViewExtension.swift */,
-				6A2E9FE6291C68040020672B /* DateExtension.swift */,
-				6AE16937292A768000137822 /* NumbersExtension.swift */,
-				6A41FAA3292B3A1A002F6B81 /* NamespaceExtension.swift */,
-				6AC04BB62B35A983009938B9 /* KMMViewModelExtension.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		6A507C612C2724CC0085909A /* Lottie */ = {
-			isa = PBXGroup;
-			children = (
-				6A507C702C27265F0085909A /* social.json */,
-			);
-			path = Lottie;
-			sourceTree = "<group>";
-		};
-		6A507C622C2724D40085909A /* Lottie */ = {
-			isa = PBXGroup;
-			children = (
-				6A507C632C2724E20085909A /* LottieView.swift */,
-			);
-			path = Lottie;
-			sourceTree = "<group>";
-		};
-		6A507C682C2725AE0085909A /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				6A507C692C2725B80085909A /* AuthRootView.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		6A507C6B2C2725D60085909A /* Theme */ = {
-			isa = PBXGroup;
-			children = (
-				6A507C6C2C2725EB0085909A /* BackgroundColorStyle.swift */,
-				6A507C6E2C2726140085909A /* DefaultButtonStyle.swift */,
-			);
-			path = Theme;
-			sourceTree = "<group>";
-		};
-		6AB01ADB2B3602A4001AF7FF /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				6AB01ADC2B3602B0001AF7FF /* Application */,
-			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
-		6AB01ADC2B3602B0001AF7FF /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				6AB01ADD2B3602C5001AF7FF /* TokenRepository.swift */,
-			);
-			path = Application;
-			sourceTree = "<group>";
-		};
-		6AB01AE22B360595001AF7FF /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				6AB01AE32B3605A1001AF7FF /* AuthView.swift */,
-				6A7D0795291D8C5F0023BE5B /* AuthSheet.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		6AC04BAF2B35A7A7009938B9 /* DI */ = {
-			isa = PBXGroup;
-			children = (
-				2152FB032600AC8F00CF470E /* ExtopyApp.swift */,
-				6AC04BB02B35A804009938B9 /* KoinExtension.swift */,
-				6AC04BB22B35A897009938B9 /* InjectStateViewModel.swift */,
-			);
-			path = DI;
-			sourceTree = "<group>";
-		};
-		6AC04BB42B35A921009938B9 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				6A507C612C2724CC0085909A /* Lottie */,
-				6AC04BB52B35A925009938B9 /* Components */,
-				6A507C6B2C2725D60085909A /* Theme */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		6AC04BB52B35A925009938B9 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				6A507C622C2724D40085909A /* Lottie */,
-				6A507C682C2725AE0085909A /* Auth */,
-				6AC04BBE2B35B682009938B9 /* Posts */,
-				6AC04BBD2B35B67A009938B9 /* Users */,
-				6A7D0793291D81950023BE5B /* SafariView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		6AC04BBD2B35B67A009938B9 /* Users */ = {
-			isa = PBXGroup;
-			children = (
-				6A442CE829294710009E10AE /* UserCard.swift */,
-				6AC04BBF2B35F46F009938B9 /* UserHeaderView.swift */,
-				6A3AAA3E2B52F8330096C48C /* UserCounterView.swift */,
-				6A3AAA402B52F9F60096C48C /* UserButtonView.swift */,
-			);
-			path = Users;
-			sourceTree = "<group>";
-		};
-		6AC04BBE2B35B682009938B9 /* Posts */ = {
-			isa = PBXGroup;
-			children = (
-				6A2E9FE0291C4D3C0020672B /* PostCard.swift */,
-				6AE50DC82B3F22FE00E1AC2B /* PostCounterView.swift */,
-			);
-			path = Posts;
-			sourceTree = "<group>";
-		};
-		6AE16930292A629B00137822 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				6AE16931292A62C600137822 /* NotificationsView.swift */,
-			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
-		6AFD935D2B5428A400ED8EB5 /* Posts */ = {
-			isa = PBXGroup;
-			children = (
-				6AFD935E2B5428D900ED8EB5 /* PostView.swift */,
-			);
-			path = Posts;
-			sourceTree = "<group>";
-		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
-				7555FF7D242A565900829871 /* Extopy */,
+				6ABBFA892E10439C00DA616B /* Extopy */,
 				7555FF7C242A565900829871 /* Products */,
 				7555FFB0242A642200829871 /* Frameworks */,
 			);
@@ -337,22 +69,6 @@
 				6A117C1D29214F17008388A3 /* Extopy.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		7555FF7D242A565900829871 /* Extopy */ = {
-			isa = PBXGroup;
-			children = (
-				6AC04BAF2B35A7A7009938B9 /* DI */,
-				6A49D8DB291C40B700C19937 /* Extensions */,
-				6A49D8CE291C3D8300C19937 /* Features */,
-				6AB01ADB2B3602A4001AF7FF /* Repositories */,
-				6AC04BB42B35A921009938B9 /* UI */,
-				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				6A95E46F2925AC460060C7EA /* Extopy.entitlements */,
-				6A49D8E2291C417A00C19937 /* Localizable.strings */,
-				058557D7273AAEEB004C7B11 /* Preview Content */,
-			);
-			path = Extopy;
 			sourceTree = "<group>";
 		};
 		7555FFB0242A642200829871 /* Frameworks */ = {
@@ -378,12 +94,14 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				6ABBFA892E10439C00DA616B /* Extopy */,
+			);
 			name = Extopy;
 			packageProductDependencies = (
 				6A3F2E2A292155CA006D64A7 /* Kingfisher */,
 				6AC04BC22B35FAEA009938B9 /* Sentry */,
 				6AC04BC62B35FAEA009938B9 /* SentrySwiftUI */,
-				6AB01AE02B3602FB001AF7FF /* Keychain */,
 				6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */,
 				6AB3B52F2C27222C00E0D76A /* KMPNativeCoroutinesCore */,
 				6AB3B5322C27223A00E0D76A /* KMPObservableViewModelCore */,
@@ -416,12 +134,19 @@
 			knownRegions = (
 				en,
 				Base,
+				bs,
+				"bs-Cyrl",
+				de,
+				es,
+				fr,
+				hr,
+				sr,
+				"sr-Latn",
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
 				6A996E5A291ED45A00F36B8C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				6AC04BC12B35FAEA009938B9 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
-				6AB01ADF2B3602FB001AF7FF /* XCRemoteSwiftPackageReference "Keychain" */,
 				6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
 				6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */,
 				6A507C652C2725070085909A /* XCRemoteSwiftPackageReference "lottie-ios" */,
@@ -440,9 +165,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A507C712C27265F0085909A /* social.json in Resources */,
-				6A3F2E5F2921583A006D64A7 /* Localizable.strings in Resources */,
-				6A3F2E6529215ABF006D64A7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,57 +195,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A3F2E4729215607006D64A7 /* StringExtension.swift in Sources */,
-				6A507C6F2C2726140085909A /* DefaultButtonStyle.swift in Sources */,
-				6AE16939292A768000137822 /* NumbersExtension.swift in Sources */,
-				6A3F2E4629215607006D64A7 /* SettingsView.swift in Sources */,
-				6A3F2E5D29215607006D64A7 /* DateExtension.swift in Sources */,
-				6AC04BB72B35A983009938B9 /* KMMViewModelExtension.swift in Sources */,
-				6A3AAA412B52F9F70096C48C /* UserButtonView.swift in Sources */,
-				6A3F2E4B29215607006D64A7 /* DatabaseExtension.swift in Sources */,
-				6A0F580E292A957A00A7B1F5 /* TimelineUserEditView.swift in Sources */,
-				6AC04BB12B35A804009938B9 /* KoinExtension.swift in Sources */,
-				6A3F2E5529215607006D64A7 /* AuthSheet.swift in Sources */,
-				6AB01ADE2B3602C5001AF7FF /* TokenRepository.swift in Sources */,
-				6A3F2E5A29215607006D64A7 /* AccountView.swift in Sources */,
-				6A3F2E4F29215607006D64A7 /* ViewExtension.swift in Sources */,
-				6A3F2E5829215607006D64A7 /* RootView.swift in Sources */,
-				6AC04BB32B35A897009938B9 /* InjectStateViewModel.swift in Sources */,
-				6AC04BC02B35F46F009938B9 /* UserHeaderView.swift in Sources */,
-				6A41FAA5292B3A1A002F6B81 /* NamespaceExtension.swift in Sources */,
-				6AE16935292A632700137822 /* NotificationsView.swift in Sources */,
-				6A3AAA442B5308D80096C48C /* ProfileView.swift in Sources */,
-				6AE50DC92B3F22FE00E1AC2B /* PostCounterView.swift in Sources */,
-				6A507C642C2724E20085909A /* LottieView.swift in Sources */,
-				6A3F2E4829215607006D64A7 /* PostCard.swift in Sources */,
-				6A3AAA3F2B52F8330096C48C /* UserCounterView.swift in Sources */,
-				6AFD935F2B5428D900ED8EB5 /* PostView.swift in Sources */,
-				6A3F2E4D29215607006D64A7 /* TimelineSheet.swift in Sources */,
-				6A507C6D2C2725EB0085909A /* BackgroundColorStyle.swift in Sources */,
-				6A3F2E5C29215607006D64A7 /* SafariView.swift in Sources */,
-				6A442CEA29294710009E10AE /* UserCard.swift in Sources */,
-				6A3F2E5329215607006D64A7 /* TimelineComposeView.swift in Sources */,
-				6AB01AE42B3605A1001AF7FF /* AuthView.swift in Sources */,
-				6A3F2E27292155A0006D64A7 /* ExtopyApp.swift in Sources */,
-				6A3F2E5929215607006D64A7 /* SettingsViewModel.swift in Sources */,
-				6A0F5811292A958C00A7B1F5 /* TimelineUserEditViewModel.swift in Sources */,
-				6A507C6A2C2725B80085909A /* AuthRootView.swift in Sources */,
-				6A3F2E5029215607006D64A7 /* TimelineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		6A49D8E2291C417A00C19937 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6A49D8E1291C417A00C19937 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6A117C2829214F19008388A3 /* Debug */ = {
@@ -996,14 +671,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		6AB01ADF2B3602FB001AF7FF /* XCRemoteSwiftPackageReference "Keychain" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/GroupeMINASTE/Keychain.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
-			};
-		};
 		6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines";
@@ -1040,11 +707,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A507C652C2725070085909A /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		6AB01AE02B3602FB001AF7FF /* Keychain */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6AB01ADF2B3602FB001AF7FF /* XCRemoteSwiftPackageReference "Keychain" */;
-			productName = Keychain;
 		};
 		6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */ = {
 			isa = XCSwiftPackageProductDependency;

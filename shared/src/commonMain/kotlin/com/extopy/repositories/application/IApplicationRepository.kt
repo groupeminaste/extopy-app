@@ -2,7 +2,7 @@ package com.extopy.repositories.application
 
 import dev.kaccelero.models.UUID
 
-interface ITokenRepository {
+interface IApplicationRepository {
 
     fun getToken(): String?
     fun setToken(token: String?)

@@ -7,7 +7,7 @@ struct ExtopyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     init() {
-        KoinApplication.start()
+        Koin_coreKoinApplication.companion.start()
 
         #if !DEBUG
         SentryKt.initializeSentry()

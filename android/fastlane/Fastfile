@@ -1,0 +1,56 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+    lane :staging do
+        distribute(
+            package_name: "me.nathanfallet.extopy.dev",
+            flavor: "dev"
+        )
+    end
+
+    lane :production do
+        distribute(
+            package_name: "me.nathanfallet.extopy",
+            flavor: "production"
+        )
+    end
+
+    lane :distribute do |options|
+        package_name = options[:package_name]
+        flavor = options[:flavor]
+
+        increment_version_code(
+            gradle_file_path: "build.gradle.kts",
+            version_code: number_of_commits
+        )
+
+        gradle(
+            task: "bundleRelease",
+            gradle_path: "../gradlew"
+        )
+
+        upload_to_play_store(
+            package_name: package_name,
+            track: "internal",
+            release_status: "draft",
+            aab: "build/outputs/bundle/#{flavor}Release/android-#{flavor}-release.aab"
+        )
+    end
+
+end

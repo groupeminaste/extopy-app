@@ -1,0 +1,8 @@
+app_identifier("me.nathanfallet.Extopy") # The bundle identifier of your app
+apple_id("contact@nathanfallet.me") # Your Apple Developer Portal username
+
+itc_team_id("119076755") # App Store Connect Team ID
+team_id("ZL9396WK65") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

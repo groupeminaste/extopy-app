@@ -1,0 +1,72 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+    lane :staging do
+        distribute(
+            app_identifier: "me.nathanfallet.Extopy.dev",
+            scheme: "Extopy Dev"
+        )
+    end
+
+    lane :production do
+        distribute(
+            app_identifier: "me.nathanfallet.Extopy",
+            scheme: "Extopy"
+        )
+    end
+
+    lane :distribute do |options|
+        app_identifier = options[:app_identifier]
+        scheme = options[:scheme]
+        xcodeproj = "Extopy.xcodeproj"
+
+        setup_ci
+        api_key = app_store_connect_api_key(
+            key_id: ENV["APPSTORE_KEY_ID"],
+            issuer_id: ENV["APPSTORE_ISSUER_ID"],
+            key_filepath: "fastlane/key.p8"
+        )
+
+        increment_build_number(
+            build_number: number_of_commits,
+            xcodeproj: xcodeproj
+        )
+
+        match
+        update_code_signing_settings(
+            use_automatic_signing: false,
+            profile_name: "match AppStore #{app_identifier}",
+            code_sign_identity: "iPhone Distribution",
+            path: xcodeproj
+        )
+        build_app(
+            scheme: scheme,
+            xcargs: "-allowProvisioningUpdates"
+        )
+
+        upload_to_testflight(
+            api_key: api_key,
+            app_identifier: app_identifier,
+            skip_waiting_for_build_processing: true
+        )
+
+        clean_build_artifacts
+    end
+
+end

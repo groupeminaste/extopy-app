@@ -18,4 +18,72 @@ jobs:
       - name: Install dependencies and run tests
         run: ./gradlew test koverXmlReport
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  deploy-ios:
+    runs-on: macos-latest #[ self-hosted, macOS ]
+    env:
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      P8_AUTH_KEY: ${{ secrets.P8_AUTH_KEY }}
+      APPSTORE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+      APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.MATCH_REPO_KEY }}
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: Setup Sentry CLI
+        uses: matbour/setup-sentry-cli@v2
+      - name: Install Dependencies
+        run: |
+          cd ios
+          bundle install
+          echo "${{ secrets.P8_AUTH_KEY }}" | base64 -d > fastlane/key.p8
+      - name: Build and deploy (STAGING)
+        run: cd ios && bundle exec fastlane ios staging
+      - name: Build and deploy (PRODUCTION)
+        run: cd ios && bundle exec fastlane ios production
+  deploy-android:
+    runs-on: ubuntu-latest #[ self-hosted, unix ]
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: Install Dependencies
+        run: |
+          cd android
+          bundle install
+          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}" | base64 -d > fastlane/key.json
+          echo "${{ secrets.SIGNING_KEY_JKS }}" | base64 -d > fastlane/keystore.jks
+      - name: Build and deploy (STAGING)
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: cd android && bundle exec fastlane android staging
+      - name: Build and deploy (PRODUCTION)
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: cd android && bundle exec fastlane android production
+

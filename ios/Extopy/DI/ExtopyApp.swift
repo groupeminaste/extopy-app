@@ -18,6 +18,9 @@ struct ExtopyApp: App {
         WindowGroup {
             //RootView()
             ContentView()
+                .onOpenURL { uri in
+                    ExternalUriHandler.shared.onNewUri(uri: uri.absoluteString)
+                }
         }
     }
 
@@ -48,17 +51,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             ]
         )
 
-        return true
-    }
-
-    func application(
-        _ application: UIApplication,
-        open uri: URL,
-        options: [UIApplication.OpenURLOptionsKey: Any] = [:]
-    ) -> Bool {
-        print("application open uri: \(uri)")
-        // Sends the full URI on to the singleton
-        ExternalUriHandler.shared.onNewUri(uri: uri.absoluteString)
         return true
     }
 

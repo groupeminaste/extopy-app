@@ -102,7 +102,7 @@ fun TimelineView(
                 viewedBy = viewedBy,
                 navigate = navigate,
                 onPostsClicked = { user ->
-                    navigate(Route.TimelineUser(user.id))
+                    navigate(Route.TimelineUser(user.id.toString()))
                 },
                 onFollowersClicked = { user ->
                     //navigate("timelines/users/${user.id}/followers")
@@ -136,10 +136,10 @@ fun TimelineView(
                     }
                 },
                 onRepostClicked = { post ->
-                    navigate(Route.TimelineCompose(repostOfId = post.id))
+                    navigate(Route.TimelineCompose(repostOfId = post.id.toString()))
                 },
                 onReplyClicked = { post ->
-                    navigate(Route.TimelineCompose(repliedToId = post.id))
+                    navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
                 }
             )
             viewModel.loadMoreIfNeeded(it.id)

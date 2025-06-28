@@ -13,7 +13,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
-import com.extopy.models.navigation.*
+import com.extopy.models.navigation.ExternalUriHandler
+import com.extopy.models.navigation.NavigationItem
+import com.extopy.models.navigation.Route
 import com.extopy.models.timelines.Timeline
 import com.extopy.models.users.User
 import com.extopy.ui.screens.auth.AuthView
@@ -29,7 +31,6 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import kotlin.reflect.typeOf
 
 @Composable
 fun RootView() {
@@ -130,34 +131,28 @@ fun TabNavigation(
                 modifier = Modifier.padding(padding)
             )
         }
-        composable<Route.TimelineCompose>(
-            typeMap = mapOf(typeOf<UUID?>() to optionalUUIDNavType)
-        ) { backStackEntry ->
+        composable<Route.TimelineCompose> { backStackEntry ->
             val route = backStackEntry.toRoute<Route.TimelineCompose>()
             TimelineComposeView(
                 onPostComposed = navController::navigateUp,
-                repliedToId = route.repliedToId,
-                repostOfId = route.repostOfId,
+                repliedToId = route.repliedToId.takeIf { it != "null" }?.let(::UUID),
+                repostOfId = route.repostOfId.takeIf { it != "null" }?.let(::UUID),
                 modifier = Modifier.padding(padding),
             )
         }
-        composable<Route.TimelineUser>(
-            typeMap = mapOf(typeOf<UUID>() to UUIDNavType)
-        ) { backStackEntry ->
+        composable<Route.TimelineUser> { backStackEntry ->
             val route = backStackEntry.toRoute<Route.TimelineUser>()
             ProfileView(
-                id = route.userId,
+                id = route.userId.let(::UUID),
                 viewedBy = viewedBy,
                 navigate = navController::navigate,
                 modifier = Modifier.padding(padding)
             )
         }
-        composable<Route.TimelinePost>(
-            typeMap = mapOf(typeOf<UUID>() to UUIDNavType)
-        ) { backStackEntry ->
+        composable<Route.TimelinePost> { backStackEntry ->
             val route = backStackEntry.toRoute<Route.TimelinePost>()
             PostView(
-                id = route.postId,
+                id = route.postId.let(::UUID),
                 navigate = navController::navigate,
                 modifier = Modifier.padding(padding)
             )

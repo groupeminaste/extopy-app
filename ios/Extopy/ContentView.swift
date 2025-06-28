@@ -7,12 +7,14 @@ import SwiftUI
 import shared
 
 struct ComposeView: UIViewControllerRepresentable {
+
     func makeUIViewController(context: Context) -> UIViewController {
         ExtopyApplicationKt.MainViewController()
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
+
 }
 
 struct ContentView: View {

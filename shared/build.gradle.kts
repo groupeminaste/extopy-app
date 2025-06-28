@@ -64,6 +64,7 @@ kotlin {
                 api(compose.material3)
                 api(compose.components.resources)
                 api(compose.components.uiToolingPreview)
+                api("org.jetbrains.androidx.navigation:navigation-compose:2.9.0-beta03")
 
                 api("dev.kaccelero:settings:${kacceleroVersion}")
                 api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-7")

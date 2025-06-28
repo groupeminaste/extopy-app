@@ -68,10 +68,10 @@ fun PostView(
                         }
                     },
                     onRepostClicked = { post ->
-                        navigate(Route.TimelineCompose(repostOfId = post.id))
+                        navigate(Route.TimelineCompose(repostOfId = post.id.toString()))
                     },
                     onReplyClicked = { post ->
-                        navigate(Route.TimelineCompose(repliedToId = post.id))
+                        navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
                     }
                 )
             }
@@ -86,10 +86,10 @@ fun PostView(
                     }
                 },
                 onRepostClicked = { post ->
-                    navigate(Route.TimelineCompose(repostOfId = post.id))
+                    navigate(Route.TimelineCompose(repostOfId = post.id.toString()))
                 },
                 onReplyClicked = { post ->
-                    navigate(Route.TimelineCompose(repliedToId = post.id))
+                    navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
                 }
             )
             viewModel.loadMoreIfNeeded(it.id)

@@ -33,7 +33,7 @@ fun PostCard(
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.padding(16.dp).clickable {
-                navigate(Route.TimelinePost(post.id))
+                navigate(Route.TimelinePost(post.id.toString()))
             }
         ) {
             Row {
@@ -41,7 +41,7 @@ fun PostCard(
                     UserHeaderView(
                         user = user,
                         modifier = Modifier.clickable {
-                            navigate(Route.TimelineUser(user.id))
+                            navigate(Route.TimelineUser(user.id.toString()))
                         }
                     )
                 }

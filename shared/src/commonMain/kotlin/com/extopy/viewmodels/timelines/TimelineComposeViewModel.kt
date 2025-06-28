@@ -1,12 +1,10 @@
 package com.extopy.viewmodels.timelines
 
+import androidx.lifecycle.ViewModel
 import com.extopy.models.posts.PostPayload
 import com.extopy.usecases.posts.ICreatePostUseCase
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
-import com.rickclephas.kmp.observableviewmodel.MutableStateFlow
-import com.rickclephas.kmp.observableviewmodel.ViewModel
 import dev.kaccelero.models.UUID
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class TimelineComposeViewModel(
@@ -18,9 +16,8 @@ class TimelineComposeViewModel(
 
     // Properties
 
-    private val _body = MutableStateFlow(viewModelScope, body)
+    private val _body = MutableStateFlow(body)
 
-    @NativeCoroutinesState
     val body = _body.asStateFlow()
 
     // Setters
@@ -31,7 +28,6 @@ class TimelineComposeViewModel(
 
     // Methods
 
-    @NativeCoroutines
     suspend fun send() {
         createPostUseCase(
             PostPayload(

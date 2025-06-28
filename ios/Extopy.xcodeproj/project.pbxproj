@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A3F2E2B292155CA006D64A7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6A3F2E2A292155CA006D64A7 /* Kingfisher */; };
-		6A507C672C2725070085909A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6A507C662C2725070085909A /* Lottie */; };
-		6AB3B52E2C27222C00E0D76A /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */; };
-		6AB3B5302C27222C00E0D76A /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B52F2C27222C00E0D76A /* KMPNativeCoroutinesCore */; };
-		6AB3B5332C27223A00E0D76A /* KMPObservableViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B5322C27223A00E0D76A /* KMPObservableViewModelCore */; };
-		6AB3B5352C27223A00E0D76A /* KMPObservableViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB3B5342C27223A00E0D76A /* KMPObservableViewModelSwiftUI */; };
 		6AC04BC32B35FAEA009938B9 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BC22B35FAEA009938B9 /* Sentry */; };
 		6AC04BC72B35FAEA009938B9 /* SentrySwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AC04BC62B35FAEA009938B9 /* SentrySwiftUI */; };
 /* End PBXBuildFile section */
@@ -25,6 +19,7 @@
 		6ABBFAB22E10439C00DA616B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Info.plist,
 				"Preview Content/Preview Assets.xcassets",
 			);
 			target = 6A117C1C29214F17008388A3 /* Extopy */;
@@ -41,12 +36,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AC04BC72B35FAEA009938B9 /* SentrySwiftUI in Frameworks */,
-				6AB3B5352C27223A00E0D76A /* KMPObservableViewModelSwiftUI in Frameworks */,
-				6A507C672C2725070085909A /* Lottie in Frameworks */,
-				6A3F2E2B292155CA006D64A7 /* Kingfisher in Frameworks */,
-				6AB3B5332C27223A00E0D76A /* KMPObservableViewModelCore in Frameworks */,
-				6AB3B5302C27222C00E0D76A /* KMPNativeCoroutinesCore in Frameworks */,
-				6AB3B52E2C27222C00E0D76A /* KMPNativeCoroutinesAsync in Frameworks */,
 				6AC04BC32B35FAEA009938B9 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,14 +88,8 @@
 			);
 			name = Extopy;
 			packageProductDependencies = (
-				6A3F2E2A292155CA006D64A7 /* Kingfisher */,
 				6AC04BC22B35FAEA009938B9 /* Sentry */,
 				6AC04BC62B35FAEA009938B9 /* SentrySwiftUI */,
-				6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */,
-				6AB3B52F2C27222C00E0D76A /* KMPNativeCoroutinesCore */,
-				6AB3B5322C27223A00E0D76A /* KMPObservableViewModelCore */,
-				6AB3B5342C27223A00E0D76A /* KMPObservableViewModelSwiftUI */,
-				6A507C662C2725070085909A /* Lottie */,
 			);
 			productName = Extopy;
 			productReference = 6A117C1D29214F17008388A3 /* Extopy.app */;
@@ -145,11 +128,7 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				6A996E5A291ED45A00F36B8C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				6AC04BC12B35FAEA009938B9 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
-				6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
-				6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */,
-				6A507C652C2725070085909A /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -655,38 +634,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6A507C652C2725070085909A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.4.3;
-			};
-		};
-		6A996E5A291ED45A00F36B8C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
-		6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rickclephas/KMP-ObservableViewModel";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		6AC04BC12B35FAEA009938B9 /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
@@ -698,36 +645,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6A3F2E2A292155CA006D64A7 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6A996E5A291ED45A00F36B8C /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		6A507C662C2725070085909A /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6A507C652C2725070085909A /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
-		};
-		6AB3B52D2C27222C00E0D76A /* KMPNativeCoroutinesAsync */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
-			productName = KMPNativeCoroutinesAsync;
-		};
-		6AB3B52F2C27222C00E0D76A /* KMPNativeCoroutinesCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6AB3B52C2C27222C00E0D76A /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
-			productName = KMPNativeCoroutinesCore;
-		};
-		6AB3B5322C27223A00E0D76A /* KMPObservableViewModelCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */;
-			productName = KMPObservableViewModelCore;
-		};
-		6AB3B5342C27223A00E0D76A /* KMPObservableViewModelSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6AB3B5312C27223A00E0D76A /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */;
-			productName = KMPObservableViewModelSwiftUI;
-		};
 		6AC04BC22B35FAEA009938B9 /* Sentry */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6AC04BC12B35FAEA009938B9 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;

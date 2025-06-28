@@ -20,6 +20,7 @@ import com.extopy.viewmodels.auth.AuthViewModel
 import com.extopy.viewmodels.notifications.NotificationsViewModel
 import com.extopy.viewmodels.posts.PostViewModel
 import com.extopy.viewmodels.root.RootViewModel
+import com.extopy.viewmodels.settings.SettingsViewModel
 import com.extopy.viewmodels.timelines.SearchViewModel
 import com.extopy.viewmodels.timelines.TimelineComposeViewModel
 import com.extopy.viewmodels.timelines.TimelineViewModel
@@ -27,6 +28,7 @@ import com.extopy.viewmodels.users.ProfileViewModel
 import dev.kaccelero.commons.auth.IGetTokenUseCase
 import dev.kaccelero.commons.auth.ILogoutUseCase
 import dev.kaccelero.commons.auth.IRenewTokenUseCase
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val databaseModule = module {
@@ -76,14 +78,15 @@ val useCaseModule = module {
 }
 
 val viewModelModule = module {
-    factory { RootViewModel(get(), get()) }
-    factory { AuthViewModel(get(), get(), get()) }
-    factory { TimelineViewModel(it[0], get(), get(), get(), get()) }
-    factory { TimelineComposeViewModel(it[0], it[1], it[2], get()) }
-    factory { SearchViewModel(get(), get()) }
-    factory { PostViewModel(it[0], get(), get(), get()) }
-    factory { ProfileViewModel(it[0], get(), get(), get(), get()) }
-    factory { NotificationsViewModel() }
+    viewModel { RootViewModel(get(), get()) }
+    viewModel { AuthViewModel(get(), get(), get()) }
+    viewModel { TimelineViewModel(it[0], get(), get(), get(), get()) }
+    viewModel { TimelineComposeViewModel(it[0], it[1], it[2], get()) }
+    viewModel { SearchViewModel(get(), get()) }
+    viewModel { PostViewModel(it[0], get(), get(), get()) }
+    viewModel { ProfileViewModel(it[0], get(), get(), get(), get()) }
+    viewModel { NotificationsViewModel() }
+    viewModel { SettingsViewModel() }
 }
 
 val sharedModule = listOf(

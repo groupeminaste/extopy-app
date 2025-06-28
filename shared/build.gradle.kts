@@ -1,11 +1,12 @@
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
     kotlin("plugin.serialization")
+    kotlin("plugin.compose")
+    id("com.android.library")
+    id("org.jetbrains.compose")
     id("org.jetbrains.kotlinx.kover")
     id("com.google.devtools.ksp")
     id("app.cash.sqldelight")
-    id("com.rickclephas.kmp.nativecoroutines")
 }
 
 kotlin {
@@ -22,9 +23,10 @@ kotlin {
         }
     }
 
-    val ktorVersion = "2.3.13"
-    val koinVersion = "3.5.3"
+    val ktorVersion = "3.1.3"
+    val koinVersion = "4.1.0"
     val sqlDelightVersion = "2.0.0"
+    val compottieVersion = "2.0.0-rc04"
     val kacceleroVersion = "0.4.4"
 
     sourceSets {
@@ -43,13 +45,27 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("io.insert-koin:koin-core:$koinVersion")
+                implementation("io.insert-koin:koin-compose:$koinVersion")
+                implementation("io.insert-koin:koin-compose-viewmodel:$koinVersion")
+                implementation("io.insert-koin:koin-compose-viewmodel-navigation:$koinVersion")
                 implementation("io.sentry:sentry-kotlin-multiplatform:0.7.1")
 
                 implementation("app.cash.sqldelight:runtime:$sqlDelightVersion")
                 implementation("co.touchlab:stately-common:2.0.5")
 
+                implementation("io.github.alexzhirkevich:compottie:$compottieVersion")
+                implementation("io.github.alexzhirkevich:compottie-resources:$compottieVersion")
+                implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+
+                api(compose.runtime)
+                api(compose.foundation)
+                api(compose.animation)
+                api(compose.material3)
+                api(compose.components.resources)
+                api(compose.components.uiToolingPreview)
+                api("org.jetbrains.androidx.navigation:navigation-compose:2.9.0-beta03")
+
                 api("dev.kaccelero:settings:${kacceleroVersion}")
-                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-7")
                 api("com.extopy:commons:0.1.4")
             }
         }

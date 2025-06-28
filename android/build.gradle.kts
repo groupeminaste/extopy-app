@@ -7,11 +7,11 @@ plugins {
 
 android {
     namespace = "com.extopy"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "me.nathanfallet.extopy"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 6
         versionName = "0.1.1"
     }
@@ -58,9 +58,8 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
 
-    implementation("io.insert-koin:koin-core:3.5.3")
-    implementation("io.insert-koin:koin-android:3.5.3")
-    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
+    implementation("io.insert-koin:koin-android:4.1.0")
+    implementation("io.insert-koin:koin-androidx-compose:4.1.0")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
     implementation("androidx.activity:activity-compose:1.9.0")
@@ -68,7 +67,6 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     implementation("com.google.android.material:material:1.12.0")
-    implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("com.github.JamalMulla:ComposePrefs3:1.0.4")
     implementation("me.nathanfallet.myapps:myapps-android-compose:1.3.3")
     implementation("com.airbnb.android:lottie-compose:6.3.0")

@@ -1,17 +1,15 @@
 package com.extopy.viewmodels.timelines
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.extopy.models.application.SearchOptions
 import com.extopy.models.posts.Post
 import com.extopy.models.users.User
 import com.extopy.usecases.posts.IFetchPostsUseCase
 import com.extopy.usecases.users.IFetchUsersUseCase
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
-import com.rickclephas.kmp.observableviewmodel.MutableStateFlow
-import com.rickclephas.kmp.observableviewmodel.ViewModel
-import com.rickclephas.kmp.observableviewmodel.coroutineScope
 import dev.kaccelero.repositories.Pagination
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
@@ -24,27 +22,22 @@ class SearchViewModel(
 
     // Properties
 
-    private val _search = MutableStateFlow(viewModelScope, "")
+    private val _search = MutableStateFlow("")
 
-    private val _users = MutableStateFlow<List<User>?>(viewModelScope, null)
-    private val _posts = MutableStateFlow<List<Post>?>(viewModelScope, null)
+    private val _users = MutableStateFlow<List<User>?>(null)
+    private val _posts = MutableStateFlow<List<Post>?>(null)
 
-    private val _hasMoreUsers = MutableStateFlow(viewModelScope, true)
-    private val _hasMorePosts = MutableStateFlow(viewModelScope, true)
+    private val _hasMoreUsers = MutableStateFlow(true)
+    private val _hasMorePosts = MutableStateFlow(true)
 
-    @NativeCoroutinesState
     val search = _search.asStateFlow()
 
-    @NativeCoroutinesState
     val users = _users.asStateFlow()
 
-    @NativeCoroutinesState
     val posts = _posts.asStateFlow()
 
-    @NativeCoroutinesState
     val hasMoreUsers = _hasMoreUsers.asStateFlow()
 
-    @NativeCoroutinesState
     val hasMorePosts = _hasMorePosts.asStateFlow()
 
     // Setters
@@ -56,7 +49,7 @@ class SearchViewModel(
     // Methods
 
     init {
-        viewModelScope.coroutineScope.launch {
+        viewModelScope.launch {
             _search.debounce(500L).collect {
                 fetchUsers(true)
                 fetchPosts(true)
@@ -64,7 +57,6 @@ class SearchViewModel(
         }
     }
 
-    @NativeCoroutines
     suspend fun fetchUsers(reset: Boolean = false) {
         val search = search.value.trim().takeIf { it.isNotBlank() } ?: run {
             _users.value = null
@@ -81,12 +73,11 @@ class SearchViewModel(
 
     fun loadMoreUsers() {
         if (!hasMoreUsers.value) return
-        viewModelScope.coroutineScope.launch {
+        viewModelScope.launch {
             fetchUsers()
         }
     }
 
-    @NativeCoroutines
     suspend fun fetchPosts(reset: Boolean = false) {
         val search = search.value.trim().takeIf { it.isNotBlank() } ?: run {
             _posts.value = null
@@ -103,7 +94,7 @@ class SearchViewModel(
 
     fun loadMorePosts() {
         if (!hasMorePosts.value) return
-        viewModelScope.coroutineScope.launch {
+        viewModelScope.launch {
             fetchPosts()
         }
     }

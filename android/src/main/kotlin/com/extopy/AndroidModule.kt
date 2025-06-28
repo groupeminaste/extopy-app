@@ -21,7 +21,7 @@ val databaseModule = module {
 
 val repositoryModule = module {
     single<INativeSettingsRepository> {
-        NativeSettingsRepository(get<Context>().getSharedPreferences("latexcards", Context.MODE_PRIVATE))
+        NativeSettingsRepository(get<Context>().getSharedPreferences("extopy", Context.MODE_PRIVATE))
     }
 }
 

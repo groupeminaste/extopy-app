@@ -16,7 +16,6 @@ struct ExtopyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            //RootView()
             ContentView()
                 .onOpenURL { uri in
                     ExternalUriHandler.shared.onNewUri(uri: uri.absoluteString)

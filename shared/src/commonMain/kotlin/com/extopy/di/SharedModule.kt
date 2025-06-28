@@ -20,6 +20,7 @@ import com.extopy.viewmodels.auth.AuthViewModel
 import com.extopy.viewmodels.notifications.NotificationsViewModel
 import com.extopy.viewmodels.posts.PostViewModel
 import com.extopy.viewmodels.root.RootViewModel
+import com.extopy.viewmodels.settings.SettingsViewModel
 import com.extopy.viewmodels.timelines.SearchViewModel
 import com.extopy.viewmodels.timelines.TimelineComposeViewModel
 import com.extopy.viewmodels.timelines.TimelineViewModel
@@ -85,6 +86,7 @@ val viewModelModule = module {
     viewModel { PostViewModel(it[0], get(), get(), get()) }
     viewModel { ProfileViewModel(it[0], get(), get(), get(), get()) }
     viewModel { NotificationsViewModel() }
+    viewModel { SettingsViewModel() }
 }
 
 val sharedModule = listOf(

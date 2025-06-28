@@ -1,4 +1,4 @@
-package com.extopy.features
+package com.extopy
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -1,7 +1,6 @@
-package com.extopy.di
+package com.extopy
 
 import android.content.Context
-import com.extopy.BuildConfig
 import com.extopy.database.DatabaseDriverFactory
 import com.extopy.database.IDatabaseDriverFactory
 import com.extopy.models.application.ExtopyEnvironment

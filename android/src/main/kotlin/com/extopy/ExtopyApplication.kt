@@ -1,17 +1,18 @@
-package com.extopy.di
+package com.extopy
 
 import android.app.Application
-import com.extopy.BuildConfig
+import com.extopy.di.initializeSentry
+import com.extopy.di.sharedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.GlobalContext.startKoin
+import org.koin.core.context.GlobalContext
 
 class ExtopyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        startKoin {
+        GlobalContext.startKoin {
             androidLogger()
             androidContext(this@ExtopyApplication)
             modules(sharedModule + androidModule)

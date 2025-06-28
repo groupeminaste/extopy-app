@@ -22,6 +22,7 @@ import com.extopy.models.users.User
 import com.extopy.ui.screens.auth.AuthView
 import com.extopy.ui.screens.notifications.NotificationsView
 import com.extopy.ui.screens.posts.PostView
+import com.extopy.ui.screens.settings.SettingsView
 import com.extopy.ui.screens.timelines.TimelineComposeView
 import com.extopy.ui.screens.timelines.TimelineView
 import com.extopy.ui.screens.users.ProfileView
@@ -164,12 +165,10 @@ fun TabNavigation(
             NotificationsView(modifier = Modifier.padding(padding))
         }
         composable<Route.Settings> {
-            /*
             SettingsView(
                 modifier = Modifier.padding(padding),
                 navigate = navController::navigate
             )
-            */
         }
     }
 

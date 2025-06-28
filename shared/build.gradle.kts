@@ -56,6 +56,7 @@ kotlin {
                 implementation("io.github.alexzhirkevich:compottie:$compottieVersion")
                 implementation("io.github.alexzhirkevich:compottie-resources:$compottieVersion")
                 implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+                implementation("io.coil-kt.coil3:coil-network-ktor3:3.2.0")
 
                 api(compose.runtime)
                 api(compose.foundation)

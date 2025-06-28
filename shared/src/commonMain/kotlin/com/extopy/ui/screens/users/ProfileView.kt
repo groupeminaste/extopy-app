@@ -1,12 +1,13 @@
 package com.extopy.ui.screens.users
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -47,69 +48,71 @@ fun ProfileView(
     val user by viewModel.user.collectAsState()
     val posts by viewModel.posts.collectAsState()
 
-    LazyColumn(
+    Column(
         modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
     ) {
-        item {
-            TopAppBar(
-                title = {
-                    Text(stringResource(Res.string.timeline_user_title))
-                },
-            )
-        }
-        item {
-            Spacer(modifier = Modifier.height(12.dp))
-        }
-        item {
-            user?.let {
-                UserCard(
-                    user = it,
-                    viewedBy = viewedBy,
-                    navigate = navigate,
-                    onPostsClicked = {},
-                    onFollowersClicked = { user ->
-                        //navigate("timelines/users/${user.id}/followers")
-                    },
-                    onFollowingClicked = { user ->
-                        //navigate("timelines/users/${user.id}/following")
-                    },
-                    onEditClicked = {
+        CenterAlignedTopAppBar(
+            title = {
+                Text(stringResource(Res.string.timeline_user_title))
+            },
+        )
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, (16 + 88).dp),
+        ) {
+            item {
+                user?.let {
+                    UserCard(
+                        user = it,
+                        viewedBy = viewedBy,
+                        navigate = navigate,
+                        onPostsClicked = {},
+                        onFollowersClicked = { user ->
+                            //navigate("timelines/users/${user.id}/followers")
+                        },
+                        onFollowingClicked = { user ->
+                            //navigate("timelines/users/${user.id}/following")
+                        },
+                        onEditClicked = {
 
-                    },
-                    onFollowClicked = {
+                        },
+                        onFollowClicked = {
+                            viewModel.viewModelScope.launch {
+                                viewModel.onFollowClicked()
+                            }
+                        },
+                        onSettingsClicked = {
+
+                        },
+                        onDirectMessageClicked = {
+
+                        }
+                    )
+                }
+            }
+            items(posts ?: listOf()) {
+                PostCard(
+                    post = it,
+                    navigate = navigate,
+                    onLikeClicked = { post ->
                         viewModel.viewModelScope.launch {
-                            viewModel.onFollowClicked()
+                            viewModel.onLikeClicked(post)
                         }
                     },
-                    onSettingsClicked = {
-
+                    onRepostClicked = { post ->
+                        navigate(Route.TimelineCompose(repostOfId = post.id.toString()))
                     },
-                    onDirectMessageClicked = {
-
+                    onReplyClicked = { post ->
+                        navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
                     }
                 )
+                viewModel.loadMoreIfNeeded(it.id)
             }
-        }
-        items(posts ?: listOf()) {
-            PostCard(
-                post = it,
-                navigate = navigate,
-                onLikeClicked = { post ->
-                    viewModel.viewModelScope.launch {
-                        viewModel.onLikeClicked(post)
-                    }
-                },
-                onRepostClicked = { post ->
-                    navigate(Route.TimelineCompose(repostOfId = post.id.toString()))
-                },
-                onReplyClicked = { post ->
-                    navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
-                }
-            )
-            viewModel.loadMoreIfNeeded(it.id)
-        }
-        item {
-            Spacer(modifier = Modifier.height(12.dp))
+            item {
+                Spacer(modifier = Modifier.height(12.dp))
+            }
         }
     }
 

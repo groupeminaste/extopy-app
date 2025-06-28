@@ -20,9 +20,9 @@
     <string name="timeline_user_edit_displayname">Display name</string>
     <string name="timeline_user_edit_biography">Biography</string>
     <string name="timeline_user_edit_save">Save</string>
-    <string name="timeline_info_posts">%s\nposts</string>
-    <string name="timeline_info_followers">%s\nfollowers</string>
-    <string name="timeline_info_following">%s\nfollowing</string>
+    <string name="timeline_info_posts">%1$s\nposts</string>
+    <string name="timeline_info_followers">%1$s\nfollowers</string>
+    <string name="timeline_info_following">%1$s\nfollowing</string>
     <string name="timeline_button_follow">Follow</string>
     <string name="timeline_button_following">Following</string>
     <string name="timeline_button_ask">Ask to follow</string>

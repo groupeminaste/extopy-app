@@ -3,6 +3,7 @@ package com.extopy.ui.components.users
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,6 +13,7 @@ import com.extopy.models.navigation.Route
 import com.extopy.models.users.User
 import com.extopy.models.users.UserButton
 import com.extopy.models.users.UserCounter
+import com.extopy.ui.theme.defaultCardColors
 
 @Composable
 fun UserCard(
@@ -27,10 +29,10 @@ fun UserCard(
     onDirectMessageClicked: (User) -> Unit,
 ) {
     Card(
+        elevation = CardDefaults.elevatedCardElevation(),
+        colors = defaultCardColors(),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(vertical = 4.dp)
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),

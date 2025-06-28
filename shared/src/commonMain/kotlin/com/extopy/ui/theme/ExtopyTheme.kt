@@ -2,6 +2,7 @@ package com.extopy.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.darkColorScheme
@@ -19,6 +20,11 @@ val darkBackgroundColor = Color(0xFF000000)
 
 val cardColor = Color(0xFFFFFFFF)
 val darkCardColor = Color(0xFF1E1E1E)
+
+@Composable
+fun defaultCardColors() = cardColors(
+    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+)
 
 @Composable
 fun ExtopyTheme(

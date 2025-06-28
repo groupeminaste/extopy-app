@@ -17,9 +17,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.extopy.models.users.User
+import dev.kaccelero.models.UUID
 import extopy_app.shared.generated.resources.Res
 import extopy_app.shared.generated.resources.ic_baseline_verified_24
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun UserHeaderView(
@@ -54,7 +56,24 @@ fun UserHeaderView(
                     )
                 }
             }
-            Text(user.username)
+            Text(
+                text = user.username,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            )
         }
     }
+}
+
+@Preview
+@Composable
+fun UserHeaderViewPreview() {
+    UserHeaderView(
+        user = User(
+            id = UUID(),
+            displayName = "John Doe",
+            username = "johndoe",
+            avatar = "https://example.com/avatar.jpg",
+        ),
+    )
 }

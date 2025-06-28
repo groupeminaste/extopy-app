@@ -1,5 +1,6 @@
 package com.extopy.ui.screens.timelines
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -39,10 +40,12 @@ fun TimelineComposeView(
     }
 
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        TopAppBar(
+        CenterAlignedTopAppBar(
             title = { Text(stringResource(title)) }
         )
         Spacer(modifier = Modifier.height(8.dp))

@@ -1,12 +1,13 @@
 package com.extopy.ui.screens.posts
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -44,21 +45,40 @@ fun PostView(
     val post by viewModel.post.collectAsState()
     val posts by viewModel.posts.collectAsState()
 
-    LazyColumn(
+    Column(
         modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
     ) {
-        item {
-            TopAppBar(
-                title = {
-                    Text(stringResource(Res.string.timeline_post_title))
-                },
-            )
-        }
-        item {
-            Spacer(modifier = Modifier.height(12.dp))
-        }
-        item {
-            post?.let {
+        CenterAlignedTopAppBar(
+            title = {
+                Text(stringResource(Res.string.timeline_post_title))
+            },
+        )
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, (16 + 88).dp),
+        ) {
+            item {
+                post?.let {
+                    PostCard(
+                        post = it,
+                        navigate = navigate,
+                        onLikeClicked = { post ->
+                            viewModel.viewModelScope.launch {
+                                viewModel.onLikeClicked(post)
+                            }
+                        },
+                        onRepostClicked = { post ->
+                            navigate(Route.TimelineCompose(repostOfId = post.id.toString()))
+                        },
+                        onReplyClicked = { post ->
+                            navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
+                        }
+                    )
+                }
+            }
+            items(posts ?: listOf()) {
                 PostCard(
                     post = it,
                     navigate = navigate,
@@ -74,28 +94,11 @@ fun PostView(
                         navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
                     }
                 )
+                viewModel.loadMoreIfNeeded(it.id)
             }
-        }
-        items(posts ?: listOf()) {
-            PostCard(
-                post = it,
-                navigate = navigate,
-                onLikeClicked = { post ->
-                    viewModel.viewModelScope.launch {
-                        viewModel.onLikeClicked(post)
-                    }
-                },
-                onRepostClicked = { post ->
-                    navigate(Route.TimelineCompose(repostOfId = post.id.toString()))
-                },
-                onReplyClicked = { post ->
-                    navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
-                }
-            )
-            viewModel.loadMoreIfNeeded(it.id)
-        }
-        item {
-            Spacer(modifier = Modifier.height(12.dp))
+            item {
+                Spacer(modifier = Modifier.height(12.dp))
+            }
         }
     }
 

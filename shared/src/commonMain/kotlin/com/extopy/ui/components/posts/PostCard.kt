@@ -3,6 +3,7 @@ package com.extopy.ui.components.posts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import com.extopy.models.navigation.Route
 import com.extopy.models.posts.Post
 import com.extopy.models.posts.PostCounter
 import com.extopy.ui.components.users.UserHeaderView
+import com.extopy.ui.theme.defaultCardColors
 
 @Composable
 fun PostCard(
@@ -24,10 +26,10 @@ fun PostCard(
     onReplyClicked: (Post) -> Unit,
 ) {
     Card(
+        elevation = CardDefaults.elevatedCardElevation(),
+        colors = defaultCardColors(),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(vertical = 4.dp)
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),

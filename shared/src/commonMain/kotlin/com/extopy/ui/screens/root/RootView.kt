@@ -2,7 +2,7 @@ package com.extopy.ui.screens.root
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewModelScope
@@ -10,15 +10,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavUri
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 import com.extopy.models.navigation.ExternalUriHandler
-import com.extopy.models.navigation.NavigationItem
 import com.extopy.models.navigation.Route
 import com.extopy.models.timelines.Timeline
 import com.extopy.models.users.User
+import com.extopy.ui.components.base.CustomNavigationBar
 import com.extopy.ui.screens.auth.AuthView
 import com.extopy.ui.screens.notifications.NotificationsView
 import com.extopy.ui.screens.posts.PostView
@@ -29,8 +28,6 @@ import com.extopy.ui.screens.users.ProfileView
 import com.extopy.viewmodels.root.RootViewModel
 import dev.kaccelero.models.UUID
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -41,7 +38,6 @@ fun RootView() {
     val user by viewModel.user.collectAsState()
 
     val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     LaunchedEffect(Unit) {
         viewModel.fetchUser()
@@ -62,34 +58,7 @@ fun RootView() {
     Scaffold(
         bottomBar = {
             if (user == null) return@Scaffold
-            NavigationBar {
-                val currentRoute = navBackStackEntry?.destination?.route
-                NavigationItem.entries.forEach { item ->
-                    NavigationBarItem(
-                        icon = {
-                            Icon(
-                                painterResource(item.icon),
-                                contentDescription = stringResource(item.title)
-                            )
-                        },
-                        label = { Text(text = stringResource(item.title)) },
-                        alwaysShowLabel = true,
-                        selected = currentRoute?.lowercase()?.startsWith(item.name.replace("_", "").lowercase())
-                            ?: false,
-                        onClick = {
-                            navController.navigate(item.route) {
-                                navController.graph.startDestinationRoute?.let { route ->
-                                    popUpTo(route) {
-                                        saveState = true
-                                    }
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        }
-                    )
-                }
-            }
+            CustomNavigationBar(navController)
         }
     ) { padding ->
         user?.let {

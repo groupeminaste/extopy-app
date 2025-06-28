@@ -13,10 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.extopy.models.navigation.Route
 import com.extopy.ui.components.posts.PostCard
 import com.extopy.viewmodels.posts.PostViewModel
-import com.rickclephas.kmp.observableviewmodel.coroutineScope
 import dev.kaccelero.models.UUID
 import extopy_app.shared.generated.resources.Res
 import extopy_app.shared.generated.resources.timeline_post_title
@@ -63,7 +63,7 @@ fun PostView(
                     post = it,
                     navigate = navigate,
                     onLikeClicked = { post ->
-                        viewModel.viewModelScope.coroutineScope.launch {
+                        viewModel.viewModelScope.launch {
                             viewModel.onLikeClicked(post)
                         }
                     },
@@ -81,7 +81,7 @@ fun PostView(
                 post = it,
                 navigate = navigate,
                 onLikeClicked = { post ->
-                    viewModel.viewModelScope.coroutineScope.launch {
+                    viewModel.viewModelScope.launch {
                         viewModel.onLikeClicked(post)
                     }
                 },

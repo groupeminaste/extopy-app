@@ -9,12 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.extopy.extensions.timeAgo
 import com.extopy.models.navigation.Route
 import com.extopy.models.posts.Post
 import com.extopy.models.posts.PostCounter
 import com.extopy.ui.components.users.UserHeaderView
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 @Composable
 fun PostCard(
@@ -47,8 +46,7 @@ fun PostCard(
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
-                    // TODO: Format date (time ago)
-                    text = post.publishedAt.toLocalDateTime(TimeZone.currentSystemDefault()).date.toString(),
+                    text = post.publishedAt.timeAgo,
                     style = MaterialTheme.typography.bodySmall
                 )
             }

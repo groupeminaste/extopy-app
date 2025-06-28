@@ -10,7 +10,6 @@ plugins {
     id("org.jetbrains.kotlinx.kover").version("0.8.0")
     id("com.google.devtools.ksp").version("2.1.21-2.0.1").apply(false)
     id("app.cash.sqldelight").version("2.0.0").apply(false)
-    id("com.rickclephas.kmp.nativecoroutines").version("1.0.0-ALPHA-37-kotlin-2.1.0-RC").apply(false)
 }
 
 allprojects {

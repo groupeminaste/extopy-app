@@ -16,13 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.extopy.models.navigation.Route
 import com.extopy.models.users.User
 import com.extopy.ui.components.posts.PostCard
 import com.extopy.ui.components.users.UserCard
 import com.extopy.viewmodels.timelines.SearchViewModel
 import com.extopy.viewmodels.timelines.TimelineViewModel
-import com.rickclephas.kmp.observableviewmodel.coroutineScope
 import dev.kaccelero.models.UUID
 import extopy_app.shared.generated.resources.*
 import kotlinx.coroutines.launch
@@ -114,7 +114,7 @@ fun TimelineView(
 
                 },
                 onFollowClicked = { user ->
-                    viewModel.viewModelScope.coroutineScope.launch {
+                    viewModel.viewModelScope.launch {
                         viewModel.onFollowClicked(user)
                     }
                 },
@@ -131,7 +131,7 @@ fun TimelineView(
                 post = it,
                 navigate = navigate,
                 onLikeClicked = { post ->
-                    viewModel.viewModelScope.coroutineScope.launch {
+                    viewModel.viewModelScope.launch {
                         viewModel.onLikeClicked(post)
                     }
                 },

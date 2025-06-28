@@ -8,8 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.extopy.viewmodels.timelines.TimelineComposeViewModel
-import com.rickclephas.kmp.observableviewmodel.coroutineScope
 import dev.kaccelero.models.UUID
 import extopy_app.shared.generated.resources.*
 import kotlinx.coroutines.launch
@@ -65,7 +65,7 @@ fun TimelineComposeView(
                 .fillMaxWidth(),
             enabled = body.isNotBlank(),
             onClick = {
-                viewModel.viewModelScope.coroutineScope.launch {
+                viewModel.viewModelScope.launch {
                     viewModel.send()
                     onPostComposed()
                 }

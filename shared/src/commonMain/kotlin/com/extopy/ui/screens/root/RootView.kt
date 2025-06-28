@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import androidx.navigation.NavUri
 import androidx.navigation.compose.NavHost
@@ -25,7 +26,6 @@ import com.extopy.ui.screens.timelines.TimelineComposeView
 import com.extopy.ui.screens.timelines.TimelineView
 import com.extopy.ui.screens.users.ProfileView
 import com.extopy.viewmodels.root.RootViewModel
-import com.rickclephas.kmp.observableviewmodel.coroutineScope
 import dev.kaccelero.models.UUID
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -102,7 +102,7 @@ fun RootView() {
                 navController = navController,
                 padding = padding,
                 onUserLogged = {
-                    viewModel.viewModelScope.coroutineScope.launch {
+                    viewModel.viewModelScope.launch {
                         viewModel.fetchUser()
                     }
                 }

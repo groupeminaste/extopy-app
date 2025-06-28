@@ -7,7 +7,6 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
     id("com.google.devtools.ksp")
     id("app.cash.sqldelight")
-    id("com.rickclephas.kmp.nativecoroutines")
 }
 
 kotlin {
@@ -67,7 +66,6 @@ kotlin {
                 api("org.jetbrains.androidx.navigation:navigation-compose:2.9.0-beta03")
 
                 api("dev.kaccelero:settings:${kacceleroVersion}")
-                api("com.rickclephas.kmp:kmp-observableviewmodel-core:1.0.0-BETA-7")
                 api("com.extopy:commons:0.1.4")
             }
         }

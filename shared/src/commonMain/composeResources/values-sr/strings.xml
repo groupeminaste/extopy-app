@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="timeline_user_edit_save">Сачувај</string>
+    <string name="notifications_title">Обавештење</string>
+    <string name="timeline_user_edit_title">Промени профил</string>
+    <string name="settings_title">Поставке</string>
+    <string name="timeline_button_dc">Директ Контакт</string>
+    <string name="timeline_button_ask">Питајте да пратите</string>
+    <string name="timeline_user_edit_username">Корисничко име</string>
+    <string name="timeline_button_asked">Питали сте</string>
+    <string name="timeline_button_following">Пратите</string>
+    <string name="timeline_button_edit">Промените</string>
+    <string name="timeline_search_title">Претраживања резултати</string>
+    <string name="settings_add_account">Додај налог</string>
+    <string name="timeline_button_settings">Поставке</string>
+    <string name="timeline_button_follow">Прати</string>
+    <string name="timeline_compose_account">Налог</string>
+</resources>

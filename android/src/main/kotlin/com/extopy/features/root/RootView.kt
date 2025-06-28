@@ -19,15 +19,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.extopy.R
-import com.extopy.features.auth.AuthView
-import com.extopy.features.notifications.NotificationsView
-import com.extopy.features.posts.PostView
 import com.extopy.features.settings.SettingsView
-import com.extopy.features.timelines.TimelineComposeView
-import com.extopy.features.timelines.TimelineView
-import com.extopy.features.users.ProfileView
 import com.extopy.models.timelines.Timeline
 import com.extopy.models.users.User
+import com.extopy.ui.screens.auth.AuthView
+import com.extopy.ui.screens.notifications.NotificationsView
+import com.extopy.ui.screens.posts.PostView
+import com.extopy.ui.screens.timelines.TimelineComposeView
+import com.extopy.ui.screens.timelines.TimelineView
+import com.extopy.ui.screens.users.ProfileView
 import com.extopy.viewmodels.root.RootViewModel
 import com.rickclephas.kmp.observableviewmodel.coroutineScope
 import dev.kaccelero.models.UUID
@@ -185,7 +185,7 @@ fun AuthNavigation(
             )
         }
         composable(
-            "auth/code",
+            "auth/code?code={code}",
             arguments = listOf(
                 navArgument("code") { type = NavType.StringType }
             ),

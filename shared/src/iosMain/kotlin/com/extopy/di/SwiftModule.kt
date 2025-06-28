@@ -16,8 +16,8 @@ object SwiftModule {
         single<IDatabaseDriverFactory> { DatabaseDriverFactory() }
         single<INativeSettingsRepository> {
             val group =
-                if (environment == ExtopyEnvironment.DEVELOPMENT) "group.me.nathanfallet.extopy.staging"
-                else "group.me.nathanfallet.extopy"
+                if (environment == ExtopyEnvironment.DEVELOPMENT) "group.me.nathanfallet.Extopy.dev"
+                else "group.me.nathanfallet.Extopy"
             NativeSettingsRepository(
                 userDefaults = NSUserDefaults(suiteName = group),
                 keychainRepository = KeychainRepository(service = null, keychainAccessGroup = group)

@@ -20,10 +20,10 @@ import org.koin.core.parameter.parametersOf
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimelineComposeView(
-    modifier: Modifier,
     onPostComposed: () -> Unit,
     repliedToId: UUID?,
     repostOfId: UUID?,
+    modifier: Modifier,
 ) {
 
     val viewModel = koinViewModel<TimelineComposeViewModel>(

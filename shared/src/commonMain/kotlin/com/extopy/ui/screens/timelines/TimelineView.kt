@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.extopy.models.navigation.Route
 import com.extopy.models.users.User
 import com.extopy.ui.components.posts.PostCard
 import com.extopy.ui.components.users.UserCard
@@ -35,7 +36,7 @@ import org.koin.core.parameter.parametersOf
 fun TimelineView(
     id: UUID,
     viewedBy: User,
-    navigate: (String) -> Unit,
+    navigate: (Route) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -64,7 +65,7 @@ fun TimelineView(
                 title = { Text(stringResource(Res.string.timeline_title)) },
                 actions = {
                     IconButton(
-                        onClick = { navigate("timelines/compose") }
+                        onClick = { navigate(Route.TimelineCompose()) }
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_baseline_create_24),
@@ -101,13 +102,13 @@ fun TimelineView(
                 viewedBy = viewedBy,
                 navigate = navigate,
                 onPostsClicked = { user ->
-                    navigate.invoke("timelines/users/${user.id}/posts")
+                    navigate(Route.TimelineUser(user.id))
                 },
                 onFollowersClicked = { user ->
-                    navigate.invoke("timelines/users/${user.id}/followers")
+                    //navigate("timelines/users/${user.id}/followers")
                 },
                 onFollowingClicked = { user ->
-                    navigate.invoke("timelines/users/${user.id}/following")
+                    //navigate("timelines/users/${user.id}/following")
                 },
                 onEditClicked = {
 
@@ -135,10 +136,10 @@ fun TimelineView(
                     }
                 },
                 onRepostClicked = { post ->
-                    navigate.invoke("timelines/compose?repostOfId=${post.id}")
+                    navigate(Route.TimelineCompose(repostOfId = post.id))
                 },
                 onReplyClicked = { post ->
-                    navigate.invoke("timelines/compose?repliedToId=${post.id}")
+                    navigate(Route.TimelineCompose(repliedToId = post.id))
                 }
             )
             viewModel.loadMoreIfNeeded(it.id)

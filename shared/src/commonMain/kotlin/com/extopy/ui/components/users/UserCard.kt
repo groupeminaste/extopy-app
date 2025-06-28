@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.extopy.models.navigation.Route
 import com.extopy.models.users.User
 import com.extopy.models.users.UserButton
 import com.extopy.models.users.UserCounter
@@ -16,7 +17,7 @@ import com.extopy.models.users.UserCounter
 fun UserCard(
     user: User,
     viewedBy: User,
-    navigate: (String) -> Unit,
+    navigate: (Route) -> Unit,
     onPostsClicked: (User) -> Unit,
     onFollowersClicked: (User) -> Unit,
     onFollowingClicked: (User) -> Unit,
@@ -39,7 +40,7 @@ fun UserCard(
                 UserHeaderView(
                     user = user,
                     modifier = Modifier.clickable {
-                        navigate("timelines/users/${user.id}")
+                        navigate(Route.TimelineUser(user.id))
                     }
                 )
                 Spacer(modifier = Modifier.weight(1f))

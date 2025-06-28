@@ -1,25 +1,19 @@
-package com.extopy.features.root
+package com.extopy.ui.screens.root
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+import androidx.navigation.NavUri
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import com.extopy.R
-import com.extopy.features.settings.SettingsView
+import androidx.navigation.toRoute
+import com.extopy.models.navigation.*
 import com.extopy.models.timelines.Timeline
 import com.extopy.models.users.User
 import com.extopy.ui.screens.auth.AuthView
@@ -32,7 +26,10 @@ import com.extopy.viewmodels.root.RootViewModel
 import com.rickclephas.kmp.observableviewmodel.coroutineScope
 import dev.kaccelero.models.UUID
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
+import kotlin.reflect.typeOf
 
 @Composable
 fun RootView() {
@@ -48,6 +45,18 @@ fun RootView() {
         viewModel.fetchUser()
     }
 
+    DisposableEffect(Unit) {
+        // Sets up the listener to call `NavController.navigate()`
+        // for the composable that has a matching `navDeepLink` listed
+        ExternalUriHandler.listener = { uri ->
+            navController.navigate(NavUri(uri))
+        }
+        // Removes the listener when the composable is no longer active
+        onDispose {
+            ExternalUriHandler.listener = null
+        }
+    }
+
     Scaffold(
         bottomBar = {
             if (user == null) return@Scaffold
@@ -57,13 +66,14 @@ fun RootView() {
                     NavigationBarItem(
                         icon = {
                             Icon(
-                                painterResource(id = item.icon),
+                                painterResource(item.icon),
                                 contentDescription = stringResource(item.title)
                             )
                         },
                         label = { Text(text = stringResource(item.title)) },
                         alwaysShowLabel = true,
-                        selected = currentRoute?.startsWith(item.route) ?: false,
+                        selected = currentRoute?.lowercase()?.startsWith(item.name.replace("_", "").lowercase())
+                            ?: false,
                         onClick = {
                             navController.navigate(item.route) {
                                 navController.graph.startDestinationRoute?.let { route ->
@@ -98,6 +108,7 @@ fun RootView() {
             )
         }
     }
+
 }
 
 @Composable
@@ -106,11 +117,12 @@ fun TabNavigation(
     navController: NavHostController,
     padding: PaddingValues,
 ) {
+
     NavHost(
         navController = navController,
-        startDestination = "timelines"
+        startDestination = Route.Timelines
     ) {
-        composable("timelines") {
+        composable<Route.Timelines> {
             TimelineView(
                 id = Timeline.defaultId,
                 viewedBy = viewedBy,
@@ -118,54 +130,54 @@ fun TabNavigation(
                 modifier = Modifier.padding(padding)
             )
         }
-        composable(
-            "timelines/compose?repliedToId={repliedToId}&repostOfId={repostOfId}",
-            arguments = listOf(
-                navArgument("repliedToId") {
-                    type = NavType.StringType
-                    nullable = true
-                },
-                navArgument("repostOfId") {
-                    type = NavType.StringType
-                    nullable = true
-                }
-            )
+        composable<Route.TimelineCompose>(
+            typeMap = mapOf(typeOf<UUID?>() to optionalUUIDNavType)
         ) { backStackEntry ->
+            val route = backStackEntry.toRoute<Route.TimelineCompose>()
             TimelineComposeView(
-                modifier = Modifier.padding(padding),
                 onPostComposed = navController::navigateUp,
-                repliedToId = backStackEntry.arguments?.getString("repliedToId")?.let(::UUID),
-                repostOfId = backStackEntry.arguments?.getString("repostOfId")?.let(::UUID)
+                repliedToId = route.repliedToId,
+                repostOfId = route.repostOfId,
+                modifier = Modifier.padding(padding),
             )
         }
-        composable("timelines/users/{userId}") { backStackEntry ->
+        composable<Route.TimelineUser>(
+            typeMap = mapOf(typeOf<UUID>() to UUIDNavType)
+        ) { backStackEntry ->
+            val route = backStackEntry.toRoute<Route.TimelineUser>()
             ProfileView(
-                id = backStackEntry.arguments?.getString("userId")?.let(::UUID)!!,
+                id = route.userId,
                 viewedBy = viewedBy,
                 navigate = navController::navigate,
                 modifier = Modifier.padding(padding)
             )
         }
-        composable("timelines/posts/{postId}") { backStackEntry ->
+        composable<Route.TimelinePost>(
+            typeMap = mapOf(typeOf<UUID>() to UUIDNavType)
+        ) { backStackEntry ->
+            val route = backStackEntry.toRoute<Route.TimelinePost>()
             PostView(
-                id = backStackEntry.arguments?.getString("postId")?.let(::UUID)!!,
+                id = route.postId,
                 navigate = navController::navigate,
                 modifier = Modifier.padding(padding)
             )
         }
-        composable("direct_message") {
+        composable<Route.DirectMessages> {
 
         }
-        composable("notifications") {
+        composable<Route.Notifications> {
             NotificationsView(modifier = Modifier.padding(padding))
         }
-        composable("settings") {
+        composable<Route.Settings> {
+            /*
             SettingsView(
                 modifier = Modifier.padding(padding),
                 navigate = navController::navigate
             )
+            */
         }
     }
+
 }
 
 @Composable
@@ -174,53 +186,31 @@ fun AuthNavigation(
     padding: PaddingValues,
     onUserLogged: () -> Unit,
 ) {
+
     NavHost(
         navController = navController,
-        startDestination = "auth"
+        startDestination = Route.Auth
     ) {
-        composable("auth") {
+        composable<Route.Auth> {
             AuthView(
                 onUserLogged = onUserLogged,
                 modifier = Modifier.padding(padding)
             )
         }
-        composable(
-            "auth/code?code={code}",
-            arguments = listOf(
-                navArgument("code") { type = NavType.StringType }
-            ),
+        composable<Route.AuthWithCode>(
             deepLinks = listOf(
                 navDeepLink {
                     uriPattern = "extopy://auth?code={code}"
                 }
             )
         ) { backStackEntry ->
+            val route = backStackEntry.toRoute<Route.AuthWithCode>()
             AuthView(
                 onUserLogged = onUserLogged,
                 modifier = Modifier.padding(padding),
-                code = backStackEntry.arguments?.getString("code")
+                code = route.code
             )
         }
     }
-}
-
-enum class NavigationItem(
-    val route: String,
-    val icon: Int,
-    val title: Int,
-) {
-
-    TIMELINE("timelines", R.drawable.ic_baseline_menu_24, R.string.timeline_title),
-    DIRECT_MESSAGE(
-        "direct_message",
-        R.drawable.ic_baseline_message_24,
-        R.string.direct_message_title
-    ),
-    NOTIFICATIONS(
-        "notifications",
-        R.drawable.ic_baseline_notifications_24,
-        R.string.notifications_title
-    ),
-    SETTINGS("settings", R.drawable.ic_baseline_settings_24, R.string.settings_title)
 
 }

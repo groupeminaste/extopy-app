@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.extopy.models.navigation.Route
 import com.extopy.models.users.User
 import com.extopy.ui.components.posts.PostCard
 import com.extopy.ui.components.users.UserCard
@@ -31,7 +32,7 @@ import org.koin.core.parameter.parametersOf
 fun ProfileView(
     id: UUID,
     viewedBy: User, // TODO: Manage on view model
-    navigate: (String) -> Unit,
+    navigate: (Route) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -67,10 +68,10 @@ fun ProfileView(
                     navigate = navigate,
                     onPostsClicked = {},
                     onFollowersClicked = { user ->
-                        navigate.invoke("timelines/users/${user.id}/followers")
+                        //navigate("timelines/users/${user.id}/followers")
                     },
                     onFollowingClicked = { user ->
-                        navigate.invoke("timelines/users/${user.id}/following")
+                        //navigate("timelines/users/${user.id}/following")
                     },
                     onEditClicked = {
 
@@ -99,10 +100,10 @@ fun ProfileView(
                     }
                 },
                 onRepostClicked = { post ->
-                    navigate.invoke("timelines/compose?repostOfId=${post.id}")
+                    navigate(Route.TimelineCompose(repostOfId = post.id))
                 },
                 onReplyClicked = { post ->
-                    navigate.invoke("timelines/compose?repliedToId=${post.id}")
+                    navigate(Route.TimelineCompose(repliedToId = post.id))
                 }
             )
             viewModel.loadMoreIfNeeded(it.id)

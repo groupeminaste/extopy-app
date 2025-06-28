@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.extopy.R
 import com.extopy.extensions.dataStore
+import com.extopy.models.navigation.Route
 import com.jamal.composeprefs3.ui.GroupHeader
 import com.jamal.composeprefs3.ui.PrefsScreen
 import com.jamal.composeprefs3.ui.prefs.TextPref
@@ -25,7 +26,7 @@ import com.jamal.composeprefs3.ui.prefs.TextPref
 @Composable
 fun SettingsView(
     modifier: Modifier = Modifier,
-    navigate: (String) -> Unit,
+    navigate: (Route) -> Unit,
     code: String? = null,
 ) {
 

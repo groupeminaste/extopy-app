@@ -25,6 +25,7 @@
 		6ABBFAB22E10439C00DA616B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Info.plist,
 				"Preview Content/Preview Assets.xcassets",
 			);
 			target = 6A117C1C29214F17008388A3 /* Extopy */;

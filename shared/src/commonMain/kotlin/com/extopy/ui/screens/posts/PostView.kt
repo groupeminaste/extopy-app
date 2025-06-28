@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.extopy.models.navigation.Route
 import com.extopy.ui.components.posts.PostCard
 import com.extopy.viewmodels.posts.PostViewModel
 import com.rickclephas.kmp.observableviewmodel.coroutineScope
@@ -28,7 +29,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun PostView(
     id: UUID,
-    navigate: (String) -> Unit,
+    navigate: (Route) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -67,10 +68,10 @@ fun PostView(
                         }
                     },
                     onRepostClicked = { post ->
-                        navigate.invoke("timelines/compose?repostOfId=${post.id}")
+                        navigate(Route.TimelineCompose(repostOfId = post.id))
                     },
                     onReplyClicked = { post ->
-                        navigate.invoke("timelines/compose?repliedToId=${post.id}")
+                        navigate(Route.TimelineCompose(repliedToId = post.id))
                     }
                 )
             }
@@ -85,10 +86,10 @@ fun PostView(
                     }
                 },
                 onRepostClicked = { post ->
-                    navigate.invoke("timelines/compose?repostOfId=${post.id}")
+                    navigate(Route.TimelineCompose(repostOfId = post.id))
                 },
                 onReplyClicked = { post ->
-                    navigate.invoke("timelines/compose?repliedToId=${post.id}")
+                    navigate(Route.TimelineCompose(repliedToId = post.id))
                 }
             )
             viewModel.loadMoreIfNeeded(it.id)

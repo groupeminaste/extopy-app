@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.extopy.models.navigation.Route
 import com.extopy.models.posts.Post
 import com.extopy.models.posts.PostCounter
 import com.extopy.ui.components.users.UserHeaderView
@@ -18,7 +19,7 @@ import kotlinx.datetime.toLocalDateTime
 @Composable
 fun PostCard(
     post: Post,
-    navigate: (String) -> Unit,
+    navigate: (Route) -> Unit,
     onLikeClicked: (Post) -> Unit,
     onRepostClicked: (Post) -> Unit,
     onReplyClicked: (Post) -> Unit,
@@ -32,7 +33,7 @@ fun PostCard(
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.padding(16.dp).clickable {
-                navigate("timelines/posts/${post.id}")
+                navigate(Route.TimelinePost(post.id))
             }
         ) {
             Row {
@@ -40,7 +41,7 @@ fun PostCard(
                     UserHeaderView(
                         user = user,
                         modifier = Modifier.clickable {
-                            navigate("timelines/users/${user.id}")
+                            navigate(Route.TimelineUser(user.id))
                         }
                     )
                 }

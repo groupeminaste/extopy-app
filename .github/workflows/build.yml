@@ -22,7 +22,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   deploy-ios:
-    runs-on: macos-latest #[ self-hosted, macOS ]
+    runs-on: macos-15 #[ self-hosted, macOS ]
     env:
       MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
       P8_AUTH_KEY: ${{ secrets.P8_AUTH_KEY }}

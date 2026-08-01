@@ -35,6 +35,20 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    // The keystore and its passwords only exist on CI, which writes the file from a secret before
+    // building. A release built anywhere else comes out unsigned rather than failing, so that
+    // `assembleProductionRelease` still works locally for checking what ships.
+    val keystore = file("fastlane/keystore.jks")
+    signingConfigs {
+        create("release") {
+            if (keystore.exists()) {
+                storeFile = keystore
+                storePassword = System.getenv("SIGNING_STORE_PASSWORD")
+                keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+                keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+            }
+        }
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1,INDEX.LIST}"
@@ -43,6 +57,7 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            signingConfig = signingConfigs["release"].takeIf { keystore.exists() }
         }
     }
     compileOptions {

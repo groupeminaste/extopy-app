@@ -56,4 +56,5 @@
     <string name="timeline_greeting">Hi, %1$s</string>
     <string name="timeline_empty_title">Nothing here yet</string>
     <string name="timeline_empty_body">Follow a few people, or write the first post.</string>
+    <string name="direct_message_tab">Messages</string>
 </resources>

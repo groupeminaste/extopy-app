@@ -14,12 +14,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavUri
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 import com.extopy.domain.models.timelines.Timeline
 import com.extopy.domain.models.users.User
-import com.extopy.presentation.components.base.CustomNavigationBar
+import androidx.navigation.NavDestination.Companion.hasRoute
+import com.extopy.presentation.components.base.ExtopyNavBar
 import com.extopy.presentation.screens.AuthScreen
 import com.extopy.presentation.screens.NotificationsScreen
 import com.extopy.presentation.screens.PostScreen
@@ -47,6 +49,7 @@ fun ExtopyNavHost() {
     val user by viewModel.user.collectAsState()
 
     val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     LaunchedEffect(Unit) {
         viewModel.fetchUser()
@@ -64,10 +67,29 @@ fun ExtopyNavHost() {
         }
     }
 
+    // Which tab is current is read off the destination itself rather than guessed from its name:
+    // `hasRoute` compares the route class, so renaming a screen cannot silently unselect its tab.
+    val currentDestination = navBackStackEntry?.destination
+    val currentTab = NavigationItem.entries.firstOrNull { item ->
+        currentDestination?.hasRoute(item.route::class) == true
+    }
+
     Scaffold(
         bottomBar = {
             if (user == null) return@Scaffold
-            CustomNavigationBar(navController)
+            ExtopyNavBar(
+                items = NavigationItem.entries,
+                selected = currentTab,
+                onSelect = { item ->
+                    navController.navigate(item.route) {
+                        navController.graph.startDestinationRoute?.let { route ->
+                            popUpTo(route) { saveState = true }
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+            )
         }
     ) { padding ->
         user?.let {

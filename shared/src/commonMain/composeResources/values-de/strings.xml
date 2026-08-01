@@ -18,4 +18,5 @@
     <string name="timeline_greeting">Hallo, %1$s</string>
     <string name="timeline_empty_title">Noch nichts hier</string>
     <string name="timeline_empty_body">Folge ein paar Leuten oder schreibe den ersten Beitrag.</string>
+    <string name="direct_message_tab">Nachrichten</string>
 </resources>

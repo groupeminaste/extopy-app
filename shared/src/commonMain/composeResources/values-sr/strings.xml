@@ -16,4 +16,5 @@
     <string name="timeline_button_follow">Прати</string>
     <string name="timeline_compose_account">Налог</string>
     <string name="timeline_greeting">Zdravo, %1$s</string>
+    <string name="direct_message_tab">Poruke</string>
 </resources>

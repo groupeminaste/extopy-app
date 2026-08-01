@@ -1,40 +1,54 @@
 package com.extopy.presentation.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
-import com.extopy.presentation.navigation.Route
+import com.adamglin.PhosphorIcons
+import com.adamglin.phosphoricons.Regular
+import com.adamglin.phosphoricons.regular.NotePencil
 import com.extopy.domain.models.users.User
+import com.extopy.presentation.components.base.EmptyState
+import com.extopy.presentation.components.base.ExtopySearchField
 import com.extopy.presentation.components.posts.PostCard
 import com.extopy.presentation.components.users.UserCard
+import com.extopy.presentation.navigation.Route
+import com.extopy.presentation.theme.PillShape
 import com.extopy.presentation.viewmodels.SearchViewModel
 import com.extopy.presentation.viewmodels.TimelineViewModel
-import kotlin.uuid.Uuid
 import com.extopy.resources.Res
-import com.extopy.resources.ic_baseline_create_24
 import com.extopy.resources.timeline_compose_title
+import com.extopy.resources.timeline_empty_body
+import com.extopy.resources.timeline_empty_title
+import com.extopy.resources.timeline_greeting
 import com.extopy.resources.timeline_search_field
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
+import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimelineScreen(
     id: Uuid,
@@ -52,7 +66,6 @@ fun TimelineScreen(
         viewModel.fetchTimeline()
     }
 
-    val timeline by viewModel.timeline.collectAsState()
     val users by viewModel.users.collectAsState()
     val posts by viewModel.posts.collectAsState()
 
@@ -60,43 +73,53 @@ fun TimelineScreen(
     val searchUsers by searchViewModel.users.collectAsState()
     val searchPosts by searchViewModel.posts.collectAsState()
 
+    val shownUsers = searchUsers?.takeIf { it.isNotEmpty() } ?: users ?: listOf()
+    val shownPosts = searchPosts?.takeIf { it.isNotEmpty() } ?: posts ?: listOf()
+
     Column(
         modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background),
     ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 12.dp),
         ) {
-            OutlinedTextField(
-                value = search,
-                onValueChange = searchViewModel::updateSearch,
-                placeholder = {
-                    Text(
-                        text = stringResource(Res.string.timeline_search_field),
-                        color = Color.LightGray
-                    )
-                },
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Search
-                ),
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier
-                    .weight(1f)
+            Text(
+                text = stringResource(Res.string.timeline_greeting, viewedBy.displayName),
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onBackground,
             )
-            Icon(
-                painter = painterResource(Res.drawable.ic_baseline_create_24),
-                contentDescription = stringResource(Res.string.timeline_compose_title)
-            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                ExtopySearchField(
+                    value = search,
+                    onValueChange = searchViewModel::updateSearch,
+                    placeholder = stringResource(Res.string.timeline_search_field),
+                    modifier = Modifier.weight(1f),
+                )
+                // The compose action is the one thing this screen is *for*, so it gets the accent.
+                Icon(
+                    imageVector = PhosphorIcons.Regular.NotePencil,
+                    contentDescription = stringResource(Res.string.timeline_compose_title),
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier
+                        .clip(PillShape)
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable { navigate(Route.TimelineCompose()) }
+                        .padding(12.dp)
+                        .size(20.dp),
+                )
+            }
         }
 
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, (16 + 88).dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
         ) {
-            items(searchUsers?.takeIf { it.isNotEmpty() } ?: users ?: listOf()) {
+            items(shownUsers) {
                 UserCard(
                     user = it,
                     viewedBy = viewedBy,
@@ -104,29 +127,19 @@ fun TimelineScreen(
                     onPostsClicked = { user ->
                         navigate(Route.TimelineUser(user.id.toString()))
                     },
-                    onFollowersClicked = { user ->
-                        //navigate("timelines/users/${user.id}/followers")
-                    },
-                    onFollowingClicked = { user ->
-                        //navigate("timelines/users/${user.id}/following")
-                    },
-                    onEditClicked = {
-
-                    },
+                    onFollowersClicked = { },
+                    onFollowingClicked = { },
+                    onEditClicked = { },
                     onFollowClicked = { user ->
                         viewModel.viewModelScope.launch {
                             viewModel.onFollowClicked(user)
                         }
                     },
-                    onSettingsClicked = {
-
-                    },
-                    onDirectMessageClicked = {
-
-                    }
+                    onSettingsClicked = { },
+                    onDirectMessageClicked = { },
                 )
             }
-            items(searchPosts?.takeIf { it.isNotEmpty() } ?: posts ?: listOf()) {
+            items(shownPosts) {
                 PostCard(
                     post = it,
                     navigate = navigate,
@@ -140,9 +153,17 @@ fun TimelineScreen(
                     },
                     onReplyClicked = { post ->
                         navigate(Route.TimelineCompose(repliedToId = post.id.toString()))
-                    }
+                    },
                 )
                 viewModel.loadMoreIfNeeded(it.id)
+            }
+            if (shownUsers.isEmpty() && shownPosts.isEmpty()) {
+                item {
+                    EmptyState(
+                        title = stringResource(Res.string.timeline_empty_title),
+                        body = stringResource(Res.string.timeline_empty_body),
+                    )
+                }
             }
             item {
                 Spacer(modifier = Modifier.height(12.dp))

@@ -24,4 +24,5 @@
     <string name="timeline_greeting">Bonjour, %1$s</string>
     <string name="timeline_empty_title">Rien pour l'instant</string>
     <string name="timeline_empty_body">Abonne-toi à quelques comptes, ou écris le premier post.</string>
+    <string name="direct_message_tab">Messages</string>
 </resources>

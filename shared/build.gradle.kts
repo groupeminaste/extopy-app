@@ -51,7 +51,6 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
-            implementation(libs.compose.animation)
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
@@ -62,9 +61,7 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.composeViewModel)
-            implementation(libs.koin.composeViewModelNavigation)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.multiplatform.settings)
             implementation(libs.room.runtime)
@@ -75,7 +72,6 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor3)
             implementation(libs.compottie)
-            implementation(libs.compottie.resources)
             implementation(libs.sentry)
         }
         androidMain.dependencies {
@@ -88,7 +84,6 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.test)
             implementation(libs.multiplatform.settings.test)
-            implementation(libs.ktor.client.mock)
         }
     }
 }

@@ -42,11 +42,11 @@ class PostViewModel(
     }
 
     suspend fun onLikeClicked(post: Post) {
-        toggleLike(post)?.let {
-            _posts.value = _posts.value?.toMutableList()?.apply {
-                set(indexOf(post), it)
-            }
-        }
+        // The post at the top of the screen is not one of the replies, so it has to be updated on
+        // its own — looking it up in the list would not find it.
+        val updated = toggleLike(post) ?: return
+        if (_post.value?.id == updated.id) _post.value = updated
+        _posts.value = _posts.value?.map { if (it.id == updated.id) updated else it }
     }
 
     fun loadMoreIfNeeded(postId: Uuid) {

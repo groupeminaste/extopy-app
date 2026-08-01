@@ -20,6 +20,9 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE id = :id AND expiresAt > :now")
     suspend fun get(id: String, now: Long): UserEntity?
 
+    @Query("DELETE FROM users WHERE id = :id")
+    suspend fun delete(id: String)
+
     @Query("DELETE FROM users WHERE expiresAt <= :now")
     suspend fun deleteExpired(now: Long)
 
@@ -36,6 +39,9 @@ interface PostDao {
 
     @Query("SELECT * FROM posts WHERE id = :id AND expiresAt > :now")
     suspend fun get(id: String, now: Long): PostEntity?
+
+    @Query("DELETE FROM posts WHERE id = :id")
+    suspend fun delete(id: String)
 
     @Query("DELETE FROM posts WHERE expiresAt <= :now")
     suspend fun deleteExpired(now: Long)

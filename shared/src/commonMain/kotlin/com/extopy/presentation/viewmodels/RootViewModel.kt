@@ -3,6 +3,7 @@ package com.extopy.presentation.viewmodels
 import androidx.lifecycle.ViewModel
 import com.extopy.domain.models.application.ApiException
 import com.extopy.domain.models.users.User
+import com.extopy.domain.repositories.CacheRepository
 import com.extopy.domain.usecases.auth.GetCurrentUserUseCase
 import com.extopy.domain.usecases.auth.LogoutUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.asStateFlow
 class RootViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val logout: LogoutUseCase,
+    private val cache: CacheRepository,
 ) : ViewModel() {
 
     // Properties
@@ -26,6 +28,9 @@ class RootViewModel(
     // Methods
 
     suspend fun fetchUser() {
+        // This runs once when the app opens, which is the natural moment to take out the rows that
+        // went stale while it was closed.
+        cache.purgeExpired()
         try {
             _user.value = getCurrentUser()
         } catch (e: ApiException) {

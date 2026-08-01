@@ -83,6 +83,14 @@ interface CacheRepository {
 
     suspend fun clear()
 
+    /**
+     * Drops the rows that are past their expiry.
+     *
+     * A read already ignores those, so this changes nothing anyone can see — it is what keeps rows
+     * that were cached once and never looked at again from piling up forever.
+     */
+    suspend fun purgeExpired()
+
 }
 
 /** Signs in and out. */

@@ -45,11 +45,8 @@ class ProfileViewModel(
     }
 
     suspend fun onLikeClicked(post: Post) {
-        toggleLike(post)?.let {
-            _posts.value = _posts.value?.toMutableList()?.apply {
-                set(indexOf(post), it)
-            }
-        }
+        val updated = toggleLike(post) ?: return
+        _posts.value = _posts.value?.map { if (it.id == updated.id) updated else it }
     }
 
     suspend fun onFollowClicked() {

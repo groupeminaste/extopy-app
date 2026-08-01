@@ -17,6 +17,10 @@ import kotlin.uuid.Uuid
  *
  * Only [get] is served from the cache: a listing is a window into something that moves, so re-reading
  * it is the point, whereas opening the same profile twice in a row should not cost two round trips.
+ *
+ * Following someone drops their cached row rather than trying to patch it: the row carries a
+ * follower count and a "you follow them", both of which the write just made wrong, and the server is
+ * the only thing that knows what they became.
  */
 class ApiUsersRepository(
     private val client: ExtopyClient,
@@ -41,10 +45,12 @@ class ApiUsersRepository(
 
     override suspend fun follow(id: Uuid) {
         api { client.followersInUsers.create(id) }
+        users.delete(id.toString())
     }
 
     override suspend fun unfollow(id: Uuid, followerId: Uuid) {
         api { client.followersInUsers.delete(id, followerId) }
+        users.delete(id.toString())
     }
 
 }

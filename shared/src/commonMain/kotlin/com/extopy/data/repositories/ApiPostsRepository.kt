@@ -17,6 +17,10 @@ import kotlin.uuid.Uuid
  *
  * As with users, only [get] is served from the cache — the listings are what the timelines are
  * built from, and serving those from a cache would be showing the user yesterday's feed.
+ *
+ * Liking a post drops its cached row rather than trying to patch it: the row carries a like count
+ * and a "you liked this", both of which the write just made wrong, and the server is the only thing
+ * that knows what they became.
  */
 class ApiPostsRepository(
     private val client: ExtopyClient,
@@ -49,10 +53,12 @@ class ApiPostsRepository(
 
     override suspend fun like(id: Uuid) {
         api { client.likesInPosts.create(id) }
+        posts.delete(id.toString())
     }
 
     override suspend fun unlike(id: Uuid, userId: Uuid) {
         api { client.likesInPosts.delete(id, userId) }
+        posts.delete(id.toString())
     }
 
 }

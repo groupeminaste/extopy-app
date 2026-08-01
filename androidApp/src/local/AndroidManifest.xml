@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      The local backend is served over plain HTTP on the host machine, which the platform blocks by
+      default. Scoped to this flavor so no released build can ever send anything in the clear.
+    -->
+    <application android:usesCleartextTraffic="true"/>
+
+</manifest>

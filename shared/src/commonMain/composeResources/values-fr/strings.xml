@@ -10,7 +10,7 @@
     <string name="timeline_button_dc">Direct Contact</string>
     <string name="timeline_compose_reply_title">Répondre à un post</string>
     <string name="timeline_button_ask">Demander</string>
-    <string name="timeline_user_edit_username">Nom d\'utilisateur</string>
+    <string name="timeline_user_edit_username">Nom d'utilisateur</string>
     <string name="timeline_user_title">Profil utilisateur</string>
     <string name="timeline_button_asked">Demandé</string>
     <string name="timeline_button_following">Abonné</string>
@@ -21,4 +21,7 @@
     <string name="timeline_button_settings">Paramètres</string>
     <string name="timeline_button_follow">Suivre</string>
     <string name="timeline_compose_account">Compte</string>
+    <string name="timeline_greeting">Bonjour, %1$s</string>
+    <string name="timeline_empty_title">Rien pour l'instant</string>
+    <string name="timeline_empty_body">Abonne-toi à quelques comptes, ou écris le premier post.</string>
 </resources>

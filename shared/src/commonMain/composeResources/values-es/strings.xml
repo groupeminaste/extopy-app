@@ -17,4 +17,7 @@
     <string name="timeline_button_settings">Ajustes</string>
     <string name="timeline_button_follow">Seguir</string>
     <string name="timeline_compose_account">Cuenta</string>
+    <string name="timeline_greeting">Hola, %1$s</string>
+    <string name="timeline_empty_title">Aquí todavía no hay nada</string>
+    <string name="timeline_empty_body">Sigue a algunas personas o escribe la primera publicación.</string>
 </resources>

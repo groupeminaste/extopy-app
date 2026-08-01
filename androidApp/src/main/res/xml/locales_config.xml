@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Languages the app supports, so Android 13+ shows a per-app language picker in Settings.
+     Without a per-app choice, the app already follows the system language.
+     Keep in step with the composeResources/values-* folders. -->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en"/>
+    <locale android:name="fr"/>
+    <locale android:name="de"/>
+    <locale android:name="es"/>
+    <locale android:name="bs"/>
+    <locale android:name="hr"/>
+    <locale android:name="sr"/>
+</locale-config>

@@ -53,4 +53,7 @@
     <string name="auth_title">Time to get back to the basics</string>
     <string name="auth_description">Join your friends on Extopy by clicking on Continue</string>
     <string name="auth_button_login">Continue</string>
+    <string name="timeline_greeting">Hi, %1$s</string>
+    <string name="timeline_empty_title">Nothing here yet</string>
+    <string name="timeline_empty_body">Follow a few people, or write the first post.</string>
 </resources>

@@ -4,6 +4,22 @@
     <dict>
         <key>ITSAppUsesNonExemptEncryption</key>
         <false/>
+        <!--
+          Without this, iOS treats the app as English-only: it shows no Language entry under
+          Settings, and the App Store lists a single language — however many translations the
+          bundle actually ships. Must stay in step with `knownRegions` in the project file and with
+          the `composeResources/values-*` folders.
+        -->
+        <key>CFBundleLocalizations</key>
+        <array>
+            <string>en</string>
+            <string>fr</string>
+            <string>de</string>
+            <string>es</string>
+            <string>bs</string>
+            <string>hr</string>
+            <string>sr</string>
+        </array>
         <key>CADisableMinimumFrameDurationOnPhone</key>
         <true/>
         <!--

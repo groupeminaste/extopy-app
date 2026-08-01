@@ -6,13 +6,8 @@ struct ExtopyApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    init() {
-        Koin_coreKoinApplication.companion.start()
-
-        #if !DEBUG
-        SentryKt.initializeSentry()
-        #endif
-    }
+    // Koin and Sentry are started by MainViewController, on the shared side, so that both platforms
+    // wire the app up the same way.
 
     var body: some Scene {
         WindowGroup {

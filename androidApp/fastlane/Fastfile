@@ -40,8 +40,10 @@ platform :android do
             version_code: number_of_commits
         )
 
+        # Only the flavor being distributed: `bundleRelease` would also assemble the `local` one,
+        # which exists purely to talk to a backend on a developer's machine.
         gradle(
-            task: "bundleRelease",
+            task: "bundle#{flavor.capitalize}Release",
             gradle_path: "../gradlew"
         )
 
@@ -49,7 +51,7 @@ platform :android do
             package_name: package_name,
             track: "internal",
             release_status: "draft",
-            aab: "build/outputs/bundle/#{flavor}Release/android-#{flavor}-release.aab"
+            aab: "build/outputs/bundle/#{flavor}Release/androidApp-#{flavor}-release.aab"
         )
     end
 

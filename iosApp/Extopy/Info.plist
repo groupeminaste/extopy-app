@@ -6,6 +6,16 @@
         <false/>
         <key>CADisableMinimumFrameDurationOnPhone</key>
         <true/>
+        <!--
+          App Transport Security blocks cleartext HTTP, including to the host machine. This opens up
+          local addresses only, which is what a debug build set to EXTOPY_ENV=local needs to reach a
+          backend running on your Mac. Everything else still has to be HTTPS.
+        -->
+        <key>NSAppTransportSecurity</key>
+        <dict>
+            <key>NSAllowsLocalNetworking</key>
+            <true/>
+        </dict>
         <key>CFBundleURLTypes</key>
         <array>
             <dict>

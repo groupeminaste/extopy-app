@@ -1,34 +1,24 @@
 package com.extopy.presentation.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import androidx.navigation.NavUri
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
-import com.extopy.domain.models.timelines.Timeline
 import com.extopy.domain.models.users.User
-import androidx.navigation.NavDestination.Companion.hasRoute
-import com.extopy.presentation.components.base.ExtopyNavBar
 import com.extopy.presentation.screens.AuthScreen
-import com.extopy.presentation.screens.NotificationsScreen
+import com.extopy.presentation.screens.MainScreen
 import com.extopy.presentation.screens.PostScreen
 import com.extopy.presentation.screens.ProfileScreen
-import com.extopy.presentation.screens.SettingsScreen
 import com.extopy.presentation.screens.TimelineComposeScreen
-import com.extopy.presentation.screens.TimelineScreen
 import com.extopy.presentation.viewmodels.RootViewModel
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
@@ -40,6 +30,10 @@ import kotlin.uuid.Uuid
  * Which of the two graphs is mounted depends on whether anyone is signed in: no screen makes sense
  * in both, and swapping the graph rather than gating each destination means a signed-out user
  * cannot end up somewhere that needs a session.
+ *
+ * Inside the signed-in graph there are only four destinations, not seven: the tabs live inside
+ * [MainScreen] as state. Everything that *is* a destination here is something you open on top of a
+ * tab and come back from.
  */
 @Composable
 fun ExtopyNavHost() {
@@ -49,7 +43,6 @@ fun ExtopyNavHost() {
     val user by viewModel.user.collectAsState()
 
     val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     LaunchedEffect(Unit) {
         viewModel.fetchUser()
@@ -67,78 +60,42 @@ fun ExtopyNavHost() {
         }
     }
 
-    // Which tab is current is read off the destination itself rather than guessed from its name:
-    // `hasRoute` compares the route class, so renaming a screen cannot silently unselect its tab.
-    val currentDestination = navBackStackEntry?.destination
-    val currentTab = NavigationItem.entries.firstOrNull { item ->
-        currentDestination?.hasRoute(item.route::class) == true
-    }
-
-    Scaffold(
-        bottomBar = {
-            if (user == null) return@Scaffold
-            ExtopyNavBar(
-                items = NavigationItem.entries,
-                selected = currentTab,
-                onSelect = { item ->
-                    navController.navigate(item.route) {
-                        navController.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route) { saveState = true }
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-            )
-        }
-    ) { padding ->
-        user?.let {
-            TabNavigation(
-                viewedBy = it,
-                navController = navController,
-                padding = padding
-            )
-        } ?: run {
-            AuthNavigation(
-                navController = navController,
-                padding = padding,
-                onUserLogged = {
-                    viewModel.viewModelScope.launch {
-                        viewModel.fetchUser()
-                    }
-                }
-            )
-        }
-    }
+    user?.let {
+        SignedInNavigation(viewedBy = it, navController = navController)
+    } ?: AuthNavigation(
+        navController = navController,
+        onUserLogged = {
+            viewModel.viewModelScope.launch {
+                viewModel.fetchUser()
+            }
+        },
+    )
 
 }
 
 @Composable
-fun TabNavigation(
+fun SignedInNavigation(
     viewedBy: User,
     navController: NavHostController,
-    padding: PaddingValues,
 ) {
 
     NavHost(
         navController = navController,
-        startDestination = Route.Timelines
+        startDestination = Route.Main,
     ) {
-        composable<Route.Timelines> {
-            TimelineScreen(
-                id = Timeline.defaultId,
+        composable<Route.Main> {
+            MainScreen(
                 viewedBy = viewedBy,
                 navigate = navController::navigate,
-                modifier = Modifier.padding(padding)
             )
         }
         composable<Route.TimelineCompose> { backStackEntry ->
             val route = backStackEntry.toRoute<Route.TimelineCompose>()
             TimelineComposeScreen(
                 onPostComposed = navController::navigateUp,
+                onBack = navController::navigateUp,
                 repliedToId = route.repliedToId.toUuidOrNull(),
                 repostOfId = route.repostOfId.toUuidOrNull(),
-                modifier = Modifier.padding(padding),
             )
         }
         composable<Route.TimelineUser> { backStackEntry ->
@@ -147,7 +104,7 @@ fun TabNavigation(
                 id = Uuid.parse(route.userId),
                 viewedBy = viewedBy,
                 navigate = navController::navigate,
-                modifier = Modifier.padding(padding)
+                onBack = navController::navigateUp,
             )
         }
         composable<Route.TimelinePost> { backStackEntry ->
@@ -155,19 +112,7 @@ fun TabNavigation(
             PostScreen(
                 id = Uuid.parse(route.postId),
                 navigate = navController::navigate,
-                modifier = Modifier.padding(padding)
-            )
-        }
-        composable<Route.DirectMessages> {
-
-        }
-        composable<Route.Notifications> {
-            NotificationsScreen(modifier = Modifier.padding(padding))
-        }
-        composable<Route.Settings> {
-            SettingsScreen(
-                modifier = Modifier.padding(padding),
-                navigate = navController::navigate
+                onBack = navController::navigateUp,
             )
         }
     }
@@ -177,19 +122,15 @@ fun TabNavigation(
 @Composable
 fun AuthNavigation(
     navController: NavHostController,
-    padding: PaddingValues,
     onUserLogged: () -> Unit,
 ) {
 
     NavHost(
         navController = navController,
-        startDestination = Route.Auth
+        startDestination = Route.Auth,
     ) {
         composable<Route.Auth> {
-            AuthScreen(
-                onUserLogged = onUserLogged,
-                modifier = Modifier.padding(padding)
-            )
+            AuthScreen(onUserLogged = onUserLogged)
         }
         composable<Route.AuthWithCode>(
             deepLinks = listOf(
@@ -201,8 +142,7 @@ fun AuthNavigation(
             val route = backStackEntry.toRoute<Route.AuthWithCode>()
             AuthScreen(
                 onUserLogged = onUserLogged,
-                modifier = Modifier.padding(padding),
-                code = route.code
+                code = route.code,
             )
         }
     }

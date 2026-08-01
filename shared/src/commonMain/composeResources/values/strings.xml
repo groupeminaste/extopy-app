@@ -57,4 +57,9 @@
     <string name="timeline_empty_title">Nothing here yet</string>
     <string name="timeline_empty_body">Follow a few people, or write the first post.</string>
     <string name="direct_message_tab">Messages</string>
+    <string name="soon_title">Coming soon</string>
+    <string name="soon_body">This part of Extopy is still being built.</string>
+    <string name="timeline_info_posts_label">posts</string>
+    <string name="timeline_info_followers_label">followers</string>
+    <string name="timeline_info_following_label">following</string>
 </resources>

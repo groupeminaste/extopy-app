@@ -25,4 +25,6 @@
     <string name="timeline_empty_title">Rien pour l'instant</string>
     <string name="timeline_empty_body">Abonne-toi à quelques comptes, ou écris le premier post.</string>
     <string name="direct_message_tab">Messages</string>
+    <string name="soon_title">Bientôt</string>
+    <string name="soon_body">Cette partie d'Extopy est encore en construction.</string>
 </resources>

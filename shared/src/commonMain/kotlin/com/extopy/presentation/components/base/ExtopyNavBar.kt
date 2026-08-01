@@ -23,13 +23,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.extopy.presentation.navigation.NavigationItem
 import com.extopy.presentation.theme.PillShape
-import org.jetbrains.compose.resources.stringResource
+
+/** One entry of [ExtopyNavBar]. [key] identifies the tab, and is also the `tab_<key>` test tag. */
+data class NavBarItem(
+    val key: String,
+    val icon: ImageVector,
+    val iconSelected: ImageVector,
+    val label: String,
+)
 
 /**
  * The tab bar, as a pill floating clear of the screen edge.
@@ -39,15 +46,14 @@ import org.jetbrains.compose.resources.stringResource
  * whole tab width to itself, and the current tab is a filled pill rather than a small indicator
  * behind the glyph.
  *
- * Which tab is current is decided by the caller rather than guessed from the route name, and
- * selecting one raises an event rather than navigating: this component knows nothing about
- * navigation, which is what makes it previewable and testable.
+ * It knows nothing about navigation — it is handed its items and raises an event — which is what
+ * makes it previewable and testable.
  */
 @Composable
 fun ExtopyNavBar(
-    items: List<NavigationItem>,
-    selected: NavigationItem?,
-    onSelect: (NavigationItem) -> Unit,
+    items: List<NavBarItem>,
+    selectedKey: String,
+    onSelect: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -65,8 +71,8 @@ fun ExtopyNavBar(
         items.forEach { item ->
             NavBarTab(
                 item = item,
-                selected = item == selected,
-                onClick = { onSelect(item) },
+                selected = item.key == selectedKey,
+                onClick = { onSelect(item.key) },
             )
         }
     }
@@ -74,11 +80,11 @@ fun ExtopyNavBar(
 
 @Composable
 private fun RowScope.NavBarTab(
-    item: NavigationItem,
+    item: NavBarItem,
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    // Colour and width both settle rather than cut, so switching tabs reads as one movement.
+    // Colour settles rather than cuts, so switching tabs reads as one movement.
     val background by animateColorAsState(
         if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
     )
@@ -86,14 +92,12 @@ private fun RowScope.NavBarTab(
         if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
     )
 
-    val label = stringResource(item.title)
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(3.dp),
         modifier = Modifier
             .weight(1f)
-            .testTag("tab_${item.name.lowercase()}")
+            .testTag("tab_${item.key}")
             .clip(PillShape)
             .background(background)
             .selectable(
@@ -111,7 +115,7 @@ private fun RowScope.NavBarTab(
             modifier = Modifier.size(22.dp),
         )
         Text(
-            text = label,
+            text = item.label,
             style = MaterialTheme.typography.labelSmall,
             color = content,
             maxLines = 1,

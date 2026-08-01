@@ -4,10 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.extopy.presentation.navigation.Route
 import com.extopy.domain.models.users.User
+import com.extopy.presentation.components.base.ExtopyTopBar
 import com.extopy.presentation.components.posts.PostCard
 import com.extopy.presentation.components.users.UserCard
 import com.extopy.presentation.viewmodels.ProfileViewModel
@@ -28,12 +26,12 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     id: Uuid,
     viewedBy: User, // TODO: Manage on view model
     navigate: (Route) -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -53,14 +51,13 @@ fun ProfileScreen(
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background),
     ) {
-        CenterAlignedTopAppBar(
-            title = {
-                Text(stringResource(Res.string.timeline_user_title))
-            },
+        ExtopyTopBar(
+            title = stringResource(Res.string.timeline_user_title),
+            onBack = onBack,
         )
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, (16 + 88).dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
         ) {
             item {
                 user?.let {
@@ -109,9 +106,6 @@ fun ProfileScreen(
                     }
                 )
                 viewModel.loadMoreIfNeeded(it.id)
-            }
-            item {
-                Spacer(modifier = Modifier.height(12.dp))
             }
         }
     }

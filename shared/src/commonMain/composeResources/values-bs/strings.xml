@@ -15,4 +15,6 @@
     <string name="timeline_button_settings">Postavke</string>
     <string name="timeline_button_follow">Prati</string>
     <string name="timeline_compose_account">Nalog</string>
+    <string name="timeline_greeting">Zdravo, %1$s</string>
+    <string name="direct_message_tab">Poruke</string>
 </resources>

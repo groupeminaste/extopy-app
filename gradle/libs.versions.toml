@@ -24,6 +24,7 @@ ktor = "3.4.0"
 coil = "3.5.0"
 compottie = "2.2.4"
 sentry = "0.27.0"
+phosphor-icon = "1.0.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -58,6 +59,7 @@ coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" 
 coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
 sentry = { module = "io.sentry:sentry-kotlin-multiplatform", version.ref = "sentry" }
+phosphor-icons = { module = "com.adamglin:phosphor-icon", version.ref = "phosphor-icon" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

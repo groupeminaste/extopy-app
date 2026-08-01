@@ -71,6 +71,7 @@ kotlin {
             api(libs.extopy.client)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor3)
+            implementation(libs.phosphor.icons)
             implementation(libs.compottie)
             implementation(libs.sentry)
         }

@@ -1,0 +1,69 @@
+import SwiftUI
+import shared
+
+@main
+struct ExtopyApp: App {
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    // Koin and Sentry are started by MainViewController, on the shared side, so that both platforms
+    // wire the app up the same way.
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .onOpenURL { uri in
+                    ExternalUriHandler.shared.onNewUri(uri: uri.absoluteString)
+                }
+        }
+    }
+
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+        // Register for notifications
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound],
+            completionHandler: { _, _ in
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            }
+        )
+
+        // Register notification categories
+        UNUserNotificationCenter.current().setNotificationCategories(
+            [
+                // TODO
+                UNNotificationCategory(identifier: "followers", actions: [], intentIdentifiers: [], options: []),
+            ]
+        )
+
+        return true
+    }
+
+    func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+        // Create the token from data
+        let _ = deviceToken.map { data in
+            String(format: "%02.2hhx", data)
+        }
+        .joined()
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .list, .badge, .sound])
+    }
+
+}

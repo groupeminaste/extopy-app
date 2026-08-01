@@ -16,7 +16,7 @@ jobs:
           distribution: 'temurin'
           java-version: 21
       - name: Install dependencies and run tests
-        run: ./gradlew test koverXmlReport
+        run: ./gradlew :shared:testAndroidHostTest koverXmlReport
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         env:
@@ -47,13 +47,13 @@ jobs:
         uses: matbour/setup-sentry-cli@v2
       - name: Install Dependencies
         run: |
-          cd ios
+          cd iosApp
           bundle install
           echo "${{ secrets.P8_AUTH_KEY }}" | base64 -d > fastlane/key.p8
       - name: Build and deploy (STAGING)
-        run: cd ios && bundle exec fastlane ios staging
+        run: cd iosApp && bundle exec fastlane ios staging
       - name: Build and deploy (PRODUCTION)
-        run: cd ios && bundle exec fastlane ios production
+        run: cd iosApp && bundle exec fastlane ios production
   deploy-android:
     runs-on: ubuntu-latest #[ self-hosted, unix ]
     needs: test
@@ -70,7 +70,7 @@ jobs:
           java-version: 21
       - name: Install Dependencies
         run: |
-          cd android
+          cd androidApp
           bundle install
           echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}" | base64 -d > fastlane/key.json
           echo "${{ secrets.SIGNING_KEY_JKS }}" | base64 -d > fastlane/keystore.jks
@@ -79,11 +79,11 @@ jobs:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-        run: cd android && bundle exec fastlane android staging
+        run: cd androidApp && bundle exec fastlane android staging
       - name: Build and deploy (PRODUCTION)
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-        run: cd android && bundle exec fastlane android production
+        run: cd androidApp && bundle exec fastlane android production
 

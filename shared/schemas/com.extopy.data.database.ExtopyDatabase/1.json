@@ -1,0 +1,170 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "85c18c55489e1e5108c9c92cec0ac7ca",
+    "entities": [
+      {
+        "tableName": "users",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `displayName` TEXT NOT NULL, `username` TEXT NOT NULL, `biography` TEXT, `avatar` TEXT, `joinDate` INTEGER, `verified` INTEGER, `postsCount` INTEGER, `followersCount` INTEGER, `followingCount` INTEGER, `followersIn` INTEGER, `followingIn` INTEGER, `expiresAt` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "displayName",
+            "columnName": "displayName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "biography",
+            "columnName": "biography",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "avatar",
+            "columnName": "avatar",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "joinDate",
+            "columnName": "joinDate",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "verified",
+            "columnName": "verified",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "postsCount",
+            "columnName": "postsCount",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "followersCount",
+            "columnName": "followersCount",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "followingCount",
+            "columnName": "followingCount",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "followersIn",
+            "columnName": "followersIn",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "followingIn",
+            "columnName": "followingIn",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "expiresAt",
+            "columnName": "expiresAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "posts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `userId` TEXT NOT NULL, `repliedToId` TEXT, `repostOfId` TEXT, `body` TEXT, `publishedAt` INTEGER NOT NULL, `editedAt` INTEGER, `likesCount` INTEGER, `repliesCount` INTEGER, `repostsCount` INTEGER, `likesIn` INTEGER, `expiresAt` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repliedToId",
+            "columnName": "repliedToId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "repostOfId",
+            "columnName": "repostOfId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "body",
+            "columnName": "body",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "publishedAt",
+            "columnName": "publishedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "editedAt",
+            "columnName": "editedAt",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "likesCount",
+            "columnName": "likesCount",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "repliesCount",
+            "columnName": "repliesCount",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "repostsCount",
+            "columnName": "repostsCount",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "likesIn",
+            "columnName": "likesIn",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "expiresAt",
+            "columnName": "expiresAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '85c18c55489e1e5108c9c92cec0ac7ca')"
+    ]
+  }
+}

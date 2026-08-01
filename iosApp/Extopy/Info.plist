@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>ITSAppUsesNonExemptEncryption</key>
+        <false/>
+        <key>CADisableMinimumFrameDurationOnPhone</key>
+        <true/>
+        <!--
+          App Transport Security blocks cleartext HTTP, including to the host machine. This opens up
+          local addresses only, which is what a debug build set to EXTOPY_ENV=local needs to reach a
+          backend running on your Mac. Everything else still has to be HTTPS.
+        -->
+        <key>NSAppTransportSecurity</key>
+        <dict>
+            <key>NSAllowsLocalNetworking</key>
+            <true/>
+        </dict>
+        <key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Viewer</string>
+                <key>CFBundleURLName</key>
+                <string>extopy</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>extopy</string>
+                </array>
+            </dict>
+        </array>
+    </dict>
+</plist>

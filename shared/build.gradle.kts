@@ -1,137 +1,104 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
-    kotlin("plugin.compose")
-    id("com.android.library")
-    id("org.jetbrains.compose")
-    id("org.jetbrains.kotlinx.kover")
-    id("com.google.devtools.ksp")
-    id("app.cash.sqldelight")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidMultiplatformLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
-    androidTarget()
+    compilerOptions {
+        // Room generates an `actual` for the @ConstructedBy expect object.
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            // Lowercase, because that is what `import shared` in the Xcode project expects.
             baseName = "shared"
             isStatic = true
         }
     }
 
-    val ktorVersion = "3.1.3"
-    val koinVersion = "4.1.0"
-    val sqlDelightVersion = "2.0.0"
-    val compottieVersion = "2.0.0-rc04"
-    val kacceleroVersion = "0.4.4"
+    androidLibrary {
+        namespace = "com.extopy.shared"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
+        androidResources {
+            enable = true
+        }
+        withHostTest {
+            isIncludeAndroidResources = true
+        }
+    }
 
     sourceSets {
         all {
-            languageSettings {
-                optIn("kotlinx.cinterop.ExperimentalForeignApi")
-                optIn("kotlin.experimental.ExperimentalObjCName")
-            }
+            languageSettings.optIn("kotlin.uuid.ExperimentalUuidApi")
         }
-        val commonMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-logging:$ktorVersion")
-                implementation("io.ktor:ktor-client-auth:$ktorVersion")
-                implementation("io.ktor:ktor-client-websockets:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("io.insert-koin:koin-core:$koinVersion")
-                implementation("io.insert-koin:koin-compose:$koinVersion")
-                implementation("io.insert-koin:koin-compose-viewmodel:$koinVersion")
-                implementation("io.insert-koin:koin-compose-viewmodel-navigation:$koinVersion")
-                implementation("io.sentry:sentry-kotlin-multiplatform:0.7.1")
-
-                implementation("app.cash.sqldelight:runtime:$sqlDelightVersion")
-                implementation("co.touchlab:stately-common:2.0.5")
-
-                implementation("io.github.alexzhirkevich:compottie:$compottieVersion")
-                implementation("io.github.alexzhirkevich:compottie-resources:$compottieVersion")
-                implementation("io.coil-kt.coil3:coil-compose:3.2.0")
-                implementation("io.coil-kt.coil3:coil-network-ktor3:3.2.0")
-
-                api(compose.runtime)
-                api(compose.foundation)
-                api(compose.animation)
-                api(compose.material3)
-                api(compose.components.resources)
-                api(compose.components.uiToolingPreview)
-                api("org.jetbrains.androidx.navigation:navigation-compose:2.9.0-beta03")
-
-                api("dev.kaccelero:settings:${kacceleroVersion}")
-                api("com.extopy:commons:0.1.4")
-            }
+        commonMain.dependencies {
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.componentsUiToolingPreview)
+            implementation(libs.androidx.lifecycle.viewmodelCompose)
+            implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.androidx.navigation.compose)
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.composeViewModel)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.multiplatform.settings)
+            implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
+            // The API contract and its client, published from extopy-backend.
+            api(libs.extopy.api)
+            api(libs.extopy.client)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor3)
+            implementation(libs.compottie)
+            implementation(libs.sentry)
         }
-        val commonTest by getting
-        val androidMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
-                implementation("app.cash.sqldelight:android-driver:$sqlDelightVersion")
-            }
+        androidMain.dependencies {
+            implementation(libs.ktor.client.android)
         }
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-                implementation("io.mockk:mockk:1.13.11")
-            }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-                implementation("app.cash.sqldelight:native-driver:$sqlDelightVersion")
-            }
-        }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.multiplatform.settings.test)
         }
     }
 }
 
-android {
-    namespace = "com.extopy.shared"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 21
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
-kover {
-    currentProject {
-        createVariant("custom") {
-            addWithDependencies("debug")
-        }
-    }
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "com.extopy.resources"
 }
 
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("com.extopy.database")
-        }
-    }
+dependencies {
+    add("kspAndroid", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
 }

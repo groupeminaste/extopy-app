@@ -68,6 +68,15 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 21
+      # Only needed on GitHub-hosted runners: the Ubuntu image ships no Ruby, so `bundle` is not on
+      # PATH. The self-hosted runners the other apps use have it already, which is why this step is
+      # absent there.
+      - name: Set up our Ruby environment
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          working-directory: androidApp
       - name: Install Dependencies
         run: |
           cd androidApp

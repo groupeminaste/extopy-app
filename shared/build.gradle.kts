@@ -103,3 +103,14 @@ dependencies {
     add("kspIosArm64", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)
 }
+
+// `-PextopyVersion=0.2.0-SNAPSHOT` (on the command line or in ~/.gradle/gradle.properties) builds against a
+// snapshot of com.extopy:api and com.extopy:client published to Maven Local by extopy-backend, instead of
+// the release in the catalog. Never commit a snapshot version: CI only sees Maven Central.
+providers.gradleProperty("extopyVersion").orNull?.let { extopyVersion ->
+    configurations.configureEach {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "com.extopy") useVersion(extopyVersion)
+        }
+    }
+}

@@ -44,6 +44,24 @@ published to Maven Central as `com.extopy:api` and `com.extopy:client`. The clie
 access token to every call and refreshes it on its own; the app only supplies a `TokenStore` saying
 where the tokens are kept — the keychain on iOS, a preferences file on Android.
 
+## Using a backend snapshot
+
+`main` builds against a release of `com.extopy:api` and `com.extopy:client` from Maven Central (the
+`extopy` version in `gradle/libs.versions.toml`). Releases are occasional: Maven Central limits how
+much an organization publishes each month. To work on both repositories at once, publish a snapshot
+from `extopy-backend` and point this build at it:
+
+```sh
+# in extopy-backend
+./gradlew :api:publishToMavenLocal :client:publishToMavenLocal
+# here
+./gradlew :androidApp:installLocalDebug -PextopyVersion=0.2.0-SNAPSHOT
+```
+
+Put `extopyVersion=0.2.0-SNAPSHOT` in `~/.gradle/gradle.properties` to make it the default on your
+machine (the backend reads the same property, so both stay on the same version). Only `com.extopy`
+snapshots are ever read from Maven Local. Once a release is on Central, bump the catalog to it.
+
 ## Running against a local backend
 
 Start `extopy-backend` on port 8080, then:
